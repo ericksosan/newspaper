@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import { Login } from './page'
+import { Login } from './pages'
 import { Layout } from './components'
 
 export const App: React.FC = () => {
