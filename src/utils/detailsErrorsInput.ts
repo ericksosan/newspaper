@@ -1,11 +1,11 @@
 import type { FieldErrors } from 'react-hook-form'
 
-interface detailsError {
+interface DetailsError {
   message: string
   isInvalid: boolean
 }
 
-export const detailsErrorsInput = (errors: FieldErrors, name: string): detailsError => {
+export const detailsErrorsInput = (errors: FieldErrors, name: string): DetailsError => {
   const filter = Object.keys(errors)
     .filter(key => key.includes(name))
     .reduce((cur, key) => {
