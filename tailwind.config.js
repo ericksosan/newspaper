@@ -1,8 +1,17 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-	content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+module.exports = {
+	content: [
+		'./index.html',
+		'./src/**/*.{js,ts,jsx,tsx}',
+		'./node_modules/tw-elements/dist/js/**/*.js',
+	],
 	theme: {
 		extend: {},
+		fontFamily: {
+			inter: ['Inter', 'sans-serif'],
+		},
 	},
-	plugins: [],
+	darkMode: 'media',
+	plugins: [require('tw-elements/dist/plugin.cjs')],
+	safelist: ['animate-[fade-in_1s_ease-in-out]', 'animate-[fade-in-down_1s_ease-in-out]']
 };
