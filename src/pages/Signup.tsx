@@ -36,7 +36,7 @@ export const Signup: React.FC = () => {
           />
         </div>
         <div className="py-10 h-full flex justify-center items-center flex-col md:px-6 lg:w-3/4">
-          <div className="mb-12 text-center xl:w-3/4">
+          <div className="mb-10 text-center xl:w-3/4">
             <h1 className="text-3xl font-bold dark:text-gray-200">Create an account</h1>
             <span className="text-lg inline-block text-gray-400 mt-1 md:text-lg">
               Sign up now and don&apos;t miss any news highlights.
