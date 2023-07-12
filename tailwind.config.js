@@ -11,7 +11,6 @@ module.exports = {
 			inter: ['Inter', 'sans-serif'],
 		},
 	},
-	darkMode: 'media',
-	plugins: [require('tw-elements/dist/plugin.cjs')],
-	safelist: ['animate-[fade-in_1s_ease-in-out]', 'animate-[fade-in-down_1s_ease-in-out]']
+	darkMode: 'class',
+	plugins: [require('tw-elements/dist/plugin.cjs'), require('tailwindcss-animated')],
 };

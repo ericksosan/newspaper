@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import { Login } from './pages'
+import { Login, Signup } from './pages'
 import { Layout } from './components'
 
 export const App: React.FC = () => {
@@ -20,8 +20,8 @@ export const App: React.FC = () => {
           <Route path="/admin/users" element={<h1 className="text-3xl font-bold text-red-500">Admin Users</h1>} />
 
         </Route>
-        <Route path="/login" element={<Login/>} />
-        <Route path="/signup" element={<h1 className="text-3xl font-bold">Sign Up</h1>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </>
   )
