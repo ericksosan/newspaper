@@ -31,9 +31,10 @@ export const Avatar: React.FC<AvatarProps> = ({ ripple, role }) => {
       onClick={handleDropdownActive}
     >
       <img
-        src="/images/erick.jpg"
+        src="/images/mockprofile.webp"
         alt="profile"
         loading='lazy'
+        className='object-cover w-full h-full'
       />
     </picture>
   )
