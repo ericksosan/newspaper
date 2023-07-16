@@ -12,5 +12,10 @@ module.exports = {
 		},
 	},
 	darkMode: 'class',
-	plugins: [require('tw-elements/dist/plugin.cjs'), require('tailwindcss-animated')],
+	plugins: [
+		require('@tailwindcss/typography'),
+		require('tw-elements/dist/plugin.cjs'),
+	  require('tailwindcss-animated'),
+		require('tailwind-scrollbar')({ nocompatible: true })
+	],
 };
