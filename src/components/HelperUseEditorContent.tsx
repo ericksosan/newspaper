@@ -8,7 +8,7 @@ export const HelperUseEditorContent = (): JSX.Element => {
         role="tooltip"
         className="absolute z-10 invisible inline-block text-sm text-gray-500
         transition-opacity duration-300 bg-white border border-gray-200 rounded-lg
-        shadow-md opacity-0 w-96 lg:w-[450px] dark:bg-gray-800 dark:border-gray-600
+        shadow-md opacity-0 w-80 lg:w-[450px] dark:bg-gray-800 dark:border-gray-600
       dark:text-gray-400">
         <div className="p-3 space-y-2">
           <h3 className="font-semibold text-gray-900 dark:text-white">What is Markdown?</h3>

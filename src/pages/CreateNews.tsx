@@ -16,7 +16,7 @@ export const CreateNews: React.FC = () => {
     const { name, value } = target
     setFormMarkdownEditor({
       ...formMarkdownEditor,
-      [name]: value
+      [name]: value.trim()
     })
   }
 
@@ -37,7 +37,7 @@ export const CreateNews: React.FC = () => {
           <h1 className={
             twJoin(
               controllers ? 'animate-fade-down' : 'animate-fade-up',
-              `text-xl md:text-4xl text-slate-900 font-bold dark:text-gray-200
+              `text-sm md:text-4xl text-slate-900 font-bold dark:text-gray-200
                   first-letter:animate-duration-500 animate-ease-in-out`
             )
           }
