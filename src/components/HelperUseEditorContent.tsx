@@ -3,10 +3,10 @@ import { ExclamationCircle } from './Icons'
 export const HelperUseEditorContent = (): JSX.Element => {
   return (
     <div>
-      <p className="flex items-center text-sm text-gray-500 dark:text-gray-400">You can use <kbd className="p-1 mx-1 text-sm font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">Markdown</kbd> in your content! <button data-popover-target="popover-description" data-popover-placement="bottom-end" type="button"><ExclamationCircle className="w-5 h-5 ml-2 text-gray-400 hover:text-gray-500" /></button></p>
+      <p className="flex items-center text-sm text-gray-500 dark:text-gray-400">You can use <kbd className="p-1 mx-1 text-sm font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-600 dark:text-gray-100 dark:border-gray-500">Markdown</kbd> in your content! <button data-popover-target="popover-description" data-popover-placement="bottom-end" type="button"><ExclamationCircle className="w-5 h-5 ml-2 text-gray-400 hover:text-gray-500" /><span className="sr-only">Show information</span></button></p>
       <div data-popover id="popover-description"
         role="tooltip"
-        className="absolute z-10 invisible inline-block text-sm text-gray-500
+        className="absolute z-0 invisible inline-block text-sm text-gray-500
         transition-opacity duration-300 bg-white border border-gray-200 rounded-lg
         shadow-md opacity-0 w-80 lg:w-[450px] dark:bg-gray-800 dark:border-gray-600
       dark:text-gray-400">
@@ -27,7 +27,6 @@ export const HelperUseEditorContent = (): JSX.Element => {
                   <th scope="col" className="px-6 py-3">
                     DESCRIPTION
                   </th>
-
                 </tr>
               </thead>
               <tbody>

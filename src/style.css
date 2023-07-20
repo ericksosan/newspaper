@@ -19,8 +19,17 @@ body {
 	@apply modify-scroll focus:shadow-none focus:ring-0;
 }
 
-
 .modify-scroll {
 	@apply scrollbar-thin scrollbar-thumb-gray-200 dark:scrollbar-thumb-slate-900
   scrollbar-track-transparent scrollbar-thumb-rounded-lg;
+}
+
+.button-create-news {
+	@apply text-gray-900 bg-white border border-gray-300 hover:bg-gray-100
+    font-medium rounded-lg text-sm px-5 py-3 dark:bg-gray-800 dark:text-white
+    dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600;
+}
+
+code {
+	@apply modify-scroll h-60;
 }

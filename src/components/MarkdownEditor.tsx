@@ -11,11 +11,13 @@ export const MarkdownEditor: React.FC<MarkdownEditorProps> = ({ handleInputChang
     <div className="py-5">
       <form className='flex flex-col gap-3 items-start'>
         <input
-          type="text"
+          type="url"
           placeholder='Enter the URL of the cover page.'
           name="cover"
           value={formMarkdownEditor.cover}
           onChange={handleInputChange}
+          autoComplete='off'
+          autoFocus
           className='markdown-editor w-full bg-transparent py-3
           font-bold text-slate-900 dark:text-gray-200 text-sm md:text-2xl bg-gray-50
           border-gray-300 focus:ring-transparent focus:border-gray-300 dark:bg-gray-800
@@ -27,6 +29,7 @@ export const MarkdownEditor: React.FC<MarkdownEditorProps> = ({ handleInputChang
           name='title'
           value={formMarkdownEditor.title}
           onChange={handleInputChange}
+          autoComplete='off'
           className='markdown-editor w-full bg-transparent py-3
           font-bold text-slate-900 dark:text-gray-200 text-sm md:text-2xl bg-gray-50
           border-gray-300 focus:ring-transparent focus:border-gray-300 dark:bg-gray-800
