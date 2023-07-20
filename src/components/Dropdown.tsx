@@ -20,15 +20,16 @@ export const Dropdown = (): JSX.Element => {
   }, [])
 
   return (
-    <div ref={dropdownRef} className="bg-white border-2 border-gray-200
-      absolute right-4 top-20 w-80 flex flex-col gap-1
-      dark:bg-slate-900 rounded-md p-2 shadow-sm
-      dark:border-slate-700 transition-[background-color]
-      duration-500 ease-in-out animate-fade-down animate-duration-500 animate-ease-in-out">
+    <div ref={dropdownRef}
+      className="bg-white border border-gray-200 absolute right-4 top-20 z-10
+      w-72 lg:w-80 flex flex-col gap-2 dark:bg-slate-800 dark:border-slate-700 rounded-md
+      p-2 shadow-sm transition-[background-color] duration-300 ease-in-out
+      animate-fade-down animate-duration-500 animate-ease-in-out
+      [&>hr]:rounded [&>hr]:border-gray-200 [&>hr]:dark:border-slate-700">
       <UserDetails />
-      <hr className='rounded border-gray-200 dark:border-slate-800' />
+      <hr />
       <UserOptions />
-      <hr className='rounded border-gray-200 dark:border-slate-800' />
+      <hr />
       <Logout />
     </div>
   )

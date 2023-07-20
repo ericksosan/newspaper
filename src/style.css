@@ -1,25 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+body {
+	@apply bg-white dark:bg-slate-900;
+}
+
 .dropdown-list {
-	@apply p-3 font-inter font-semibold rounded-md
-  hover:bg-slate-900 dark:hover:bg-slate-800 hover:text-gray-200 transition-all ease-in-out
-    duration-500 cursor-pointer dark:border-slate-800 dark:text-gray-200;
+	@apply p-3 font-semibold rounded-md hover:bg-slate-100
+  hover:text-azure-radiance-700 transition-all ease-in-out duration-300
+    cursor-pointer dark:border-slate-800 dark:text-gray-200
+  dark:hover:bg-slate-900;
 }
 
 .markdown-editor {
-  @apply h-auto bg-gray-100/30 dark:bg-slate-900/10 text-lg lg:text-xl
-  border-2 border-gray-300 dark:border-slate-600 border-dashed rounded-md p-3
-  outline-none text-slate-900 dark:text-gray-200
-  resize-none overflow-x-hidden overflow-y-auto
-  scrollbar-thin scrollbar-thumb-gray-200 dark:scrollbar-thumb-slate-900
-  scrollbar-track-transparent scrollbar-thumb-rounded-lg;
+	@apply modify-scroll focus:shadow-none focus:ring-0;
 }
 
-code {
-  @apply scrollbar-thin scrollbar-thumb-slate-500 scrollbar-track-transparent
-  scrollbar-thumb-rounded-lg;
+
+.modify-scroll {
+	@apply scrollbar-thin scrollbar-thumb-gray-200 dark:scrollbar-thumb-slate-900
+  scrollbar-track-transparent scrollbar-thumb-rounded-lg;
 }

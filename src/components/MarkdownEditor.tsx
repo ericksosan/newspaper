@@ -1,42 +1,48 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons'
+import { HelperUseEditorContent } from '.'
+import type { FormMarkdownEditor } from '../types'
 
 interface MarkdownEditorProps {
-  handleMarkdown: ({ target }: React.ChangeEvent<HTMLTextAreaElement>) => void
-  markdown: string
+  handleInputChange: ({ target }: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void
+  formMarkdownEditor: FormMarkdownEditor
 }
 
-export const MarkdownEditor: React.FC<MarkdownEditorProps> = ({ handleMarkdown, markdown }) => {
+export const MarkdownEditor: React.FC<MarkdownEditorProps> = ({ handleInputChange, formMarkdownEditor }) => {
   return (
-    <div className="py-10 h-full">
-      <form className='flex flex-col gap-2 h-full items-start'>
-        <label htmlFor="file-upload"
-          className="px-4 py-2 rounded-md cursor-pointer bg-slate-600
-        text-white dark:bg-slate-500 font-inter font-semibold transition-opacity
-          duration-300 ease-in hover:opacity-80"
-        >
-          Add a cover image
-          <input type="file" id="file-upload" name="ufile-upload" className='hidden' />
-        </label>
+    <div className="py-5">
+      <form className='flex flex-col gap-3 items-start'>
+        <input
+          type="text"
+          placeholder='Enter the URL of the cover page.'
+          name="cover"
+          value={formMarkdownEditor.cover}
+          onChange={handleInputChange}
+          className='markdown-editor w-full bg-transparent py-3
+          font-bold text-slate-900 dark:text-gray-200 text-sm md:text-2xl bg-gray-50
+          border-gray-300 focus:ring-transparent focus:border-gray-300 dark:bg-gray-800
+          dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-transparent rounded-md'
+        />
         <input
           type="text"
           placeholder='Enter here the title of the news item...'
-          className="w-full text-xl md:h-20 lg:text-5xl bg-transparent
-          font-bold border-none outline-none text-slate-900 dark:text-gray-200"
+          name='title'
+          value={formMarkdownEditor.title}
+          onChange={handleInputChange}
+          className='markdown-editor w-full bg-transparent py-3
+          font-bold text-slate-900 dark:text-gray-200 text-sm md:text-2xl bg-gray-50
+          border-gray-300 focus:ring-transparent focus:border-gray-300 dark:bg-gray-800
+          dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-transparent rounded-md'
         />
-        <hr className='rounded w-full border-2 border-slate-200 dark:border-gray-700' />
-        <p className="text-sm w-full text-slate-700 dark:text-slate-400 flex
-          justify-end items-center gap-1">
-          <FontAwesomeIcon icon={faCircleExclamation} />
-          You can use <kbd className="text-success bg-slate-200 dark:bg-slate-900 px-2 py-1 rounded">Markdown</kbd> in your content!
-        </p>
-        <textarea name="markdown"
+        <HelperUseEditorContent />
+        <textarea
           rows={25}
-          value={markdown}
+          name="content"
+          value={formMarkdownEditor.content}
           spellCheck={false}
-          onChange={handleMarkdown}
+          onChange={handleInputChange}
           placeholder='Write the content of your news here.'
-          className='w-full markdown-editor'
+          className="markdown-editor resize-none block p-3 w-full text-sm md:text-xl text-gray-900 bg-gray-50
+          rounded-md border border-gray-300 focus:ring-transparent focus:border-gray-300 dark:bg-gray-800
+          dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-200 dark:focus:ring-transparent"
         >
         </textarea>
       </form>
