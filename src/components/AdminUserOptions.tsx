@@ -1,4 +1,4 @@
-import { faPenToSquare, faNewspaper, faUsers } from '@fortawesome/free-solid-svg-icons'
+import { Newspaper, PecilSquare, GroupUsers } from './Icons'
 import { DropdownLinkOption } from '.'
 
 export const AdminUserOptions = (): JSX.Element => {
@@ -6,17 +6,17 @@ export const AdminUserOptions = (): JSX.Element => {
     <>
       <DropdownLinkOption
         to='/admin/news'
-        icon={faNewspaper}
+        icon={<Newspaper />}
         label='News'
       />
       <DropdownLinkOption
         to='/admin/news/add'
-        icon={faPenToSquare}
+        icon={<PecilSquare />}
         label='Create News'
       />
       <DropdownLinkOption
         to='/admin/users'
-        icon={faUsers}
+        icon={<GroupUsers />}
         label='Users'
       />
     </>

@@ -4,7 +4,7 @@ export const UserOptions = (): JSX.Element => {
   return (
     <>
       <AdminUserOptions />
-      {/* <NormalUserOptions/> */}
+      <NormalUserOptions/>
     </>
   )
 }

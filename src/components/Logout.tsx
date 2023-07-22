@@ -1,13 +1,12 @@
-import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons'
+import { ArrowRightRectangle } from './Icons'
 import { DropdownLinkOption } from '.'
 
 export const Logout = (): JSX.Element => {
   return (
     <DropdownLinkOption
       to='#'
-      icon={faRightFromBracket}
+      icon={<ArrowRightRectangle />}
       label='Logout'
-      rippleColor='danger'
     />
   )
 }

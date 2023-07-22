@@ -1,5 +1,5 @@
-import { faKey, faUserPen } from '@fortawesome/free-solid-svg-icons'
 import { DropdownLinkOption } from '.'
+import { UserPencil, Key } from './Icons'
 
 export const NormalUserOptions = (): JSX.Element => {
   return (
@@ -7,12 +7,12 @@ export const NormalUserOptions = (): JSX.Element => {
       <DropdownLinkOption
         to='/profile/change-username'
         label='Change Username'
-        icon={faUserPen}
+        icon={<UserPencil />}
       />
       <DropdownLinkOption
         to='/profile/change-password'
         label='Change Password'
-        icon={faKey}
+        icon={<Key />}
       />
     </>
   )
