@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import { Login, Signup, CreateNews, ManageNews, ManageUsers } from './pages'
+import { Login, Signup, CreateNews, ManageNews, ManageUsers, ChangePassword } from './pages'
 import { Layout } from './components'
 
 export const App: React.FC = () => {
@@ -12,7 +12,7 @@ export const App: React.FC = () => {
 
           {/* profile */}
           <Route path="/profile/change-username" element={<h1 className="text-3xl font-bold text-green-500">Change Username</h1>} />
-          <Route path="/profile/change-password" element={<h1 className="text-3xl font-bold text-green-500">Change Password</h1>} />
+          <Route path="/profile/change-password" element={<ChangePassword/>} />
 
           {/* Admin */}
           <Route path="/admin/news" element={<ManageNews/>} />
