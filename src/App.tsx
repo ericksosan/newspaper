@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
-import { Login, Signup, CreateNews, ManageNews } from './pages'
+import { Login, Signup, CreateNews, ManageNews, ManageUsers } from './pages'
 import { Layout } from './components'
 
 export const App: React.FC = () => {
@@ -17,7 +17,7 @@ export const App: React.FC = () => {
           {/* Admin */}
           <Route path="/admin/news" element={<ManageNews/>} />
           <Route path="/admin/news/add" element={<CreateNews />} />
-          <Route path="/admin/users" element={<h1 className="text-3xl font-bold text-red-500">Admin Users</h1>} />
+          <Route path="/admin/users" element={<ManageUsers/>} />
 
         </Route>
         <Route path="/login" element={<Login />} />
