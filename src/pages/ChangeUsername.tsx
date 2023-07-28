@@ -27,7 +27,10 @@ export const ChangeUsername = (): JSX.Element => {
               placeholder="Enter your new username"
               validation={formValidation.standard}
             />
-            <button className='w-full bg-azure-radiance-700 hover:bg-azure-radiance-800 px-3 py-2 rounded-md font-semibold text-white transition-colors duration-300 ease-in-out'>Change Username</button>
+            <button
+            className='w-full bg-azure-radiance-700 hover:bg-azure-radiance-800
+              px-3 py-2 rounded-md font-semibold text-white transition-colors duration-300
+              ease-in-out'>Change Username</button>
           </form>
         </FormProvider>
       </div>

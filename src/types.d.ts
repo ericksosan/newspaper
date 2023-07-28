@@ -15,3 +15,9 @@ export interface FormMarkdownEditor {
   title: string
   content: string
 }
+
+export interface FormInputsChangePassword {
+  password: string
+  newPassword: string
+  repassword: string
+}

@@ -1,4 +1,4 @@
-import { Newspaper, PecilSquare, GroupUsers } from './Icons'
+import { Newspaper, PecilSquare, GroupUsers } from '../../components/Icons'
 import { DropdownLinkOption } from '.'
 
 export const AdminUserOptions = (): JSX.Element => {

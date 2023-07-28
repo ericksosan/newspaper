@@ -1,9 +1,10 @@
 import { Link } from 'react-router-dom'
 import { useForm, FormProvider, type SubmitHandler } from 'react-hook-form'
 import { formValidation } from '../utils'
-import { DarkThemeToggle, Input } from '../components'
+import { Input } from '../components'
 import { GoogleIcon } from '../components/Icons'
 import { type FormInputs } from '../types'
+import { DarkThemeToggle } from '../layouts'
 
 export const Login: React.FC = () => {
   const methods = useForm<FormInputs>()

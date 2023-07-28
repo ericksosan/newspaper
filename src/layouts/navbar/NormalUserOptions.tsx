@@ -1,5 +1,5 @@
 import { DropdownLinkOption } from '.'
-import { UserPencil, Key } from './Icons'
+import { UserPencil, Key } from '../../components/Icons'
 
 export const NormalUserOptions = (): JSX.Element => {
   return (

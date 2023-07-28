@@ -8,19 +8,12 @@ body {
 	@apply bg-white dark:bg-slate-900;
 }
 
-.dropdown-list {
-	@apply p-3 font-semibold rounded-md hover:bg-slate-100
-  hover:text-azure-radiance-700 transition-all ease-in-out duration-300
-    cursor-pointer dark:border-slate-800 dark:text-gray-200
-  dark:hover:bg-slate-900;
-}
-
 .markdown-editor {
 	@apply modify-scroll focus:shadow-none focus:ring-0;
 }
 
 .modify-scroll {
-	@apply scrollbar-thin scrollbar-thumb-gray-200 dark:scrollbar-thumb-slate-900
+	@apply scrollbar-thin scrollbar-thumb-gray-400 dark:scrollbar-thumb-slate-500
   scrollbar-track-transparent scrollbar-thumb-rounded-lg;
 }
 

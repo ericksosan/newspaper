@@ -1,4 +1,4 @@
-import { ArrowRightRectangle } from './Icons'
+import { ArrowRightRectangle } from '../../components/Icons'
 import { DropdownLinkOption } from '.'
 
 export const Logout = (): JSX.Element => {
