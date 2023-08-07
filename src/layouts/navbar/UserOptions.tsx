@@ -1,10 +1,16 @@
 import { AdminUserOptions, NormalUserOptions } from '.'
+import { useAuth } from '../../firebase/hooks/useAuth'
 
 export const UserOptions = (): JSX.Element => {
+  const { user } = useAuth()
+  const { isAdmin } = user
+
   return (
-    <>
-      <AdminUserOptions />
-      <NormalUserOptions/>
-    </>
+    isAdmin
+      ? <>
+        <AdminUserOptions />
+        <NormalUserOptions />
+      </>
+      : <NormalUserOptions />
   )
 }

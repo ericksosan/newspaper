@@ -1,18 +1,33 @@
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm, FormProvider, type SubmitHandler } from 'react-hook-form'
 import { formValidation } from '../utils'
-import { Input } from '../components'
-import { GoogleIcon } from '../components/Icons'
+import { AlertError, Input, SignInUsingGoogle, Spinner } from '../components'
 import { type FormInputs } from '../types'
 import { DarkThemeToggle } from '../layouts'
+import { authSignIn } from '../firebase/authentication'
+import { useAuth } from '../firebase/hooks/useAuth'
 
 export const Login: React.FC = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [message, setMessage] = useState<string>('')
+  const navigate = useNavigate()
+  const { handleGetUserData } = useAuth()
   const methods = useForm<FormInputs>()
   const { handleSubmit, reset } = methods
 
-  const onSubmit: SubmitHandler<FormInputs> = (data) => {
-    console.log(data)
-    reset()
+  const onSubmit: SubmitHandler<FormInputs> = async (data): Promise<void> => {
+    try {
+      setIsLoading(true)
+      const userCredentials = await authSignIn(data)
+      await handleGetUserData(userCredentials.user.uid)
+      setIsLoading(false)
+      navigate('/', { replace: true })
+      reset()
+    } catch (err) {
+      setMessage('Wrong password or email')
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -39,6 +54,7 @@ export const Login: React.FC = () => {
               <h1 className='font-bold text-2xl dark:text-gray-200 xl:text-3xl'>Welcome Back</h1>
               <span className='inline-block text-lg text-gray-600 dark:text-gray-400 xl:text-xl'>Enter your login datails below</span>
             </div>
+            { message.length > 0 && <AlertError message={message}/>}
             <Input
               label="Email address"
               type='text' name="email"
@@ -57,15 +73,17 @@ export const Login: React.FC = () => {
             <button
               type='submit'
               className="font-semibold bg-azure-radiance-700 w-full py-2
-              rounded-md text-white hover:bg-azure-radiance-800
-              transition-colors duration-500 ease-in-out"
+              rounded-md text-white hover:bg-azure-radiance-800 disabled:pointer-events-none
+              transition-colors duration-500 ease-in-out disabled:bg-azure-radiance-900
+              disabled:border disabled:border-slate-800 flex justify-center items-center"
+              disabled={isLoading}
             >
-              Log In
+              {isLoading ? <Spinner /> : 'Log In'}
             </button>
             <div className="flex justify-center items-center pt-4 gap-2">
               <span className='font-medium dark:text-gray-200'>Don&apos;t have an account?</span>
               <Link
-                to="/signup"
+                to="/auth/signup"
                 className='font-bold text-azure-radiance-700 dark:text-gray-200
               hover:text-azure-radiance-800 dark:hover:text-azure-radiance-500
                 transition-colors duration-500 ease-in-out'>Sign Up</Link>
@@ -77,15 +95,7 @@ export const Login: React.FC = () => {
               <span className='inline-block font-semibold dark:text-gray-200'>Or</span>
               <hr />
             </div>
-            <button
-              type='button'
-              className="font-semibold bg-white border border-slate-400 w-full py-2
-              rounded-md text-slate-900 hover:bg-slate-100 hover:dark:bg-slate-300
-              transition-colors duration-500 ease-in-out mt-4 flex
-              items-center gap-2 justify-center"
-            >
-              <GoogleIcon /> Google
-            </button>
+            <SignInUsingGoogle/>
           </form>
         </FormProvider>
       </main>

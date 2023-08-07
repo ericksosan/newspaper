@@ -1,18 +1,33 @@
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm, FormProvider, type SubmitHandler } from 'react-hook-form'
 import { formValidation } from '../utils'
-import { Input } from '../components'
+import { Spinner, Input, AlertError, SignInUsingGoogle } from '../components'
 import { type FormInputsSignup } from '../types'
-import { GoogleIcon } from '../components/Icons'
 import { DarkThemeToggle } from '../layouts'
+import { authSignUp } from '../firebase/authentication'
+import { useAuth } from '../firebase/hooks/useAuth'
 
 export const Signup: React.FC = () => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [message, setMessage] = useState<string>('')
+  const navigate = useNavigate()
+  const { handleGetUserData } = useAuth()
   const methods = useForm<FormInputsSignup>()
   const { handleSubmit, reset, watch } = methods
 
-  const onSubmit: SubmitHandler<FormInputsSignup> = (data) => {
-    console.log(data)
-    reset()
+  const onSubmit: SubmitHandler<FormInputsSignup> = async (data): Promise<void> => {
+    try {
+      setIsLoading(true)
+      const userCredentials = await authSignUp(data)
+      await handleGetUserData(userCredentials.user.uid)
+      navigate('/')
+      setIsLoading(false)
+      reset()
+    } catch (err) {
+      setIsLoading(false)
+      setMessage('This email is not available')
+    }
   }
 
   return (
@@ -40,6 +55,7 @@ export const Signup: React.FC = () => {
               <span className='inline-block text-lg text-gray-600
               dark:text-gray-400 xl:text-xl'>Don&apos;t miss any news highlights.</span>
             </div>
+            {message.length > 0 && <AlertError message={message} />}
             <div className="flex justify-between items-center gap-3 ">
               <Input
                 label="First name"
@@ -91,15 +107,17 @@ export const Signup: React.FC = () => {
             <button
               type='submit'
               className="font-semibold bg-azure-radiance-700 w-full py-2
-              rounded-md text-white hover:bg-azure-radiance-800
-              transition-colors duration-500 ease-in-out"
+              rounded-md text-white hover:bg-azure-radiance-800 disabled:pointer-events-none
+              transition-colors duration-500 ease-in-out disabled:bg-azure-radiance-900
+              disabled:border disabled:border-slate-800 flex justify-center items-center"
+              disabled={isLoading}
             >
-              Sign Up
+              {isLoading ? <Spinner /> : 'Sign Up'}
             </button>
             <div className="flex justify-center items-center pt-4 gap-2">
               <span className='font-medium dark:text-gray-200'>Already have an account?</span>
               <Link
-                to="/login"
+                to="/auth/login"
                 className='font-bold text-azure-radiance-700 dark:text-gray-200
               hover:text-azure-radiance-800 dark:hover:text-azure-radiance-500
                 transition-colors duration-500 ease-in-out'>Log In</Link>
@@ -111,15 +129,7 @@ export const Signup: React.FC = () => {
               <span className='inline-block font-semibold dark:text-gray-200'>Or</span>
               <hr />
             </div>
-            <button
-              type='button'
-              className="font-semibold bg-white border border-slate-400 w-full py-2
-              rounded-md text-slate-900 hover:bg-slate-100 hover:dark:bg-slate-300
-              transition-colors duration-500 ease-in-out mt-4 flex
-              items-center gap-2 justify-center"
-            >
-              <GoogleIcon /> Google
-            </button>
+            <SignInUsingGoogle/>
           </form>
         </FormProvider>
       </main>

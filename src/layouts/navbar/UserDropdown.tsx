@@ -1,10 +1,14 @@
 import { Dropdown } from 'flowbite-react'
 import { Logout, UserDetails, UserOptions, Avatar } from '.'
+import { useAuth } from '../../firebase/hooks/useAuth'
 
 export const UserDropdown = (): JSX.Element => {
+  const { userDetailsLoaded } = useAuth()
+
   return (
     <Dropdown
       inline
+      disabled={userDetailsLoaded}
       label={<Avatar />}
       arrowIcon={false}
       className='bg-white w-72 lg:w-80 flex flex-col gap-2 dark:bg-slate-800

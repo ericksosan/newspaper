@@ -1,14 +1,25 @@
+import { Spinner } from '../../components'
+import { useAuth } from '../../firebase/hooks/useAuth'
+
 export const Avatar = (): JSX.Element => {
+  const { user, userDetailsLoaded } = useAuth()
+  const { photoURL } = user
+
   return (
     <picture
-      className='inline-block w-10 h-10 overflow-hidden rounded-full'
+      className='w-10 h-10 overflow-hidden rounded-full
+      grid place-content-center'
     >
-      <img
-        src="/images/mockprofile.webp"
-        alt="profile"
-        loading='lazy'
-        className='object-cover w-full h-full'
-      />
+      {
+        !userDetailsLoaded
+          ? <img
+            src={photoURL ?? ''}
+            alt="profile"
+            loading='lazy'
+            className='object-cover w-full h-full'
+          />
+          : <Spinner />
+      }
     </picture>
   )
 }
