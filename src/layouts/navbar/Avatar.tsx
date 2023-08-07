@@ -3,7 +3,7 @@ import { useAuth } from '../../firebase/hooks/useAuth'
 
 export const Avatar = (): JSX.Element => {
   const { user, userDetailsLoaded } = useAuth()
-  const { photoURL } = user
+  const { photoURL, fullname } = user
 
   return (
     <picture
@@ -14,11 +14,10 @@ export const Avatar = (): JSX.Element => {
         !userDetailsLoaded
           ? <img
             src={photoURL ?? ''}
-            alt="profile"
-            loading='lazy'
+            alt={`Profile ${fullname ?? ''}`}
             className='object-cover w-full h-full'
           />
-          : <Spinner />
+          : <Spinner className='border-t-slate-800'/>
       }
     </picture>
   )

@@ -9,6 +9,7 @@ export interface AuthContextValues {
   handleLogoutReset: () => void
   userDetailsLoaded: boolean
   handleGetUserData: (id: string) => Promise<void>
+  handleChangeUsername: (username: string) => void
 }
 
 export const AuthContext = createContext({} as AuthContextValues)

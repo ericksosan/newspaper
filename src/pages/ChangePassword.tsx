@@ -1,15 +1,28 @@
+import { useState } from 'react'
 import { FormProvider, type SubmitHandler, useForm } from 'react-hook-form'
-import { Input } from '../components'
+import { AlertError, AlertSuccess, Input, Spinner } from '../components'
 import { formValidation } from '../utils'
-import { type FormInputsChangePassword } from '../types'
+import type { MessageAlert, FormInputsChangePassword } from '../types'
+import { logout, userChangePassword } from '../firebase/authentication'
 
 export const ChangePassword = (): JSX.Element => {
+  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [alert, setAlert] = useState<MessageAlert>({ codeAlert: 'none', message: '' })
   const methods = useForm<FormInputsChangePassword>()
   const { handleSubmit, reset, watch } = methods
 
-  const onSubmit: SubmitHandler<FormInputsChangePassword> = (data) => {
-    console.log(data)
-    reset()
+  const onSubmit: SubmitHandler<FormInputsChangePassword> = async (data): Promise<void> => {
+    try {
+      setIsLoading(true)
+      await userChangePassword(data)
+      setAlert({ codeAlert: 'success', message: 'Your password was successfully changed' })
+      setIsLoading(false)
+      await logout()
+      reset()
+    } catch (err) {
+      setIsLoading(false)
+      setAlert({ codeAlert: 'error', message: 'Invalid password' })
+    }
   }
 
   return (
@@ -18,6 +31,12 @@ export const ChangePassword = (): JSX.Element => {
       <div className="p-5 border rounded-md dark:border-slate-700">
         <FormProvider {...methods}>
           <form onSubmit={(evt) => { void handleSubmit(onSubmit)(evt) }}>
+            {
+              alert.codeAlert === 'success' && <AlertSuccess message={alert.message} />
+            }
+            {
+              alert.codeAlert === 'error' && <AlertError message={alert.message} />
+            }
             <Input
               label="Current Password"
               type='password'
@@ -28,7 +47,7 @@ export const ChangePassword = (): JSX.Element => {
             <Input
               label="New Password"
               type='password'
-              name="password"
+              name="newPassword"
               placeholder="Enter your new password"
               validation={formValidation.password}
             />
@@ -39,7 +58,17 @@ export const ChangePassword = (): JSX.Element => {
               placeholder="Enter your new password again"
               validation={formValidation.confirmChangePassword(watch)}
             />
-            <button className='w-full bg-azure-radiance-700 hover:bg-azure-radiance-800 px-3 py-2 rounded-md font-semibold text-white transition-colors duration-300 ease-in-out'>Change Password</button>
+            <button
+              className='w-full bg-azure-radiance-700 hover:bg-azure-radiance-800
+              px-3 py-2 rounded-md font-semibold text-white transition-colors duration-300
+              ease-in-out'
+            >
+              {
+                isLoading
+                  ? <Spinner />
+                  : 'Change Password'
+              }
+            </button>
           </form>
         </FormProvider>
       </div>

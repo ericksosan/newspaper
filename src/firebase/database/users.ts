@@ -1,4 +1,4 @@
-import { type DocumentData, doc, setDoc, getDoc } from 'firebase/firestore'
+import { type DocumentData, doc, setDoc, getDoc, updateDoc } from 'firebase/firestore'
 import { db } from '../firebase.config'
 
 export interface UserDetails {
@@ -28,4 +28,10 @@ export const getUserDetails = async (id: string): Promise<DocumentData | undefin
     return docSnap.data()
   }
   return undefined
+}
+
+export const updateUsername = async (id: string, username: string): Promise<void> => {
+  const docRef = doc(db, 'users', id)
+  username = username.toLowerCase()
+  await updateDoc(docRef, { username })
 }

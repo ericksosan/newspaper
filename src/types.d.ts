@@ -17,7 +17,13 @@ export interface FormMarkdownEditor {
 }
 
 export interface FormInputsChangePassword {
-  password: string
+  oldPassword: string
   newPassword: string
   repassword: string
+}
+
+type CodeAlert = 'error' | 'success' | 'none'
+export interface MessageAlert {
+  codeAlert: CodeAlert
+  message: string
 }

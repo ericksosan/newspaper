@@ -40,6 +40,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     } catch (error) { }
   }
 
+  const handleChangeUsername = (username: string): void => {
+    setUser(
+      {
+        ...user,
+        username
+      }
+    )
+  }
+
   const handleLogoutReset = (): void => {
     setUser({} as UserDetails)
     setIsLogout(false)
@@ -52,7 +61,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     logout,
     handleLogoutReset,
     userDetailsLoaded,
-    handleGetUserData
+    handleGetUserData,
+    handleChangeUsername
   }
 
   return (
