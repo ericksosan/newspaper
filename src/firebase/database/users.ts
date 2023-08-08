@@ -1,4 +1,4 @@
-import { type DocumentData, doc, setDoc, getDoc, updateDoc } from 'firebase/firestore'
+import { type DocumentData, doc, setDoc, getDoc, updateDoc, getDocs, collection } from 'firebase/firestore'
 import { db } from '../firebase.config'
 
 export interface UserDetails {
@@ -34,4 +34,21 @@ export const updateUsername = async (id: string, username: string): Promise<void
   const docRef = doc(db, 'users', id)
   username = username.toLowerCase()
   await updateDoc(docRef, { username })
+}
+
+export type Users = [UserDetails]
+
+export const getAllUsers = async (): Promise<Users> => {
+  const users: DocumentData[] = []
+  const querySnapshot = (await getDocs(collection(db, 'users')))
+  querySnapshot.forEach((doc) => {
+    users.push(doc.data() as UserDetails)
+  })
+
+  return users as Users
+}
+
+export const updateRole = async (id: string, isAdmin: boolean): Promise<void> => {
+  const docRef = doc(db, 'users', id)
+  await updateDoc(docRef, { isAdmin })
 }

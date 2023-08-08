@@ -1,16 +1,31 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { type Users, getAllUsers, type UserDetails } from '../firebase/database/users'
+import { Spinner, User } from '../components'
+import { Loading } from '../components/Loading'
+import { useAuth } from '../firebase/hooks/useAuth'
 
 export const ManageUsers = (): JSX.Element => {
-  const [isAdmin, setIsAdmin] = useState<boolean>(false)
+  const { user: { id } } = useAuth()
+  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [listUsers, setListUsers] = useState<Users>([{} as UserDetails] as Users)
 
-  const handleToggleChange = (): void => {
-    setIsAdmin(!isAdmin)
+  useEffect(() => {
+    void handleGetAllUsers()
+  }, [])
+
+  const handleGetAllUsers = async (): Promise<void> => {
+    try {
+      const users = await getAllUsers()
+      setIsLoading(false)
+      setListUsers(users.filter((user) => user.id !== id) as Users)
+    } catch (error) { }
   }
+
+  if (isLoading) return <Loading />
 
   return (
     <div className="lg:max-w-7xl lg:mx-auto flex flex-col pt-8 xl:pt-16 min-h-screen px-5 md:px-10">
       <h1 className="font-bold text-lg md:text-4xl dark:text-gray-200 pb-4">Users Management</h1>
-
       <div className="relative overflow-x-auto sm:rounded-lg border dark:border-slate-700">
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-slate-700 dark:text-gray-400">
@@ -30,24 +45,13 @@ export const ManageUsers = (): JSX.Element => {
             </tr>
           </thead>
           <tbody>
-            <tr className="bg-white dark:bg-slate-800 dark:border-gray-700">
-              <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                J. Cole
-              </th>
-              <td className="px-6 py-4">
-                jcole
-              </td>
-              <td className="px-6 py-4">
-                Admin
-              </td>
-              <td className="px-6 py-4">
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input type="checkbox" className="sr-only peer" onChange={handleToggleChange} />
-                  <div className="w-11 h-6 bg-gray-200 rounded-full dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-azure-radiance-700" />
-                  <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300">Admin</span>
-                </label>
-              </td>
-            </tr>
+            {
+              isLoading
+                ? <Spinner />
+                : listUsers.map((user) => (
+                  <User key={user.id} userDetails={user} />
+                ))
+            }
           </tbody>
         </table>
       </div>
