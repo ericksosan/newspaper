@@ -8,7 +8,7 @@ export const GoogleIcon = (): JSX.Element => {
   )
 }
 
-export const Moon = ({ className }: React.ComponentProps<'i'>): JSX.Element => {
+export const Moon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24" fill="currentColor"
@@ -20,7 +20,7 @@ export const Moon = ({ className }: React.ComponentProps<'i'>): JSX.Element => {
   )
 }
 
-export const Sun = ({ className }: React.ComponentProps<'i'>): JSX.Element => {
+export const Sun = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
@@ -33,7 +33,7 @@ export const Sun = ({ className }: React.ComponentProps<'i'>): JSX.Element => {
   )
 }
 
-export const Newspaper = ({ className }: React.ComponentProps<'i'>): JSX.Element => {
+export const Newspaper = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
@@ -47,7 +47,7 @@ export const Newspaper = ({ className }: React.ComponentProps<'i'>): JSX.Element
   )
 }
 
-export const PecilSquare = ({ className }: React.ComponentProps<'i'>): JSX.Element => {
+export const PecilSquare = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
@@ -61,7 +61,7 @@ export const PecilSquare = ({ className }: React.ComponentProps<'i'>): JSX.Eleme
   )
 }
 
-export const GroupUsers = ({ className }: React.ComponentProps<'i'>): JSX.Element => {
+export const GroupUsers = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
@@ -75,7 +75,7 @@ export const GroupUsers = ({ className }: React.ComponentProps<'i'>): JSX.Elemen
   )
 }
 
-export const ArrowRightRectangle = ({ className }: React.ComponentProps<'i'>): JSX.Element => {
+export const ArrowRightRectangle = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
@@ -88,7 +88,7 @@ export const ArrowRightRectangle = ({ className }: React.ComponentProps<'i'>): J
   )
 }
 
-export const CheckBadge = ({ className }: React.ComponentProps<'i'>): JSX.Element => {
+export const CheckBadge = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
@@ -101,7 +101,7 @@ export const CheckBadge = ({ className }: React.ComponentProps<'i'>): JSX.Elemen
   )
 }
 
-export const UserPencil = ({ className }: React.ComponentProps<'i'>): JSX.Element => {
+export const UserPencil = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +115,7 @@ export const UserPencil = ({ className }: React.ComponentProps<'i'>): JSX.Elemen
   )
 }
 
-export const Key = ({ className }: React.ComponentProps<'i'>): JSX.Element => {
+export const Key = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -128,13 +128,45 @@ export const Key = ({ className }: React.ComponentProps<'i'>): JSX.Element => {
   )
 }
 
-export const ExclamationCircle = ({ className }: React.ComponentProps<'i'>): JSX.Element => {
+export const ExclamationCircle = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
   return (
     <svg
       viewBox="0 0 24 24"
       fill="currentColor"
       className={className}>
       <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
+    </svg>
+  )
+}
+
+export const UserCircle = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+    </svg>
+  )
+}
+
+export const Tooth = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path fillRule="evenodd" d="M11.828 2.25c-.916 0-1.699.663-1.85 1.567l-.091.549a.798.798 0 01-.517.608 7.45 7.45 0 00-.478.198.798.798 0 01-.796-.064l-.453-.324a1.875 1.875 0 00-2.416.2l-.243.243a1.875 1.875 0 00-.2 2.416l.324.453a.798.798 0 01.064.796 7.448 7.448 0 00-.198.478.798.798 0 01-.608.517l-.55.092a1.875 1.875 0 00-1.566 1.849v.344c0 .916.663 1.699 1.567 1.85l.549.091c.281.047.508.25.608.517.06.162.127.321.198.478a.798.798 0 01-.064.796l-.324.453a1.875 1.875 0 00.2 2.416l.243.243c.648.648 1.67.733 2.416.2l.453-.324a.798.798 0 01.796-.064c.157.071.316.137.478.198.267.1.47.327.517.608l.092.55c.15.903.932 1.566 1.849 1.566h.344c.916 0 1.699-.663 1.85-1.567l.091-.549a.798.798 0 01.517-.608 7.52 7.52 0 00.478-.198.798.798 0 01.796.064l.453.324a1.875 1.875 0 002.416-.2l.243-.243c.648-.648.733-1.67.2-2.416l-.324-.453a.798.798 0 01-.064-.796c.071-.157.137-.316.198-.478.1-.267.327-.47.608-.517l.55-.091a1.875 1.875 0 001.566-1.85v-.344c0-.916-.663-1.699-1.567-1.85l-.549-.091a.798.798 0 01-.608-.517 7.507 7.507 0 00-.198-.478.798.798 0 01.064-.796l.324-.453a1.875 1.875 0 00-.2-2.416l-.243-.243a1.875 1.875 0 00-2.416-.2l-.453.324a.798.798 0 01-.796.064 7.462 7.462 0 00-.478-.198.798.798 0 01-.517-.608l-.091-.55a1.875 1.875 0 00-1.85-1.566h-.344zM12 15.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z" clipRule="evenodd" />
+    </svg>
+  )
+}
+
+export const Trash = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path fillRule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clipRule="evenodd" />
+    </svg>
+  )
+}
+
+export const ArrowTopRightSquare = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <path fillRule="evenodd" d="M15.75 2.25H21a.75.75 0 01.75.75v5.25a.75.75 0 01-1.5 0V4.81L8.03 17.03a.75.75 0 01-1.06-1.06L19.19 3.75h-3.44a.75.75 0 010-1.5zm-10.5 4.5a1.5 1.5 0 00-1.5 1.5v10.5a1.5 1.5 0 001.5 1.5h10.5a1.5 1.5 0 001.5-1.5V10.5a.75.75 0 011.5 0v8.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V8.25a3 3 0 013-3h8.25a.75.75 0 010 1.5H5.25z" clipRule="evenodd" />
     </svg>
   )
 }

@@ -1,3 +1,7 @@
 export * from './Login'
 export * from './Signup'
 export * from './CreateNews'
+export * from './ManageNews'
+export * from './ManageUsers'
+export * from './ChangePassword'
+export * from './ChangeUsername'
