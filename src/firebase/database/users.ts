@@ -12,13 +12,14 @@ export interface UserDetails {
   fullname: string | null
 }
 
-export const createUser = async (data: UserDetails): Promise<void> => {
-  const docRef = doc(db, `users/${data.id}`)
+export const getAllUsers = async (): Promise<UserDetails[]> => {
+  const querySnapshot = await getDocs(collection(db, 'users'))
 
-  const docSnap = await getDoc(docRef)
-  if (!docSnap.exists()) {
-    await setDoc(docRef, data)
-  }
+  const users: UserDetails[] = querySnapshot.docs.map((doc) => {
+    return doc.data() as UserDetails
+  })
+
+  return users
 }
 
 export const getUserDetails = async (id: string): Promise<DocumentData | undefined> => {
@@ -30,22 +31,19 @@ export const getUserDetails = async (id: string): Promise<DocumentData | undefin
   return undefined
 }
 
+export const createUser = async (data: UserDetails): Promise<void> => {
+  const docRef = doc(db, `users/${data.id}`)
+
+  const docSnap = await getDoc(docRef)
+  if (!docSnap.exists()) {
+    await setDoc(docRef, data)
+  }
+}
+
 export const updateUsername = async (id: string, username: string): Promise<void> => {
   const docRef = doc(db, 'users', id)
   username = username.toLowerCase()
   await updateDoc(docRef, { username })
-}
-
-export type Users = [UserDetails]
-
-export const getAllUsers = async (): Promise<Users> => {
-  const users: DocumentData[] = []
-  const querySnapshot = (await getDocs(collection(db, 'users')))
-  querySnapshot.forEach((doc) => {
-    users.push(doc.data() as UserDetails)
-  })
-
-  return users as Users
 }
 
 export const updateRole = async (id: string, isAdmin: boolean): Promise<void> => {

@@ -1,6 +1,6 @@
 export const Footer = (): JSX.Element => {
   return (
-    <footer className="text-gray-600 body-font border-t border-gray-100 dark:bg-slate-800 dark:border-slate-700">
+    <footer className="text-gray-600 border-y dark:bg-slate-800 dark:border-slate-700 font-montserrat">
       <div className="container px-5 py-4 mx-auto flex items-center sm:flex-row flex-col sm:justify-center">
         <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
           <span className="ml-3 text-xl dark:text-gray-200">Newspaper</span>

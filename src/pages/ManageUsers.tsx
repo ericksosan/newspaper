@@ -24,7 +24,7 @@ export const ManageUsers = (): JSX.Element => {
   if (isLoading) return <Loading />
 
   return (
-    <div className="lg:max-w-7xl lg:mx-auto flex flex-col pt-8 xl:pt-16 min-h-screen px-5 md:px-10">
+    <div className="lg:max-w-7xl lg:mx-auto flex flex-col pt-8 xl:pt-16 min-h-screen px-5 md:px-10 font-montserrat">
       <h1 className="font-bold text-lg md:text-4xl dark:text-gray-200 pb-4">Users Management</h1>
       <div className="relative overflow-x-auto sm:rounded-lg border dark:border-slate-700">
         <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">

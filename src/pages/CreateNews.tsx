@@ -11,7 +11,7 @@ export const CreateNews = (): JSX.Element => {
   } = useMarkdownEditor()
 
   return (
-    <div className="px-5 md:px-10 py-4 lg:py-10 h-auto relative">
+    <div className="px-5 md:px-10 py-4 lg:py-10 h-auto relative font-montserrat">
       <div className='lg:max-w-4xl lg:mx-auto flex flex-col'>
         <div className="flex justify-between items-center border-b-2 pb-4 border-gray-300
         dark:border-gray-600">
@@ -52,7 +52,7 @@ export const CreateNews = (): JSX.Element => {
             <button
               className="text-gray-200 bg-azure-radiance-700 border-none
               hover:bg-azure-radiance-800 font-medium rounded-lg text-sm px-5 py-3"
-              onClick={handleSavePostNewspaper}>
+              onClick={() => { void handleSavePostNewspaper() }}>
               Post Newspaper
             </button>
           </div>

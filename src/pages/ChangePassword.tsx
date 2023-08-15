@@ -26,7 +26,7 @@ export const ChangePassword = (): JSX.Element => {
   }
 
   return (
-    <div className="max-w-xl mx-auto flex flex-col pt-8 xl:pt-16 min-h-screen px-5 md:px-10">
+    <div className="max-w-xl mx-auto flex flex-col pt-8 xl:pt-16 min-h-screen px-5 md:px-10 font-montserrat">
       <h1 className="font-bold text-lg md:text-4xl dark:text-gray-200 pb-4">Change Password</h1>
       <div className="p-5 border rounded-md dark:border-slate-700">
         <FormProvider {...methods}>

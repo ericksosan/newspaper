@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
-import { Login, Signup, CreateNews, ManageNews, ManageUsers, ChangePassword, ChangeUsername, Home } from './pages'
+import { Login, Signup, CreateNews, ManageNews, ManageUsers, ChangePassword, ChangeUsername, Home, NewspaperRender } from './pages'
 import { AdminRoutes, AuthRoutes } from './components'
 import { AuthProvider } from './firebase/contexts/AuthProvider'
 import { ProtectedRoutes } from './components/ProtectedRoutes'
@@ -9,7 +9,9 @@ export const App: React.FC = () => {
     <AuthProvider>
       <Routes>
         <Route element={<ProtectedRoutes />}>
-          <Route path="/" element={<Home/>} />
+          <Route path="/" element={<Home />} />
+
+          <Route path='/new/:id' element={<NewspaperRender />} />
 
           {/* profile */}
           <Route path="/profile/change-username" element={<ChangeUsername />} />

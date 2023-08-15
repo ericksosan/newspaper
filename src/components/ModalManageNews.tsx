@@ -9,8 +9,8 @@ interface ModalProps {
 
 export const ModalManageNews: React.FC<ModalProps> = ({ openModal, handleSetOpenModal }) => {
   const { formMarkdownEditor, handleInputChange } = useMarkdownEditor()
+  
   return (
-    <>
       <Modal
         dismissible
         size={'6xl'}
@@ -43,6 +43,5 @@ export const ModalManageNews: React.FC<ModalProps> = ({ openModal, handleSetOpen
           </button>
         </Modal.Footer>
       </Modal>
-    </>
   )
 }

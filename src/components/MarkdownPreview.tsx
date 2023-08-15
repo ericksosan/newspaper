@@ -12,7 +12,7 @@ export const MarkdownPreview: React.FC<MarkdownPreviewProps> = ({ formMarkdownEd
   const markdownParsed = markdownParser(markdown)
 
   return (
-    <div className="w-full min-h-screen pt-4 flex flex-col gap-4">
+    <div className="w-full min-h-screen pt-4 pb-10 flex flex-col gap-4">
       <div className='mx-auto max-w-4xl'>
         <div
           className="max-w-full prose dark:prose-invert prose-code:px-2 prose-code:py-1

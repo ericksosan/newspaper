@@ -31,7 +31,7 @@ export const Signup: React.FC = () => {
   }
 
   return (
-    <section className="flex flex-col">
+    <section className="flex flex-col font-montserrat">
       <nav className="h-16 w-full flex justify-between items-center px-10">
         <h1 className="inline-block text-xl font-bold select-none text-azure-radiance-700
           dark:text-gray-200">Newspaper</h1>

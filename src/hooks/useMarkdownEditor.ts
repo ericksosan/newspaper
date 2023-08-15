@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import type { FormMarkdownEditor } from '../types'
+import { type NewspaperDetails, createNewspaper } from '../firebase/database/newspaper'
+import { useAuth } from '../firebase/hooks/useAuth'
 
 interface UseMarkdownEditor {
   controllers: boolean
@@ -9,7 +11,7 @@ interface UseMarkdownEditor {
   formMarkdownEditor: FormMarkdownEditor
   handleInputChange: ({ target }: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void
   handleSwitchControllers: () => void
-  handleSavePostNewspaper: () => void
+  handleSavePostNewspaper: () => Promise<void>
 }
 
 const initialFormMarkdownEditor = {
@@ -19,10 +21,10 @@ const initialFormMarkdownEditor = {
 }
 
 export const useMarkdownEditor = (): UseMarkdownEditor => {
+  const { user } = useAuth()
   const [controllers, setControllers] = useState<boolean>(false)
   const [section, setSection] = useState<string>('Create News')
   const [message, setMessage] = useState<string>('')
-  // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
   const [formMarkdownEditor, setFormMarkdownEditor] = useState<FormMarkdownEditor>((JSON.parse(localStorage.getItem('lastnews') as string) as FormMarkdownEditor) || initialFormMarkdownEditor)
 
   const { cover, title, content } = formMarkdownEditor
@@ -75,12 +77,20 @@ export const useMarkdownEditor = (): UseMarkdownEditor => {
     validateFormMarkdownEditor()
   }
 
-  const handleSavePostNewspaper = (): void => {
+  const handleSavePostNewspaper = async (): Promise<void> => {
     if (validateFormMarkdownEditor()) {
-      console.log('sending data...')
+      const data: NewspaperDetails = {
+        newspaper: formMarkdownEditor,
+        idWritter: user.id,
+        avatarWritter: user.photoURL ?? '',
+        nameWritter: user.fullname ?? 'Anonymus'
+      }
       // localStorage.removeItem('lastnews')
       // setFormMarkdownEditor(initialFormMarkdownEditor)
       // Erick, don't forget this code snippet above.
+      try {
+        await createNewspaper(data)
+      } catch (error) { }
     }
   }
 
