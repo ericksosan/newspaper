@@ -1,11 +1,14 @@
 import { Outlet } from 'react-router-dom'
-import { Footer, Nav } from '../layouts'
 import { useAuth } from '../firebase/hooks/useAuth'
-import { Loading } from './Loading'
+import { Redirect } from './atoms'
+import { Loading } from './molecules'
+
 export const Layout = (): JSX.Element => {
-  const { isLoading } = useAuth()
+  const { isLoading, isLogout } = useAuth()
 
   if (isLoading) return <Loading/>
+
+  if (!isLogout) return <Redirect to='HOME'/>
 
   return (
     <>

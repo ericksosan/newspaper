@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, updateDoc, orderBy, where } from 'firebase/firestore'
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, updateDoc, orderBy, where, limit } from 'firebase/firestore'
 import type { FormMarkdownEditor } from '../../types'
 import { db } from '../firebase.config'
 import { calculateReadingTime, createTextSummary } from '../utils'
@@ -33,15 +33,17 @@ export interface DataNewspaper {
 
 export const getAllNewspaper = async (currentPage: number = 1): Promise<DataNewspaper> => {
   const orderQueryBy = 'createdAt'
-  const limitQuery = 20
+  const limitQuery = 15
 
   const currentPosition = (limitQuery * currentPage)
-  const lastPosition = (limitQuery * (currentPage - 1))
+  const lastPosition = ((limitQuery) * ((currentPage - 1)))
 
-  const queryRef = query(collection(db, 'newspaper'), orderBy(orderQueryBy, 'desc'))
-  const docRef = await getDocs(queryRef)
+  const preQuery = query(collection(db, 'newspaper'), orderBy(orderQueryBy, 'desc'))
+  const preDocRef = await getDocs(preQuery)
+  const queryRef = query(collection(db, 'newspaper'), orderBy(orderQueryBy, 'desc'), limit(currentPosition))
+  const docRef = (await getDocs(queryRef))
 
-  const totalNewspaper = Math.round(docRef.size / limitQuery)
+  const totalNewspaper = Math.round(preDocRef.size / limitQuery)
   const allNewspaper = docRef.docs.slice(lastPosition, currentPosition).map((doc) => {
     return doc.data() as NewspaperAllDetails
   })

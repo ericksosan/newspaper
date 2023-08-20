@@ -7,7 +7,7 @@ export interface FormInputsSignup extends FormInputs {
   firstname: string
   lastname: string
   username: string
-  repassword: string
+  rePassword: string
 }
 
 export interface FormMarkdownEditor {

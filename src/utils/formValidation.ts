@@ -16,7 +16,7 @@ const confirmPassword = (watch: UseFormWatch<FormInputsSignup>): RegisterOptions
     required: { value: true, message: 'Password required.' },
     minLength: { value: 8, message: 'Minimum password 8 characters.' },
     validate: (value) => {
-      if (watch('password') !== value) {
+      if (watch('rePassword') !== value) {
         return 'Your passwords do no match.'
       }
     }

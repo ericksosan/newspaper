@@ -4,6 +4,8 @@ import { AuthContext, type AuthContextValues } from './AuthContext'
 import { auth } from '../firebase.config'
 import { type UserDetails, getUserDetails } from '../database/users'
 import { logout } from '../authentication/logout'
+import { AppRoutes } from '../../routes'
+import { type NavigateOptions, useNavigate } from 'react-router-dom'
 
 interface AuthProviderProps {
   children: React.ReactNode
@@ -14,12 +16,12 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [userDetailsLoaded, setUserDetailsLoaded] = useState<boolean>(true)
   const [user, setUser] = useState<UserDetails>({} as UserDetails)
+  const navigate = useNavigate()
 
   useEffect(() => {
     const deconnect = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser !== null) {
         setIsLogout(true)
-        setIsLoading(false)
         void handleGetUserData(currentUser.uid)
       } else {
         setUser({} as UserDetails)
@@ -36,6 +38,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       if (res !== undefined) {
         setUser(res as UserDetails)
         setUserDetailsLoaded(false)
+        setIsLoading(false)
       }
     } catch (error) { }
   }
@@ -54,6 +57,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setIsLogout(false)
   }
 
+  const navigateTo = (path: keyof typeof AppRoutes, options?: NavigateOptions): void => {
+    navigate(AppRoutes[path], options)
+  }
+
   const values: AuthContextValues = {
     isLoading,
     isLogout,
@@ -62,7 +69,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     handleLogoutReset,
     userDetailsLoaded,
     handleGetUserData,
-    handleChangeUsername
+    handleChangeUsername,
+    navigateTo
   }
 
   return (
