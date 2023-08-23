@@ -33,12 +33,12 @@ export interface DataNewspaper {
 
 export const getAllNewspaper = async (currentPage: number = 1): Promise<DataNewspaper> => {
   const orderQueryBy = 'createdAt'
-  const limitQuery = 15
+  const limitQuery = 20
 
   const currentPosition = (limitQuery * currentPage)
   const lastPosition = ((limitQuery) * ((currentPage - 1)))
 
-  const preQuery = query(collection(db, 'newspaper'), orderBy(orderQueryBy, 'desc'))
+  const preQuery = query(collection(db, 'newspaper'))
   const preDocRef = await getDocs(preQuery)
   const queryRef = query(collection(db, 'newspaper'), orderBy(orderQueryBy, 'desc'), limit(currentPosition))
   const docRef = (await getDocs(queryRef))
@@ -53,12 +53,12 @@ export const getAllNewspaper = async (currentPage: number = 1): Promise<DataNews
 
 // --------------- Get newspaper by one --------------- //
 
-export const getNewspaperByOne = async (id: string): Promise<NewspaperAllDetails[] | null> => {
+export const getNewspaperByOne = async (id: string): Promise<NewspaperAllDetails | null> => {
   const docRef = doc(db, 'newspaper', id)
   const newspaper = await getDoc(docRef)
 
   if (newspaper.exists()) {
-    return newspaper.data() as NewspaperAllDetails[]
+    return newspaper.data() as NewspaperAllDetails
   }
 
   return null

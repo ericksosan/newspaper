@@ -4,8 +4,8 @@ export const SkeletonImage = ({ className }: { className?: string }): JSX.Elemen
   return (
     <div className={
       twMerge(
-        className,
-        'items-center justify-center mb-4 bg-gray-300 animate-pulse dark:bg-gray-700 hidden h-52 w-full rounded-md'
+        'items-center justify-center mb-4 bg-gray-300 animate-pulse dark:bg-gray-700 hidden h-52 w-full rounded-md',
+        className
       )
     }>
       <svg className="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">

@@ -24,7 +24,7 @@ export const CardNewspaper: React.FC<CardNewspaperProps> = (props) => {
       pathOptional={id}
       className="flex flex-col items-center bg-white border overflow-hidden border-gray-300 dark:hover:bg-slate-900
       transition-colors duration-300 ease-out rounded-lg dark:border-gray-700 dark:bg-slate-800
-      w-full sm:w-full sm:py-6 shadow-lg dark:shadow-md [&>div>h5]:hover:text-azure-radiance-700 [&>div>h5]:dark:hover:text-gray-300
+      w-full sm:w-full sm:py-6 shadow-md dark:shadow-md [&>div>h5]:hover:text-azure-radiance-700 [&>div>h5]:dark:hover:text-gray-300
       [&>div>h5]:transition-colors [&>div>h5]:duration-300 [&>div>h5]:ease-out font-inter">
       <div className="flex flex-col justify-between p-6 gap-4 sm:py-0 w-full">
         <>

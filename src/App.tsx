@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
-import { CreateNews, ManageNews, ManageUsers, ChangePassword, ChangeUsername, NewspaperRender } from './pages'
+import { CreateNews } from './pages'
 import { AdminRoutes, AuthRoutes } from './components'
-import { Login, Signup, Home } from './components/pages'
+import { Login, Signup, Home, NewspaperRender, ManageUsers, ChangePassword, ChangeUsername, ManageNewspaper } from './components/pages'
 import { AuthProvider } from './firebase/contexts/AuthProvider'
 import { Layout } from './components/organisms'
 
@@ -9,7 +9,7 @@ export const App: React.FC = () => {
   return (
     <AuthProvider>
       <Routes>
-        <Route element={<Layout/>}>
+        <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
 
           <Route path='/new/:id' element={<NewspaperRender />} />
@@ -20,7 +20,7 @@ export const App: React.FC = () => {
 
           {/* Admin */}
           <Route path="/admin" element={<AdminRoutes />}>
-            <Route path="news" element={<ManageNews />} />
+            <Route path="news" element={<ManageNewspaper />} />
             <Route path="news/add" element={<CreateNews />} />
             <Route path="users" element={<ManageUsers />} />
           </Route>

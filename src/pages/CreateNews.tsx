@@ -1,6 +1,7 @@
-import { MarkdownEditor, MarkdownPreview } from '../components'
+import { MarkdownEditor } from '../components'
 import { twJoin } from 'tailwind-merge'
 import { useMarkdownEditor } from '../hooks'
+import { NewspaperPreview } from '../components/organisms'
 
 export const CreateNews = (): JSX.Element => {
   const {
@@ -67,7 +68,7 @@ export const CreateNews = (): JSX.Element => {
         }
         {
           controllers
-            ? <MarkdownPreview formMarkdownEditor={formMarkdownEditor} />
+            ? <NewspaperPreview formMarkdownEditor={formMarkdownEditor} />
             : <MarkdownEditor handleInputChange={handleInputChange} formMarkdownEditor={formMarkdownEditor} />
         }
       </div>

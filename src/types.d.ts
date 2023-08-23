@@ -22,8 +22,12 @@ export interface FormInputsChangePassword {
   repassword: string
 }
 
-type CodeAlert = 'error' | 'success' | 'none'
-export interface MessageAlert {
-  codeAlert: CodeAlert
+export interface FormInputChangeUsername {
+  newUsername: string
+}
+
+type CodeAlert = 'error' | 'success'
+export interface Alert {
+  code: CodeAlert
   message: string
 }

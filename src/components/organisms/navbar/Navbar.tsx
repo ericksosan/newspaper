@@ -1,7 +1,8 @@
 import { twMerge } from 'tailwind-merge'
 import { useAuth } from '../../../firebase/hooks/useAuth'
 import { Nav, LinkRedirect } from '../../atoms'
-import { DarkThemeToggle, UserDropdown } from '../../molecules'
+import { DarkThemeToggle } from '../../molecules'
+import { UserDropdown } from '..'
 
 export const Navbar = ({ className }: { className?: string }): JSX.Element => {
   const { isLogout } = useAuth()

@@ -3,7 +3,7 @@ import { Pagination } from 'flowbite-react'
 import { getGreeting } from '../../utils'
 import { useAuth } from '../../firebase/hooks/useAuth'
 import { News } from '../molecules'
-import { Title } from '../atoms'
+import { Container, Title } from '../atoms'
 import { type DataNewspaper, getAllNewspaper } from '../../firebase/database/newspaper'
 
 export const Home = (): JSX.Element => {
@@ -15,7 +15,7 @@ export const Home = (): JSX.Element => {
   useEffect(() => {
     getAllNewspaper(currentPage)
       .then(res => { setDataNewspaper(res) })
-      .catch(err => { console.log(err) })
+      .catch(_err => { })
       .finally(() => { setIsLoading(false) })
   }, [currentPage])
 
@@ -26,20 +26,17 @@ export const Home = (): JSX.Element => {
   const { user: { fullname } } = useAuth()
 
   return (
-    <div className='min-h-screen px-5 2xl:px-10 font-montserrat'>
-      <section className="text-gray-600 body-font overflow-hidden py-10 mx-auto
-      max-w-7xl 2xl:max-w-full">
-        <Title className='text-xl md:text-2xl xl:text-4xl font-bold mb-8'>
-          {getGreeting(fullname ?? '')}
-        </Title>
-        <News isLoading={isLoading} newspaper={allNewspaper} />
-        <Pagination
-          currentPage={currentPage}
-          onPageChange={onPageChange}
-          totalPages={totalNewspaper}
-          className='grid place-items-center mt-8'
-        />
-      </section>
-    </div>
+    <Container>
+      <Title className='font-bold text-lg md:text-4xl dark:text-gray-200 py-4 font-montserrat'>
+        {getGreeting(fullname ?? '')}
+      </Title>
+      <News isLoading={isLoading} newspaper={allNewspaper} />
+      <Pagination
+        currentPage={currentPage}
+        onPageChange={onPageChange}
+        totalPages={totalNewspaper}
+        className='grid place-items-center mt-8'
+      />
+    </Container>
   )
 }

@@ -1,4 +1,4 @@
-import { type DocumentData, doc, setDoc, getDoc, updateDoc, getDocs, collection } from 'firebase/firestore'
+import { type DocumentData, doc, setDoc, getDoc, updateDoc, getDocs, collection, query, where } from 'firebase/firestore'
 import { db } from '../firebase.config'
 
 export interface UserDetails {
@@ -12,8 +12,9 @@ export interface UserDetails {
   fullname: string | null
 }
 
-export const getAllUsers = async (): Promise<UserDetails[]> => {
-  const querySnapshot = await getDocs(collection(db, 'users'))
+export const getAllUsers = async (id: string): Promise<UserDetails[]> => {
+  const queryRef = query(collection(db, 'users'), where('id', '!=', id))
+  const querySnapshot = await getDocs(queryRef)
 
   const users: UserDetails[] = querySnapshot.docs.map((doc) => {
     return doc.data() as UserDetails

@@ -10,7 +10,7 @@ export const Nav: React.FC<NavProps> = ({ children, className }) => {
     <nav
       className={
         twMerge(
-          'h-16 w-full flex justify-between items-center px-10 font-montserrat',
+          'h-16 w-full flex justify-between items-center px-5 sm:px-10 font-montserrat',
           className
         )
       }

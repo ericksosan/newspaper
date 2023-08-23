@@ -22,7 +22,7 @@ export const useAuthForm = (): UseAuthForm => {
   const { handleGetUserData } = useAuth()
   const navigate = useNavigate()
 
-  const { reset } = useForm<FormInputs>()
+  const { reset } = useForm<FormInputs | FormInputsSignup>()
 
   const onSubmitLogin: SubmitHandler<FormInputs> = async (data): Promise<void> => {
     try {

@@ -1,9 +1,2 @@
-export * from './ChangePassword'
-export * from './ChangeUsername'
 export * from './CreateNews'
-export * from '../components/pages/Home'
-export * from '../components/pages/Login'
-export * from './ManageNews'
-export * from './ManageUsers'
-export * from './NewspaperRender'
-export * from '../components/pages/Signup'
+
