@@ -8,7 +8,7 @@ interface DropdownItemProps {
   children: React.ReactNode
 }
 
-export const DropdownItem: React.FC<DropdownItemProps> = ({ to, children, onClick }) => {
+export const DropdownItem: React.FC<DropdownItemProps> = ({ to = '', children, onClick }) => {
   return (
     <Dropdown.Item as={Link} to={to && AppRoutes[to]} onClick={onClick}
       className='p-3 font-semibold hover:text-azure-radiance-700 transition-colors

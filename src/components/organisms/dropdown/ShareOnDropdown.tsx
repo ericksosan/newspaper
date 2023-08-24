@@ -15,9 +15,9 @@ export const ShareOnDropdown: React.FC<ShareOnDropdownProps> = ({ id, title, sum
   return (
     <div className="flex gap-2 items-center relative">
       <Button
+        colors='blue'
         onClick={() => { setDropdownToggle(!dropdownToggle) }}
-        className='block px-3 text-xs sm:text-base sm:px-6 sm:py-2 bg-azure-radiance-700 text-white
-            font-medium rounded-md hover:bg-azure-radiance-800'>
+        >
         Share on
       </Button>
 

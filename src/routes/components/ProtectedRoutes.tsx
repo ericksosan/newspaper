@@ -1,7 +1,7 @@
 import { Navigate } from 'react-router'
-import { useAuth } from '../firebase/hooks/useAuth'
-import { Loading } from './Loading'
-import { Layout } from '.'
+import { useAuth } from '../../firebase/hooks/useAuth'
+import { Loading } from '../../components/molecules'
+import { Layout } from '../../components/organisms'
 
 export const ProtectedRoutes = (): JSX.Element => {
   const { isLoading, isLogout } = useAuth()

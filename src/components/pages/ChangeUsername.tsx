@@ -17,7 +17,7 @@ export const ChangeUsername = (): JSX.Element => {
         <form onSubmit={(evt) => { void handleSubmit(onSubmitChangeUsername)(evt) }}>
 
           {
-            alert.code === 'success' && <FormAlert message={alert.message} type={alert.code} />
+            alert.code === 'success' && <FormAlert message={alert.message} code={alert.code} />
           }
 
           <FormField
@@ -29,8 +29,9 @@ export const ChangeUsername = (): JSX.Element => {
 
           <Button
             type='submit'
-            className='w-full bg-azure-radiance-700 hover:bg-azure-radiance-800
-              rounded-md font-semibold text-white'>
+            colors='blue'
+            className='w-full'
+            >
             Change Username
           </Button>
         </form>

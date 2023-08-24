@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Moon, Sun } from '../../Icons'
 import { Button } from '../../atoms'
+import { MoonIcon, SunIcon } from '../../atoms/icon'
 
 export const DarkThemeToggle: React.FC = () => {
   const [themeToggle, setThemeToggle] = useState<boolean>(false || JSON.parse(localStorage.getItem('appearance') as string) as boolean)
@@ -22,14 +22,14 @@ export const DarkThemeToggle: React.FC = () => {
   return (
     <Button
       onClick={() => { setThemeToggle(!themeToggle) }}
-      className='text-slate-800 transition-opacity duration-500 hover:opacity-70
+      className='text-slate-700 transition-opacity duration-500 hover:opacity-70
       dark:text-gray-200 [&>svg]:animate-jump [&>svg]:animate-duration-500
-      [&>svg]:animate-ease-out [&>svg]:animate-once'
+      [&>svg]:animate-ease-out [&>svg]:animate-once p-0'
     >
       {
         themeToggle
-          ? <Sun />
-          : <Moon />
+          ? <SunIcon />
+          : <MoonIcon />
       }
     </Button>
   )

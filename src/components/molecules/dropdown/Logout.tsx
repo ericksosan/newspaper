@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useAuth } from '../../../firebase/hooks/useAuth'
-import { ArrowRightRectangle, DropdownItem, Spinner } from '../../atoms'
+import { DropdownItem, Spinner } from '../../atoms'
+import { ArrowRightRectangleIcon } from '../../atoms/icon'
 
 export const Logout = (): JSX.Element => {
   const { logout, navigateTo } = useAuth()
@@ -17,7 +18,7 @@ export const Logout = (): JSX.Element => {
 
   return (
     <DropdownItem onClick={() => { void handleLogout() }}>
-      { isLoading && <Spinner/> } <ArrowRightRectangle /> Logout
+      { isLoading && <Spinner/> } <ArrowRightRectangleIcon /> Logout
     </DropdownItem>
   )
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import type { FormMarkdownEditor } from '../types'
 import { type NewspaperDetails, createNewspaper } from '../firebase/database/newspaper'
 import { useAuth } from '../firebase/hooks/useAuth'
@@ -6,6 +6,7 @@ import { useAuth } from '../firebase/hooks/useAuth'
 interface UseMarkdownEditor {
   controllers: boolean
   isFormValid: boolean
+  isLoading: boolean
   section: string
   message: string
   formMarkdownEditor: FormMarkdownEditor
@@ -22,38 +23,30 @@ const initialFormMarkdownEditor = {
 
 export const useMarkdownEditor = (): UseMarkdownEditor => {
   const { user } = useAuth()
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [controllers, setControllers] = useState<boolean>(false)
   const [section, setSection] = useState<string>('Create News')
   const [message, setMessage] = useState<string>('')
-  const [formMarkdownEditor, setFormMarkdownEditor] = useState<FormMarkdownEditor>((JSON.parse(localStorage.getItem('lastnews') as string) as FormMarkdownEditor) || initialFormMarkdownEditor)
+  const [formMarkdownEditor, setFormMarkdownEditor] = useState<FormMarkdownEditor>(initialFormMarkdownEditor)
 
   const { cover, title, content } = formMarkdownEditor
   const isURL = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i
 
-  useEffect(() => {
-    if (localStorage.getItem('lastnews') === null) {
-      localStorage.setItem('lastnews', JSON.stringify(formMarkdownEditor))
-    } else {
-      localStorage.setItem('lastnews', JSON.stringify(formMarkdownEditor))
-    }
-  }, [formMarkdownEditor])
-
   const validateFormMarkdownEditor = (): boolean => {
-    if (!isURL.test(cover.trim())) {
-      setMessage('The URL of the cover page cannot be invalid!')
+    if (cover === '') {
+      setMessage('The URL cannot be empty!')
       return false
-    }
-
-    if (title.trim().length <= 0) {
+    } if (!isURL.test(cover)) {
+      setMessage('The URL of the cover page is invalid!')
+      return false
+    } else if (title === '') {
+      console.log(title.length)
       setMessage('The title cannot be empty!')
       return false
-    }
-
-    if (content.trim().length <= 0) {
+    } else if (content === '') {
       setMessage('The content box is empty!')
       return false
     }
-
     setMessage('')
     return true
   }
@@ -64,7 +57,6 @@ export const useMarkdownEditor = (): UseMarkdownEditor => {
       ...formMarkdownEditor,
       [name]: value.trimStart()
     })
-    validateFormMarkdownEditor()
   }
 
   const handleSwitchControllers = (): void => {
@@ -74,24 +66,24 @@ export const useMarkdownEditor = (): UseMarkdownEditor => {
         ? 'Edit'
         : 'Preview'
     )
-    validateFormMarkdownEditor()
   }
 
   const handleSavePostNewspaper = async (): Promise<void> => {
-    if (validateFormMarkdownEditor()) {
-      const data: NewspaperDetails = {
-        newspaper: formMarkdownEditor,
-        idWritter: user.id,
-        avatarWritter: user.photoURL ?? '',
-        nameWritter: user.fullname ?? 'Anonymus'
-      }
-      // localStorage.removeItem('lastnews')
-      // setFormMarkdownEditor(initialFormMarkdownEditor)
-      // Erick, don't forget this code snippet above.
-      try {
-        await createNewspaper(data)
-      } catch (error) { }
+    if (!validateFormMarkdownEditor()) return
+    setFormMarkdownEditor(initialFormMarkdownEditor)
+    const data: NewspaperDetails = {
+      newspaper: formMarkdownEditor,
+      idWritter: user.id,
+      avatarWritter: user.photoURL ?? '',
+      nameWritter: user.fullname ?? 'Anonymus'
     }
+
+    // Erick, don't forget this code snippet above.
+    try {
+      setIsLoading(true)
+      await createNewspaper(data)
+      setIsLoading(false)
+    } catch (error) { }
   }
 
   const isFormValid = (formMarkdownEditor.content.length === 0 ||
@@ -100,6 +92,7 @@ export const useMarkdownEditor = (): UseMarkdownEditor => {
   return {
     controllers,
     isFormValid,
+    isLoading,
     section,
     message,
     formMarkdownEditor,

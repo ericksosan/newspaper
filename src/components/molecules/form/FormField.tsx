@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useFormContext, type RegisterOptions } from 'react-hook-form'
+import { EyeIcon, EyeSlashIcon } from '../../atoms/icon'
 import { Label, Input, InputAlert } from '../../atoms'
 import { detailsErrorsInput } from '../../../utils'
-import { Eye, EyeSlash } from '../..'
 
 interface FormFieldProps {
   label: string
@@ -33,8 +33,8 @@ export const FormField: React.FC<FormFieldProps> = ({ label, name, type, placeho
             onClick={() => { setShowPassword(!showPassword) }}>
             {
               showPassword
-                ? <EyeSlash className='w-5 h-5 dark:text-gray-200' />
-                : <Eye className='w-5 h-5 dark:text-gray-200' />
+                ? <EyeSlashIcon className='w-5 h-5 dark:text-gray-200' />
+                : <EyeIcon className='w-5 h-5 dark:text-gray-200' />
             }
           </div>
         }

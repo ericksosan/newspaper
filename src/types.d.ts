@@ -31,3 +31,5 @@ export interface Alert {
   code: CodeAlert
   message: string
 }
+
+export type ButtonColors = 'blue' | 'red' | 'white' | 'dark'

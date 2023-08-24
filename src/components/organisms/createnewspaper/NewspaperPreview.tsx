@@ -1,5 +1,5 @@
 import type { FormMarkdownEditor } from '../../../types'
-import { RenderMarkdown } from '../markdown'
+import { RenderMarkdown } from '../markdowneditor'
 
 interface NewspaperPreviewProps {
   formMarkdownEditor: FormMarkdownEditor
@@ -7,8 +7,8 @@ interface NewspaperPreviewProps {
 
 export const NewspaperPreview: React.FC<NewspaperPreviewProps> = ({ formMarkdownEditor }) => {
   return (
-    <div className="w-full min-h-screen pb-10 flex flex-col gap-4">
-      <RenderMarkdown { ...formMarkdownEditor } />
+    <div className="w-full min-h-screen flex flex-col gap-4">
+      <RenderMarkdown {...formMarkdownEditor} />
     </div>
   )
 }

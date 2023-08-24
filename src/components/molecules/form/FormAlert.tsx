@@ -1,15 +1,9 @@
 import { twMerge } from 'tailwind-merge'
-import { ErrorSignal, SuccessSignal } from '../..'
+import { ErrorSignalIcon, SuccessSignalIcon } from '../../atoms/icon'
+import type { Alert } from '../../../types'
 
-type AlertType = 'success' | 'error'
-
-interface FormAlertProps {
-  type: AlertType
-  message: string
-}
-
-export const FormAlert: React.FC<FormAlertProps> = ({ type, message }) => {
-  const status = (type === 'success')
+export const FormAlert: React.FC<Alert> = ({ code, message }) => {
+  const status = (code === 'success')
 
   return (
     <div
@@ -26,7 +20,7 @@ export const FormAlert: React.FC<FormAlertProps> = ({ type, message }) => {
       role="alert"
     >
       {
-        status ? <SuccessSignal /> : <ErrorSignal />
+        status ? <SuccessSignalIcon /> : <ErrorSignalIcon />
       }
       <span className="sr-only">Info</span>
       <div>

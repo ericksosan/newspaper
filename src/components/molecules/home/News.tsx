@@ -1,4 +1,5 @@
 import { type NewspaperAllDetails } from '../../../firebase/database/newspaper'
+import { CardContainer } from '../../atoms'
 import { CardNewspaper, SkeletonCardNewspaper } from '../../organisms'
 
 interface NewsProps {
@@ -8,8 +9,7 @@ interface NewsProps {
 
 export const News: React.FC<NewsProps> = ({ isLoading = true, newspaper }) => {
   return (
-    <div className="grid place-items-center sm:place-items-stretch gap-4
-      sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 min-h-screen">
+    <CardContainer>
       {
         isLoading
           ? Array(6).fill('').map((_item, index) => (<SkeletonCardNewspaper key={index} />))
@@ -17,6 +17,6 @@ export const News: React.FC<NewsProps> = ({ isLoading = true, newspaper }) => {
             <CardNewspaper key={news.id} {...news} />
           ))
       }
-    </div>
+    </CardContainer>
   )
 }

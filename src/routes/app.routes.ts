@@ -8,4 +8,4 @@ export const AppRoutes = {
   WRITE_NEWS: '/admin/news/add',
   CHANGE_USERNAME: '/profile/change-username',
   CHANGE_PASSWORD: '/profile/change-password'
-}
+} as const

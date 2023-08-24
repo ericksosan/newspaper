@@ -15,7 +15,7 @@ export const ChangePassword = (): JSX.Element => {
         <form onSubmit={(evt) => { void handleSubmit(onSubmitChangePassword)(evt) }}>
 
           {
-            alert.code === 'error' && <FormAlert message={alert.message} type={alert.code} />
+            alert.code === 'error' && <FormAlert message={alert.message} code={alert.code} />
           }
 
           <FormField

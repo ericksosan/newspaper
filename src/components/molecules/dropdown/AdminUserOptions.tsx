@@ -1,5 +1,6 @@
 import { UserDropdownDivideBySection } from '.'
-import { DropdownItem, GroupUsers, Newspaper, PecilSquare } from '../../atoms'
+import { DropdownItem } from '../../atoms'
+import { GroupUsersIcon, NewspaperIcon, PecilSquareIcon } from '../../atoms/icon'
 
 export const AdminUserOptions = (): JSX.Element => {
   return (
@@ -7,17 +8,17 @@ export const AdminUserOptions = (): JSX.Element => {
       <UserDropdownDivideBySection sectionTitle='Management' />
 
       <DropdownItem to='WRITE_NEWS'>
-        <PecilSquare />
+        <PecilSquareIcon />
         Write News
       </DropdownItem>
 
       <DropdownItem to='ADMIN_NEWS'>
-        <Newspaper />
+        <NewspaperIcon />
         Manage News
       </DropdownItem>
 
       <DropdownItem to='ADMIN_USERS'>
-        <GroupUsers />
+        <GroupUsersIcon />
         Manage Users
       </DropdownItem>
     </>

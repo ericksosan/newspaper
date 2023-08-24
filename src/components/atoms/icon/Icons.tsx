@@ -8,7 +8,7 @@ export const GoogleIcon = (): JSX.Element => {
   )
 }
 
-export const Moon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+export const MoonIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24" fill="currentColor"
@@ -20,7 +20,7 @@ export const Moon = ({ className }: React.ComponentProps<'svg'>): JSX.Element =>
   )
 }
 
-export const Sun = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+export const SunIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
@@ -33,7 +33,7 @@ export const Sun = ({ className }: React.ComponentProps<'svg'>): JSX.Element => 
   )
 }
 
-export const Newspaper = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+export const NewspaperIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
@@ -47,7 +47,7 @@ export const Newspaper = ({ className }: React.ComponentProps<'svg'>): JSX.Eleme
   )
 }
 
-export const PecilSquare = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+export const PecilSquareIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
@@ -61,7 +61,7 @@ export const PecilSquare = ({ className }: React.ComponentProps<'svg'>): JSX.Ele
   )
 }
 
-export const GroupUsers = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+export const GroupUsersIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
@@ -75,20 +75,21 @@ export const GroupUsers = ({ className }: React.ComponentProps<'svg'>): JSX.Elem
   )
 }
 
-export const ArrowRightRectangle = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+export const ArrowRightRectangleIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
       fill="currentColor"
       className={
-        twMerge(className, 'w-6 h-6')
-      }>
-      <path fillRule="evenodd" d="M7.5 3.75A1.5 1.5 0 006 5.25v13.5a1.5 1.5 0 001.5 1.5h6a1.5 1.5 0 001.5-1.5V15a.75.75 0 011.5 0v3.75a3 3 0 01-3 3h-6a3 3 0 01-3-3V5.25a3 3 0 013-3h6a3 3 0 013 3V9A.75.75 0 0115 9V5.25a1.5 1.5 0 00-1.5-1.5h-6zm10.72 4.72a.75.75 0 011.06 0l3 3a.75.75 0 010 1.06l-3 3a.75.75 0 11-1.06-1.06l1.72-1.72H9a.75.75 0 010-1.5h10.94l-1.72-1.72a.75.75 0 010-1.06z" clipRule="evenodd" />
+        twMerge('w-6 h-6', className)
+      }
+      viewBox="0 0 512 512">
+      <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z" />
     </svg>
   )
 }
 
-export const CheckBadge = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+export const CheckBadgeIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
@@ -101,7 +102,7 @@ export const CheckBadge = ({ className }: React.ComponentProps<'svg'>): JSX.Elem
   )
 }
 
-export const UserPencil = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+export const UserPencilIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -115,7 +116,7 @@ export const UserPencil = ({ className }: React.ComponentProps<'svg'>): JSX.Elem
   )
 }
 
-export const Key = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+export const KeyIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -128,18 +129,7 @@ export const Key = ({ className }: React.ComponentProps<'svg'>): JSX.Element => 
   )
 }
 
-export const ExclamationCircle = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      className={className}>
-      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clipRule="evenodd" />
-    </svg>
-  )
-}
-
-export const UserCircle = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+export const UserCircleIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
@@ -147,7 +137,7 @@ export const UserCircle = ({ className }: React.ComponentProps<'svg'>): JSX.Elem
   )
 }
 
-export const Tooth = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+export const ToothIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className}>
       <path fillRule="evenodd" d="M11.828 2.25c-.916 0-1.699.663-1.85 1.567l-.091.549a.798.798 0 01-.517.608 7.45 7.45 0 00-.478.198.798.798 0 01-.796-.064l-.453-.324a1.875 1.875 0 00-2.416.2l-.243.243a1.875 1.875 0 00-.2 2.416l.324.453a.798.798 0 01.064.796 7.448 7.448 0 00-.198.478.798.798 0 01-.608.517l-.55.092a1.875 1.875 0 00-1.566 1.849v.344c0 .916.663 1.699 1.567 1.85l.549.091c.281.047.508.25.608.517.06.162.127.321.198.478a.798.798 0 01-.064.796l-.324.453a1.875 1.875 0 00.2 2.416l.243.243c.648.648 1.67.733 2.416.2l.453-.324a.798.798 0 01.796-.064c.157.071.316.137.478.198.267.1.47.327.517.608l.092.55c.15.903.932 1.566 1.849 1.566h.344c.916 0 1.699-.663 1.85-1.567l.091-.549a.798.798 0 01.517-.608 7.52 7.52 0 00.478-.198.798.798 0 01.796.064l.453.324a1.875 1.875 0 002.416-.2l.243-.243c.648-.648.733-1.67.2-2.416l-.324-.453a.798.798 0 01-.064-.796c.071-.157.137-.316.198-.478.1-.267.327-.47.608-.517l.55-.091a1.875 1.875 0 001.566-1.85v-.344c0-.916-.663-1.699-1.567-1.85l-.549-.091a.798.798 0 01-.608-.517 7.507 7.507 0 00-.198-.478.798.798 0 01.064-.796l.324-.453a1.875 1.875 0 00-.2-2.416l-.243-.243a1.875 1.875 0 00-2.416-.2l-.453.324a.798.798 0 01-.796.064 7.462 7.462 0 00-.478-.198.798.798 0 01-.517-.608l-.091-.55a1.875 1.875 0 00-1.85-1.566h-.344zM12 15.75a3.75 3.75 0 100-7.5 3.75 3.75 0 000 7.5z" clipRule="evenodd" />
@@ -155,7 +145,7 @@ export const Tooth = ({ className }: React.ComponentProps<'svg'>): JSX.Element =
   )
 }
 
-export const Trash = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+export const TrashIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className}>
       <path fillRule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 013.878.512.75.75 0 11-.256 1.478l-.209-.035-1.005 13.07a3 3 0 01-2.991 2.77H8.084a3 3 0 01-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 01-.256-1.478A48.567 48.567 0 017.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 013.369 0c1.603.051 2.815 1.387 2.815 2.951zm-6.136-1.452a51.196 51.196 0 013.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 00-6 0v-.113c0-.794.609-1.428 1.364-1.452zm-.355 5.945a.75.75 0 10-1.5.058l.347 9a.75.75 0 101.499-.058l-.346-9zm5.48.058a.75.75 0 10-1.498-.058l-.347 9a.75.75 0 001.5.058l.345-9z" clipRule="evenodd" />
@@ -163,7 +153,7 @@ export const Trash = ({ className }: React.ComponentProps<'svg'>): JSX.Element =
   )
 }
 
-export const ArrowTopRightSquare = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+export const ArrowTopRightSquareIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className={className}>
       <path fillRule="evenodd" d="M15.75 2.25H21a.75.75 0 01.75.75v5.25a.75.75 0 01-1.5 0V4.81L8.03 17.03a.75.75 0 01-1.06-1.06L19.19 3.75h-3.44a.75.75 0 010-1.5zm-10.5 4.5a1.5 1.5 0 00-1.5 1.5v10.5a1.5 1.5 0 001.5 1.5h10.5a1.5 1.5 0 001.5-1.5V10.5a.75.75 0 011.5 0v8.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V8.25a3 3 0 013-3h8.25a.75.75 0 010 1.5H5.25z" clipRule="evenodd" />
@@ -171,7 +161,7 @@ export const ArrowTopRightSquare = ({ className }: React.ComponentProps<'svg'>):
   )
 }
 
-export const Eye = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+export const EyeIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
@@ -180,7 +170,7 @@ export const Eye = ({ className }: React.ComponentProps<'svg'>): JSX.Element => 
   )
 }
 
-export const EyeSlash = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+export const EyeSlashIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className={className}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
@@ -188,7 +178,7 @@ export const EyeSlash = ({ className }: React.ComponentProps<'svg'>): JSX.Elemen
   )
 }
 
-export const ErrorSignal = (): JSX.Element => {
+export const ErrorSignalIcon = (): JSX.Element => {
   return (
     <svg className="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
       <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
@@ -196,10 +186,23 @@ export const ErrorSignal = (): JSX.Element => {
   )
 }
 
-export const SuccessSignal = (): JSX.Element => {
+export const SuccessSignalIcon = (): JSX.Element => {
   return (
     <svg className="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
       <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+    </svg>
+  )
+}
+
+export const MarkdownIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg"
+      className={twMerge(
+        'w-5 h-5',
+        className
+      )}
+      viewBox="0 0 640 512">
+      <path d="M593.8 59.1H46.2C20.7 59.1 0 79.8 0 105.2v301.5c0 25.5 20.7 46.2 46.2 46.2h547.7c25.5 0 46.2-20.7 46.1-46.1V105.2c0-25.4-20.7-46.1-46.2-46.1zM338.5 360.6H277v-120l-61.5 76.9-61.5-76.9v120H92.3V151.4h61.5l61.5 76.9 61.5-76.9h61.5v209.2zm135.3 3.1L381.5 256H443V151.4h61.5V256H566z" />
     </svg>
   )
 }

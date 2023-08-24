@@ -1,10 +1,11 @@
 import { useForm, FormProvider } from 'react-hook-form'
 import { formValidation } from '../../utils'
 import { type FormInputs } from '../../types'
-import { Divider, SubTitle, GoogleIcon } from '../atoms'
+import { Divider, SubTitle } from '../atoms'
 import { Navbar } from '../organisms'
 import { FormAlert, FormCover, FormField, FormHeader, FormRedirect, ButtonLoading } from '../molecules'
 import { useAuthForm } from '../../hooks/authform'
+import { GoogleIcon } from '../atoms/icon'
 
 export const Login: React.FC = () => {
   const methods = useForm<FormInputs>()
@@ -30,7 +31,7 @@ export const Login: React.FC = () => {
               subTitle='Enter your login datails below'
             />
 
-            {message.length > 0 && <FormAlert message={message} type='error' />}
+            {message.length > 0 && <FormAlert message={message} code='error' />}
 
             <FormField
               label="Email address"

@@ -10,7 +10,7 @@ export const Title: React.FC<TitleProps> = ({ children, className }) => {
     <h1
     className={
       twMerge(
-        'inline-block font-bold text-slate-900 dark:text-white',
+        'inline-block font-montserrat font-bold text-slate-900 dark:text-white',
         className
       )
     }

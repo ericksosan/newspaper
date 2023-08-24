@@ -16,11 +16,13 @@ export const CardNewspaperDetails: React.FC<NewspaperAllDetails> = ({ title, ava
           />
           <div className="flex flex-col">
             <Title className='text-md font-montserrat'>{nameWritter}</Title>
-            <SubTitle className='text-sm text-slate-700'> Posted on {modifiedAt === '' ? createdAt : modifiedAt} | {readingTimeText}</SubTitle>
+            <SubTitle className='text-sm text-slate-700'>
+              {modifiedAt === '' ? 'Posted on '.concat(createdAt) : 'Updated on '.concat(modifiedAt)} | {readingTimeText}
+            </SubTitle>
           </div>
         </div>
 
-        <ShareOnDropdown id={id} title={title} summary={summary}/>
+        <ShareOnDropdown id={id} title={title} summary={summary} />
       </div>
     </div >
   )

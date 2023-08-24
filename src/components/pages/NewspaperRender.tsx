@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { type NewspaperAllDetails, getNewspaperByOne } from '../../firebase/database/newspaper'
 import type { FormMarkdownEditor } from '../../types'
-import { Loading } from '../Loading'
 import { CardNewspaperDetails, RenderMarkdown } from '../organisms'
+import { Loading } from '../molecules'
 
 export const NewspaperRender = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState(true)

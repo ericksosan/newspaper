@@ -7,9 +7,10 @@ import { Container, Title } from '../atoms'
 import { type DataNewspaper, getAllNewspaper } from '../../firebase/database/newspaper'
 
 export const Home = (): JSX.Element => {
-  const [dataNewspaper, setDataNewspaper] = useState({ allNewspaper: [], totalNewspaper: 0 } as DataNewspaper)
+  const [dataNewspaper, setDataNewspaper] = useState({ allNewspaper: [], totalNewspaper: 1 } as DataNewspaper)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [currentPage, setCurrentPage] = useState(1)
+  const { user: { fullname } } = useAuth()
   const { allNewspaper, totalNewspaper } = dataNewspaper
 
   useEffect(() => {
@@ -23,19 +24,18 @@ export const Home = (): JSX.Element => {
     setCurrentPage(page)
   }
 
-  const { user: { fullname } } = useAuth()
-
   return (
     <Container>
-      <Title className='font-bold text-lg md:text-4xl dark:text-gray-200 py-4 font-montserrat'>
+      <Title className='text-xl md:text-4xl py-4 line-clamp-2 md:line-clamp-none'>
         {getGreeting(fullname ?? '')}
       </Title>
       <News isLoading={isLoading} newspaper={allNewspaper} />
       <Pagination
+        showIcons
         currentPage={currentPage}
         onPageChange={onPageChange}
-        totalPages={totalNewspaper}
-        className='grid place-items-center mt-8'
+        totalPages={totalNewspaper === 0 ? 1 : totalNewspaper}
+        className='grid place-items-center my-4 font-inter'
       />
     </Container>
   )

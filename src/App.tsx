@@ -1,9 +1,8 @@
 import { Routes, Route, Navigate } from 'react-router-dom'
-import { CreateNews } from './pages'
-import { AdminRoutes, AuthRoutes } from './components'
-import { Login, Signup, Home, NewspaperRender, ManageUsers, ChangePassword, ChangeUsername, ManageNewspaper } from './components/pages'
+import { Login, CreateNews, Signup, Home, NewspaperRender, ManageUsers, ChangePassword, ChangeUsername, ManageNewspaper } from './components/pages'
 import { AuthProvider } from './firebase/contexts/AuthProvider'
 import { Layout } from './components/organisms'
+import { AdminRoutes, AuthRoutes } from './routes'
 
 export const App: React.FC = () => {
   return (

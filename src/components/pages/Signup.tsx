@@ -3,7 +3,8 @@ import { formValidation } from '../../utils'
 import { type FormInputsSignup } from '../../types'
 import { Navbar } from '../organisms'
 import { ButtonLoading, FormAlert, FormCover, FormField, FormHeader, FormRedirect } from '../molecules'
-import { Divider, GoogleIcon, SubTitle } from '../atoms'
+import { Divider, SubTitle } from '../atoms'
+import { GoogleIcon } from '../atoms/icon'
 import { useAuthForm } from '../../hooks/authform'
 
 export const Signup: React.FC = () => {
@@ -30,7 +31,7 @@ export const Signup: React.FC = () => {
               subTitle='Don&apos;t miss any news highlights.'
             />
 
-            {message.length > 0 && <FormAlert type='error' message={message} />}
+            {message.length > 0 && <FormAlert code='error' message={message} />}
 
             <div className="flex justify-between items-center gap-3 ">
               <FormField

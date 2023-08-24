@@ -10,8 +10,11 @@ body {
   scrollbar-w-3.5 active:scrollbar-thumb-slate-600 dark:active:scrollbar-thumb-slate-950;
 }
 
-.markdown-editor {
-	@apply modify-scroll focus:shadow-none focus:ring-0;
+.markdown-editor-field {
+	@apply focus:shadow-none focus:ring-0 w-full bg-transparent py-3
+	font-bold text-slate-900 dark:text-gray-200 text-sm md:text-2xl bg-gray-50
+	border-gray-300 focus:ring-transparent focus:border-gray-300 dark:bg-gray-800
+	dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-transparent rounded-md;
 }
 
 .modify-scroll {
@@ -21,7 +24,7 @@ body {
 
 .button-create-news {
 	@apply text-gray-900 bg-white border border-gray-300 hover:bg-gray-100
-    font-medium rounded-lg text-sm px-5 py-3 dark:bg-gray-800 dark:text-white
+    font-medium rounded-lg text-sm dark:bg-gray-800 dark:text-white
     dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600;
 }
 
