@@ -4,12 +4,11 @@ import { Avatar, Logout, UserDetailsDropdown, UserOptions } from '../../molecule
 import { Divider } from '../../atoms'
 
 export const UserDropdown = (): JSX.Element => {
-  const { user, userDetailsLoaded } = useAuth()
+  const { user } = useAuth()
 
   return (
     <Dropdown
       inline
-      disabled={userDetailsLoaded}
       label={
         <Avatar
           img={user.photoURL ?? ''}

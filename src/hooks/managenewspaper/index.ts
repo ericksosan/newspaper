@@ -1,1 +1,1 @@
-export * from './useManageNewspaper';
+export * from './useManageNewspaper'

@@ -1,16 +1,21 @@
+import { memo } from 'react'
 import { twJoin } from 'tailwind-merge'
 import { FormMarkdownEditor, NewspaperPreview } from '../../components/organisms'
 import { Button, Title } from '../../components/atoms'
 import { ButtonLoading, FormAlert } from '../../components/molecules'
-import { useMarkdownEditor } from '../../hooks'
+import { useCreateNews } from '../../hooks'
 
-export const CreateNews = (): JSX.Element => {
+const CreateNews = (): JSX.Element => {
   const {
-    controllers, message, section,
-    formMarkdownEditor, handleInputChange,
-    handleSavePostNewspaper, isFormValid,
-    handleSwitchControllers, isLoading
-  } = useMarkdownEditor()
+    section,
+    message,
+    register,
+    isLoading,
+    isSectionChanged,
+    formMarkdownEditor,
+    handlePostNewspaper,
+    handleSwitchPreviewEdit
+  } = useCreateNews()
 
   return (
     <div className="px-5 md:px-10 py-4 lg:py-10 h-auto relative font-montserrat">
@@ -19,7 +24,7 @@ export const CreateNews = (): JSX.Element => {
         dark:border-gray-600">
           <Title className={
             twJoin(
-              controllers ? 'animate-fade-down' : 'animate-fade-up',
+              isSectionChanged ? 'animate-fade-down' : 'animate-fade-up',
               'text-lg md:text-4xl animate-duration-300 animate-ease-in-out'
             )
           }>
@@ -30,16 +35,16 @@ export const CreateNews = (): JSX.Element => {
           >
 
             {
-              controllers
+              isSectionChanged
                 ? <Button
                   colors='dark'
-                  onClick={handleSwitchControllers} >
+                  onClick={handleSwitchPreviewEdit} >
                   Edit
                 </Button>
                 : <Button
                   colors='dark'
-                  onClick={handleSwitchControllers}
-                  disabled={isFormValid} >
+                  onClick={handleSwitchPreviewEdit}
+                >
                   Preview
                 </Button>
             }
@@ -47,24 +52,24 @@ export const CreateNews = (): JSX.Element => {
             <ButtonLoading
               isLoading={isLoading}
               color='blue'
-              onClick={() => { void handleSavePostNewspaper() }}>
+              onClick={handlePostNewspaper}>
               Post Newspaper
             </ButtonLoading>
           </div>
         </div>
         {
           message.length !== 0 &&
-          <FormAlert code='error' message={message}/>
+          <FormAlert alert={{ message, code: 'error' }} />
         }
         {
-          controllers
+          isSectionChanged
             ? <NewspaperPreview
               formMarkdownEditor={formMarkdownEditor} />
-            : <FormMarkdownEditor
-              handleInputChange={handleInputChange}
-              formMarkdownEditor={formMarkdownEditor} />
+            : <FormMarkdownEditor register={register} />
         }
       </div>
     </div>
   )
 }
+
+export default memo(CreateNews)

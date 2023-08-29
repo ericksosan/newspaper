@@ -26,7 +26,7 @@ export interface FormInputChangeUsername {
   newUsername: string
 }
 
-type CodeAlert = 'error' | 'success'
+type CodeAlert = 'error' | 'success' | 'none'
 export interface Alert {
   code: CodeAlert
   message: string

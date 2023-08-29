@@ -4,7 +4,7 @@ import type { FormInputsChangePassword } from '../../types'
 import { useChangePassword } from '../../hooks'
 import { ButtonLoading, ContainerAccountSettings, FormAlert, FormField } from '../molecules'
 
-export const ChangePassword = (): JSX.Element => {
+const ChangePassword = (): JSX.Element => {
   const { alert, isLoading, onSubmitChangePassword } = useChangePassword()
   const methods = useForm<FormInputsChangePassword>()
   const { handleSubmit, watch } = methods
@@ -15,7 +15,7 @@ export const ChangePassword = (): JSX.Element => {
         <form onSubmit={(evt) => { void handleSubmit(onSubmitChangePassword)(evt) }}>
 
           {
-            alert.code === 'error' && <FormAlert message={alert.message} code={alert.code} />
+            alert.code === 'error' && <FormAlert alert={alert} />
           }
 
           <FormField
@@ -53,3 +53,5 @@ export const ChangePassword = (): JSX.Element => {
     </ContainerAccountSettings>
   )
 }
+
+export default ChangePassword

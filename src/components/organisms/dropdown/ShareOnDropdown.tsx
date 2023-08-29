@@ -24,10 +24,10 @@ export const ShareOnDropdown: React.FC<ShareOnDropdownProps> = ({ id, title, sum
       <ul className={
         twMerge(
           `flex-col gap-2 rounded-md bg-white border dark:border-slate-700
-          overflow-hidden top-12 dark:bg-slate-800 px-2.5 py-3 sm:w-full absolute
+          overflow-hidden top-12 dark:bg-slate-800 px-2.5 py-3 sm:w-full xl:w-auto absolute
           left-0  dark:text-white text-slate-900 hover:[&>li]:text-azure-radiance-700
         dark:hover:[&>li]:text-white [&>li]:font-medium hover:[&>li]:hover:bg-slate-100
-          [&>li]:w-full [&>li]:rounded-md dark:hover:[&>li]:bg-slate-700 [&>li]:p-2`,
+          [&>li]:w-full [&>li]:rounded-md dark:hover:[&>li]:bg-slate-700 [&>li]:p-2 [&>li]:text-lg`,
           dropdownToggle ? 'flex' : 'hidden'
         )
       }>

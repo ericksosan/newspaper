@@ -6,7 +6,7 @@ import { ContainerAccountSettings, FormAlert, FormField } from '../molecules'
 import { ModalConfirmChanges } from '../organisms'
 import { useChangeUsername } from '../../hooks'
 
-export const ChangeUsername = (): JSX.Element => {
+const ChangeUsername = (): JSX.Element => {
   const { alert, handleUpdateUsername, handleSetOpenModal, isLoading, onSubmitChangeUsername, openModal } = useChangeUsername()
   const methods = useForm<FormInputChangeUsername>()
   const { handleSubmit } = methods
@@ -17,7 +17,7 @@ export const ChangeUsername = (): JSX.Element => {
         <form onSubmit={(evt) => { void handleSubmit(onSubmitChangeUsername)(evt) }}>
 
           {
-            alert.code === 'success' && <FormAlert message={alert.message} code={alert.code} />
+            alert.code === 'success' && <FormAlert alert={alert} />
           }
 
           <FormField
@@ -45,3 +45,5 @@ export const ChangeUsername = (): JSX.Element => {
     </ContainerAccountSettings>
   )
 }
+
+export default ChangeUsername

@@ -1,15 +1,22 @@
+import { useContext } from 'react'
 import { Modal } from 'flowbite-react'
-import { useMarkdownEditor } from '../../../hooks'
-import { Button } from '../../atoms'
 import { FormMarkdownEditor } from '..'
+import { ManageNewspaperContext } from '../../../contexts'
+import { ButtonLoading, FormAlert } from '../../molecules'
 
 interface ModalProps {
   openModal: string | undefined
   handleSetOpenModal: (action: string | undefined) => void
+  idNewspaper: string
 }
 
-export const ModalManageNews: React.FC<ModalProps> = ({ openModal, handleSetOpenModal }) => {
-  const { formMarkdownEditor, handleInputChange } = useMarkdownEditor()
+export const ModalManageNews: React.FC<ModalProps> = ({ openModal, handleSetOpenModal, idNewspaper }) => {
+  const { handleUpdatePostNewspaper, handleDeletePostNewspaper, alert, isLoading, register } = useContext(ManageNewspaperContext)
+
+  const handleDeleteNewspaper = (): void => {
+    handleDeletePostNewspaper(idNewspaper)
+    handleSetOpenModal(undefined)
+  }
 
   return (
     <Modal
@@ -17,29 +24,34 @@ export const ModalManageNews: React.FC<ModalProps> = ({ openModal, handleSetOpen
       size={'6xl'}
       show={openModal === 'default'}
       onClose={() => { handleSetOpenModal(undefined) }}>
-      <Modal.Header>Updating News</Modal.Header>
+      <Modal.Header className='flex flex-row'>
+        Updating News
+      </Modal.Header>
       <Modal.Body className='modify-scroll'>
-        <FormMarkdownEditor
-          formMarkdownEditor={formMarkdownEditor}
-          handleInputChange={handleInputChange} />
+        <FormMarkdownEditor register={register} />
       </Modal.Body>
       <Modal.Footer>
-        <Button
-          type="button"
-          onClick={() => { handleSetOpenModal(undefined) }}
-          // className="bg-azure-radiance-700 hover:bg-azure-radiance-800 w-32 focus:outline-none text-white font-medium rounded-lg text-sm px-5 py-2.5"
-          colors='blue'
-        >
-          Save Changes
-        </Button>
-        <Button
-          type="button"
-          onClick={() => { handleSetOpenModal(undefined) }}
-          // className="w-32 focus:outline-none text-white bg-red-700 hover:bg-red-800 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700"
-          colors='red'
-        >
-          Delete
-        </Button>
+        <div className="w-full flex gap-2 items-center justify-between flex-col md:flex-row">
+          <div className="flex gap-2 w-96">
+            <ButtonLoading
+              color='blue'
+              type="button"
+              isLoading={isLoading}
+              onClick={() => { handleUpdatePostNewspaper(idNewspaper) }}
+            >
+              Save Changes
+            </ButtonLoading>
+            <ButtonLoading
+              color='red'
+              type="button"
+              isLoading={isLoading}
+              onClick={handleDeleteNewspaper}
+            >
+              Delete
+            </ButtonLoading>
+          </div>
+          {(alert.message.length > 0 && alert.message !== undefined) && <FormAlert alert={alert} className=' p-2 m-0' />}
+        </div>
       </Modal.Footer>
     </Modal>
   )

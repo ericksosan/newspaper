@@ -1,7 +1,7 @@
 import { Container, Title } from '../atoms'
 import { UserTableBody, UserTableHeader } from '../molecules'
 
-export const ManageUsers = (): JSX.Element => {
+const ManageUsers = (): JSX.Element => {
   return (
     <Container>
       <Title className="font-bold text-xl md:text-4xl dark:text-gray-200 py-4 font-montserrat">
@@ -16,3 +16,5 @@ export const ManageUsers = (): JSX.Element => {
     </Container>
   )
 }
+
+export default ManageUsers

@@ -7,7 +7,7 @@ import { Divider, SubTitle } from '../atoms'
 import { GoogleIcon } from '../atoms/icon'
 import { useAuthForm } from '../../hooks/authform'
 
-export const Signup: React.FC = () => {
+const Signup = (): JSX.Element => {
   const methods = useForm<FormInputsSignup>()
   const { handleSubmit, watch } = methods
 
@@ -24,14 +24,14 @@ export const Signup: React.FC = () => {
         />
         <FormProvider {...methods}>
           <form className='w-full mb-10 sm:w-3/4 lg:w-full lg:mb-0 xl:w-3/4'
-            onSubmit={(evt) => { void handleSubmit(onSubmitSignUp)(evt) }}>
+            onSubmit={handleSubmit(onSubmitSignUp)}>
 
             <FormHeader
               title='Create an account'
               subTitle='Don&apos;t miss any news highlights.'
             />
 
-            {message.length > 0 && <FormAlert code='error' message={message} />}
+            {message.length > 0 && <FormAlert alert={{ message, code: 'error' }} />}
 
             <div className="flex justify-between items-center gap-3 ">
               <FormField
@@ -103,7 +103,7 @@ export const Signup: React.FC = () => {
             <ButtonLoading
               type='button'
               color='white'
-              onClick={() => { void handleSignInWithGoogle() }}
+              onClick={handleSignInWithGoogle}
               isLoading={isLoading.googleProv}>
               <GoogleIcon /> Google
             </ButtonLoading>
@@ -114,3 +114,4 @@ export const Signup: React.FC = () => {
     </section>
   )
 }
+export default Signup

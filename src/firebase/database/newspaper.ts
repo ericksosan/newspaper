@@ -76,7 +76,7 @@ export const getNewspaperByWritter = async (id: string): Promise<NewspaperAllDet
 
 // --------------- Create newspaper --------------- //
 
-export const createNewspaper = async (newspaperDetails: NewspaperDetails): Promise<void> => {
+export const createNewspaper = async (newspaperDetails: NewspaperDetails): Promise<string> => {
   const { idWritter, nameWritter, newspaper, avatarWritter } = newspaperDetails
   const date = new Date().toDateString().slice(4, 10)
   const readingTimeText = calculateReadingTime(newspaper.content)
@@ -101,6 +101,7 @@ export const createNewspaper = async (newspaperDetails: NewspaperDetails): Promi
   const { id } = docRef
 
   await updateDoc(docRef, { id })
+  return id
 }
 
 // --------------- Update newspaper --------------- //

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useForm, type SubmitHandler } from 'react-hook-form'
+import { type SubmitHandler } from 'react-hook-form'
 import { authSignIn, authSignInWithGoogle, authSignUp } from '../../firebase/authentication'
 import { useAuth } from '../../firebase/hooks/useAuth'
 import type { FormInputs, FormInputsSignup } from '../../types'
@@ -22,8 +22,6 @@ export const useAuthForm = (): UseAuthForm => {
   const { handleGetUserData } = useAuth()
   const navigate = useNavigate()
 
-  const { reset } = useForm<FormInputs | FormInputsSignup>()
-
   const onSubmitLogin: SubmitHandler<FormInputs> = async (data): Promise<void> => {
     try {
       setIsLoading({ ...isLoading, emailProv: true })
@@ -31,7 +29,6 @@ export const useAuthForm = (): UseAuthForm => {
       await handleGetUserData(userCredentials.user.uid)
       setIsLoading({ ...isLoading, emailProv: false })
       navigate('/', { replace: true })
-      reset()
     } catch (err) {
       setMessage('Wrong password or email')
       setIsLoading({ ...isLoading, emailProv: false })
@@ -45,7 +42,6 @@ export const useAuthForm = (): UseAuthForm => {
       await handleGetUserData(userCredentials.user.uid)
       navigate('/')
       setIsLoading({ ...isLoading, emailProv: false })
-      reset()
     } catch (err) {
       setIsLoading({ ...isLoading, emailProv: false })
       setMessage('This email is not available')

@@ -47,7 +47,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setUser(
       {
         ...user,
-        username
+        username: username.toLowerCase()
       }
     )
   }

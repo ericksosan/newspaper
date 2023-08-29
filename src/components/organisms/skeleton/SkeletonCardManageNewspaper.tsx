@@ -2,7 +2,7 @@ import { SkeletonElement, SkeletonImage } from '../../atoms'
 
 export const SkeletonCardManageNewspaper = (): JSX.Element => {
   return (
-    <figure className="shadow-sm h-auto w-full flex animate-pulse flex-col rounded-md
+    <figure className="shadow-sm h-auto w-80 sm:w-full flex animate-pulse flex-col rounded-md
     overflow-hidden border border-slate-300 dark:bg-slate-800 dark:border-slate-700">
 
       <div className="border-none overflow-hidden h-52 rounded-b-xl relative">

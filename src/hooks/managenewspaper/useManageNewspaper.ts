@@ -25,6 +25,7 @@ export const useManageNewspaper = (): UseManageNewspaper => {
       setIsLoading(false)
     }
   }
+
   return {
     isLoading,
     newspaper

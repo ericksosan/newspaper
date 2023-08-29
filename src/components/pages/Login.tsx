@@ -7,7 +7,7 @@ import { FormAlert, FormCover, FormField, FormHeader, FormRedirect, ButtonLoadin
 import { useAuthForm } from '../../hooks/authform'
 import { GoogleIcon } from '../atoms/icon'
 
-export const Login: React.FC = () => {
+const Login = (): JSX.Element => {
   const methods = useForm<FormInputs>()
   const { handleSubmit } = methods
 
@@ -24,14 +24,14 @@ export const Login: React.FC = () => {
         />
         <FormProvider {...methods}>
           <form className='w-full mb-10 sm:w-3/4 lg:w-full lg:mb-0 xl:w-3/4'
-            onSubmit={(evt) => { void handleSubmit(onSubmitLogin)(evt) }}>
+            onSubmit={handleSubmit(onSubmitLogin)}>
 
             <FormHeader
               title='Welcome Back'
               subTitle='Enter your login datails below'
             />
 
-            {message.length > 0 && <FormAlert message={message} code='error' />}
+            {message.length > 0 && <FormAlert alert={{ message, code: 'error' }} />}
 
             <FormField
               label="Email address"
@@ -71,7 +71,7 @@ export const Login: React.FC = () => {
             <ButtonLoading
               type='button'
               color='white'
-              onClick={() => { void handleSignInWithGoogle() }}
+              onClick={handleSignInWithGoogle}
               isLoading={isLoading.googleProv}>
               <GoogleIcon /> Google
             </ButtonLoading>
@@ -82,3 +82,5 @@ export const Login: React.FC = () => {
     </section>
   )
 }
+
+export default Login
