@@ -21,7 +21,7 @@ export const useRenderNewspaper = (): UseRenderNewspaper => {
 
     getNewspaperByOne(id as string)
       .then(res => { if (res) setNewspaper(res) })
-      .catch((err) => { console.log(err) })
+      .catch((_err) => { })
       .finally(() => { setIsLoading(false) })
   }, [id])
 

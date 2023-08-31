@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { type UseFormRegister } from 'react-hook-form'
-import type { FormMarkdownEditor } from '../../types'
+import type { FormMarkdownEditor, ImageFileStatus } from '../../types'
 import { useAuth } from '../../firebase/hooks/useAuth'
 import { type NewspaperDetails, createNewspaper } from '../../firebase/database/newspaper'
 import { useNavigate } from 'react-router-dom'
@@ -11,16 +11,12 @@ interface UseCreateNews {
   message: string
   isLoading: boolean
   isSectionChanged: boolean
+  imageFileStatus: ImageFileStatus
   handleSwitchPreviewEdit: () => void
   formMarkdownEditor: FormMarkdownEditor
   handlePostNewspaper: () => Promise<void>
   register: UseFormRegister<FormMarkdownEditor>
-}
-
-const initialFormMarkdownEditor = {
-  cover: '',
-  title: '',
-  content: ''
+  handleFileCoverChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export const useCreateNews = (): UseCreateNews => {
@@ -28,7 +24,7 @@ export const useCreateNews = (): UseCreateNews => {
   const [section, setSection] = useState<string>('Create News')
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isSectionChanged, setIsSectionChanged] = useState<boolean>(false)
-  const { register, message, handleSubmit, validateFormMarkdownEditor } = useMarkdownEditorForm()
+  const { register, message, handleSubmit, validateFormMarkdownEditor, reset, handleFileCoverChange, imageFileStatus } = useMarkdownEditorForm()
   const [formMarkdownEditor, setFormMarkdownEditor] = useState<FormMarkdownEditor>({} as FormMarkdownEditor)
 
   const navigate = useNavigate()
@@ -63,7 +59,7 @@ export const useCreateNews = (): UseCreateNews => {
     try {
       setIsLoading(true)
       const id = await createNewspaper(data)
-      setFormMarkdownEditor(initialFormMarkdownEditor)
+      reset()
       navigate(`/new/${id}`, { replace: true })
       setIsLoading(false)
     } catch (error) { }
@@ -77,6 +73,8 @@ export const useCreateNews = (): UseCreateNews => {
     isSectionChanged,
     formMarkdownEditor,
     handlePostNewspaper,
-    handleSwitchPreviewEdit
+    handleSwitchPreviewEdit,
+    handleFileCoverChange,
+    imageFileStatus
   }
 }

@@ -7,7 +7,16 @@ import { useMarkdownEditorForm } from '../../hooks'
 export const ManageNewspaperProvider = ({ children }: { children: React.ReactNode }): JSX.Element => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [alert, setAlert] = useState<Alert>({ message: '', code: 'none' })
-  const { register, message, handleSubmit, validateFormMarkdownEditor, setValue } = useMarkdownEditorForm()
+  const {
+    message,
+    register,
+    setValue,
+    handleSubmit,
+    imageFileStatus,
+    handleFileCoverChange,
+    validateFormMarkdownEditor
+  } = useMarkdownEditorForm()
+
   const [updateChange, setUpdateChange] = useState<boolean>(false)
 
   const handleFillField = (id: string): void => {
@@ -59,10 +68,12 @@ export const ManageNewspaperProvider = ({ children }: { children: React.ReactNod
     message,
     register,
     isLoading,
+    updateChange,
+    imageFileStatus,
     handleFillField,
+    handleFileCoverChange,
     handleDeletePostNewspaper,
-    handleUpdatePostNewspaper,
-    updateChange
+    handleUpdatePostNewspaper
   }
 
   return (

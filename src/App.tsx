@@ -1,6 +1,5 @@
 import { lazy, Suspense } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
-// import { Login, CreateNews, Signup, Home, NewspaperRender, ManageUsers, ChangePassword, ChangeUsername, ManageNewspaper } from './components/pages'
 import { AuthProvider } from './firebase/contexts/AuthProvider'
 import { ProtectedRoutes, AdminRoutes, AuthRoutes } from './routes'
 import { Loading } from './components/molecules'
@@ -38,6 +37,7 @@ export const App: React.FC = () => {
             <Suspense fallback={<Loading />}>
               <ChangeUsername />
             </Suspense>} />
+
           <Route path="/profile/change-password" element={
             <Suspense fallback={<Loading />}>
               <ChangePassword />
@@ -51,10 +51,12 @@ export const App: React.FC = () => {
                   <ManageNewspaper />
                 </ManageNewspaperProvider>
               </Suspense>} />
+
             <Route path="news/add" element={
               <Suspense fallback={<Loading />}>
                 <CreateNews />
               </Suspense>} />
+
             <Route path="users" element={
               <Suspense fallback={<Loading />}>
                 <ManageUsers />
@@ -67,6 +69,7 @@ export const App: React.FC = () => {
             <Suspense fallback={<Loading />}>
               <Login />
             </Suspense>} />
+
           <Route path="signup" element={
             <Suspense fallback={<Loading />}>
               <Signup />

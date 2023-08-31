@@ -1,15 +1,15 @@
-import { CardManageNewspaper, ManagerNewspaperNotItems, SkeletonCardManageNewspaper } from '../organisms'
+import { useContext, useEffect, useState } from 'react'
 import { CardContainer, Container, Title } from '../atoms'
 import { ManageNewspaperContext } from '../../contexts'
-import { useContext, useEffect, useState } from 'react'
+import { CardManageNewspaper, ManagerNewspaperNotItems, SkeletonCardManageNewspaper } from '../organisms'
 import { getNewspaperByWritter, type NewspaperAllDetails } from '../../firebase/database/newspaper'
 import { useAuth } from '../../firebase/hooks/useAuth'
 
 const ManageNewspaper = (): JSX.Element => {
-  const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [newspaper, setNewspaper] = useState<NewspaperAllDetails[]>([] as NewspaperAllDetails[])
   const { user: { id } } = useAuth()
+  const [isLoading, setIsLoading] = useState<boolean>(true)
   const { updateChange } = useContext(ManageNewspaperContext)
+  const [newspaper, setNewspaper] = useState<NewspaperAllDetails[]>([] as NewspaperAllDetails[])
 
   useEffect(() => {
     getNewspaperByWritter(id)
@@ -22,7 +22,7 @@ const ManageNewspaper = (): JSX.Element => {
 
   return (
       <Container>
-        <Title className='text-lg md:text-4xl py-4 font-montserrat'>
+        <Title className='text-lg md:text-4xl pb-4 font-montserrat'>
           News Management
         </Title>
         <CardContainer>

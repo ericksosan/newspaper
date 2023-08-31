@@ -15,7 +15,7 @@ export const useManagerUser = (): UseManagerUser => {
   useEffect(() => {
     getAllUsers(id)
       .then(users => { setListUsers(users) })
-      .catch(err => { console.log(err) })
+      .catch(_err => { })
       .finally(() => { setIsLoading(false) })
   }, [])
 

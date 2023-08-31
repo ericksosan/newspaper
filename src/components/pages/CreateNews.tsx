@@ -14,17 +14,19 @@ const CreateNews = (): JSX.Element => {
     isSectionChanged,
     formMarkdownEditor,
     handlePostNewspaper,
-    handleSwitchPreviewEdit
+    handleSwitchPreviewEdit,
+    handleFileCoverChange,
+    imageFileStatus
   } = useCreateNews()
 
   return (
-    <div className="px-5 md:px-10 py-4 lg:py-10 h-auto relative font-montserrat">
+    <div className="px-5 sm:px-10 py-8 lg:py-10 h-auto relative font-montserrat">
       <div className='lg:max-w-4xl lg:mx-auto flex flex-col gap-3'>
         <div className="flex justify-between items-center border-b-2 pb-4 border-gray-300
         dark:border-gray-600">
           <Title className={
             twJoin(
-              isSectionChanged ? 'animate-fade-down' : 'animate-fade-up',
+              isSectionChanged ? 'animate-fade' : 'animate-fade',
               'text-lg md:text-4xl animate-duration-300 animate-ease-in-out'
             )
           }>
@@ -65,7 +67,10 @@ const CreateNews = (): JSX.Element => {
           isSectionChanged
             ? <NewspaperPreview
               formMarkdownEditor={formMarkdownEditor} />
-            : <FormMarkdownEditor register={register} />
+            : <FormMarkdownEditor
+              register={register}
+              imageFileStatus={imageFileStatus}
+              handleFileCoverChange={handleFileCoverChange} />
         }
       </div>
     </div>

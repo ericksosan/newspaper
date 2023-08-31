@@ -6,7 +6,7 @@ export const UserTableRow: React.FC<UserDetails> = ({ isAdmin, id, fullname, use
 
   useEffect(() => {
     updateRole(id, check)
-      .then(res => { console.log(res) })
+      .then(_res => { })
       .catch(_err => { })
   }, [check])
 

@@ -1,4 +1,5 @@
-import { type DocumentData, doc, setDoc, getDoc, updateDoc, getDocs, collection, query, where } from 'firebase/firestore'
+import { doc, setDoc, getDoc, updateDoc, getDocs, collection, query, where } from 'firebase/firestore'
+import type { DocumentData } from 'firebase/firestore'
 import { db } from '../firebase.config'
 
 export interface UserDetails {
@@ -12,6 +13,15 @@ export interface UserDetails {
   fullname: string | null
 }
 
+// --------------- Get all users --------------- //
+
+/**
+ * The function `getAllUsers` retrieves all user details from a Firestore
+ * collection except for the user with the specified ID.
+ * @param {string} id - The `id` parameter is a string representing the ID of a
+ * user.
+ * @returns a Promise that resolves to an array of UserDetails objects.
+ */
 export const getAllUsers = async (id: string): Promise<UserDetails[]> => {
   const queryRef = query(collection(db, 'users'), where('id', '!=', id))
   const querySnapshot = await getDocs(queryRef)
@@ -23,6 +33,16 @@ export const getAllUsers = async (id: string): Promise<UserDetails[]> => {
   return users
 }
 
+// --------------- Get user details --------------- //
+
+/**
+ * The function `getUserDetails` retrieves user details from a Firestore database
+ * based on the provided ID.
+ * @param {string} id - The `id` parameter is a string that represents the unique
+ * identifier of a user.
+ * @returns The function `getUserDetails` returns a `Promise` that resolves to
+ * either a `DocumentData` object or `undefined`.
+ */
 export const getUserDetails = async (id: string): Promise<DocumentData | undefined> => {
   const docRef = doc(db, 'users', id)
   const docSnap = await getDoc(docRef)
@@ -32,6 +52,15 @@ export const getUserDetails = async (id: string): Promise<DocumentData | undefin
   return undefined
 }
 
+// --------------- Create user --------------- //
+
+/**
+ * The function `createUser` creates a new user document in a Firestore database if
+ * it does not already exist.
+ * @param {UserDetails} data - The `data` parameter is of type `UserDetails`, which
+ * represents the details of a user. It contains properties such as `id`, `name`,
+ * `email`, etc.
+ */
 export const createUser = async (data: UserDetails): Promise<void> => {
   const docRef = doc(db, `users/${data.id}`)
 
@@ -41,12 +70,33 @@ export const createUser = async (data: UserDetails): Promise<void> => {
   }
 }
 
+// --------------- Update Username --------------- //
+
+/**
+ * The function `updateUsername` updates the username of a user in a database.
+ * @param {string} id - The `id` parameter is a string that represents the unique
+ * identifier of the user whose username needs to be updated.
+ * @param {string} username - The `username` parameter is a string that represents
+ * the new username that you want to update for a user.
+ */
 export const updateUsername = async (id: string, username: string): Promise<void> => {
   const docRef = doc(db, 'users', id)
   username = username.toLowerCase()
   await updateDoc(docRef, { username })
 }
 
+// --------------- Update Role --------------- //
+
+/**
+ * The `updateRole` function updates the `isAdmin` property of a user document in a
+ * Firestore database.
+ * @param {string} id - The `id` parameter is a string that represents the unique
+ * identifier of the user whose role needs to be updated.
+ * @param {boolean} isAdmin - The `isAdmin` parameter is a boolean value that
+ * indicates whether the user should be assigned the admin role or not. If
+ * `isAdmin` is `true`, it means the user should be assigned the admin role. If
+ * `isAdmin` is `false`, it means the user should not be assigned the admin
+ */
 export const updateRole = async (id: string, isAdmin: boolean): Promise<void> => {
   const docRef = doc(db, 'users', id)
   await updateDoc(docRef, { isAdmin })

@@ -24,17 +24,18 @@ const Home = (): JSX.Element => {
     setCurrentPage(page)
   }
 
-  if (isLoading) return <Loading/>
+  if (isLoading) return <Loading />
 
   return (
     <Container>
-      <Title className='text-xl md:text-4xl py-4 line-clamp-2 md:line-clamp-none'>
+      <Title className='text-xl md:text-4xl pb-4 line-clamp-2 md:line-clamp-none'>
         {getGreeting(fullname ?? '')}
       </Title>
       <News isLoading={isLoading} newspaper={allNewspaper} />
       <Pagination
         showIcons
         currentPage={currentPage}
+        layout="navigation"
         onPageChange={onPageChange}
         totalPages={totalNewspaper === 0 ? 1 : totalNewspaper}
         className='grid place-items-center my-4 font-inter'

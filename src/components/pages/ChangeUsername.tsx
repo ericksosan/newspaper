@@ -14,7 +14,7 @@ const ChangeUsername = (): JSX.Element => {
   return (
     <ContainerAccountSettings sectionTitle='Change Username'>
       <FormProvider {...methods}>
-        <form onSubmit={(evt) => { void handleSubmit(onSubmitChangeUsername)(evt) }}>
+        <form onSubmit={() => { handleSubmit(onSubmitChangeUsername) }}>
 
           {
             alert.code === 'success' && <FormAlert alert={alert} />
@@ -31,7 +31,7 @@ const ChangeUsername = (): JSX.Element => {
             type='submit'
             colors='blue'
             className='w-full'
-            >
+          >
             Change Username
           </Button>
         </form>
