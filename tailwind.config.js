@@ -8,7 +8,8 @@ module.exports = {
 	theme: {
 		extend: {
 			fontFamily: {
-				montserrat: ['Montserrat', 'sans-serif']
+				montserrat: ['Montserrat', 'sans-serif'],
+				inter: ['Inter', 'sans-serif']
 			},
 			colors: {
 				'azure-radiance': {
@@ -23,7 +24,7 @@ module.exports = {
 					'800': '#085dc5',
 					'900': '#0d519b',
 					'950': '#0e315d',
-				},
+				}
 			}
 		},
 	},
