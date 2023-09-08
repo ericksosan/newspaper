@@ -14,6 +14,8 @@ export const ShareOnDropdown: React.FC<ShareOnDropdownProps> = ({ id, title, sum
   const [dropdownToggle, setDropdownToggle] = useState<boolean>(false)
   const ref = useClickAway<HTMLUListElement>(() => { setDropdownToggle(!dropdownToggle) })
 
+  const shareURL = `https://ericksosa-newspaper-mini-project.netlify.app/new/${id}`
+
   return (
     <div className="flex gap-2 items-center relative w-auto">
       <Button
@@ -37,7 +39,7 @@ export const ShareOnDropdown: React.FC<ShareOnDropdownProps> = ({ id, title, sum
             <TwitterShareButton
               className='flex gap-x-2 items-center w-full h-full'
               title={title}
-              url={`http://localhost:5173/new/${id}`}>
+              url={shareURL}>
               <XTwitterIcon />
               X
             </TwitterShareButton>
@@ -47,7 +49,7 @@ export const ShareOnDropdown: React.FC<ShareOnDropdownProps> = ({ id, title, sum
             <FacebookShareButton
               className='flex gap-x-2 items-center w-full h-full'
               title={title}
-              url={`http://localhost:5173/new/${id}`}>
+              url={shareURL}>
               <FacebookIcon />
               Facebook
             </FacebookShareButton>
@@ -55,7 +57,7 @@ export const ShareOnDropdown: React.FC<ShareOnDropdownProps> = ({ id, title, sum
 
           <li>
             <WhatsappShareButton
-              url={`http://localhost:5173/new/${id}`}
+              url={shareURL}
               className=' flex gap-x-2 items-center w-full h-full'
               title={title}>
               <WhatsappIcon />
@@ -68,8 +70,8 @@ export const ShareOnDropdown: React.FC<ShareOnDropdownProps> = ({ id, title, sum
               className=' flex gap-x-2 items-center w-full h-full'
               title={title}
               summary={summary}
-              source='http://localhost:5173/'
-              url={`http://localhost:5173/new/${id}`}>
+              source='https://ericksosa-newspaper-mini-project.netlify.app'
+              url={shareURL}>
               <LinkedInIcon />
               LinkedIn
             </LinkedinShareButton>
