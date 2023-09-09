@@ -45,7 +45,6 @@ const confirmChangeUsername = (oldUsername: string): RegisterOptions => {
     minLength: { value: 5, message: 'Username must be over 5 characters.' },
     validate: (value) => {
       if (oldUsername === value) {
-        console.log(value)
         return 'Not the old username.'
       }
     }
