@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import { type NewspaperAllDetails } from '../../../firebase/database/newspaper'
-import { LinkRedirect, SkeletonImage, SubTitle, Title } from '../../atoms'
+import { LinkRedirect, SkeletonImage } from '../../atoms'
 import { ModalManageNews } from '..'
 import { twMerge } from 'tailwind-merge'
 import { ArrowTopRightSquareIcon, ToothIcon, UserCircleIcon } from '../../atoms/icon'
@@ -26,11 +26,12 @@ export const CardManageNewspaper: React.FC<NewspaperAllDetails> = ({ cover, crea
     dark:text-gray-200">
       <div className="border-none overflow-hidden h-52  rounded-b-xl relative">
         <div className="flex items-start flex-col justify-between absolute h-full
-        w-full bg-gradient-to-b from-slate-900 z-10">
+          w-full bg-gradient-to-b from-slate-900 z-10">
           <div className="flex items-start justify-between w-full p-4">
             <span className="text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full
-          bg-azure-radiance-700 text-gray-200">
-              {id}
+          bg-azure-radiance-700 text-gray-200 flex gap-0.5 items-center">
+              <UserCircleIcon className="w-4" />
+              {nameWritter}
             </span>
             <button
               type="button"
@@ -58,7 +59,7 @@ export const CardManageNewspaper: React.FC<NewspaperAllDetails> = ({ cover, crea
           onLoad={() => { setImgIsLoading(false) }}
           className={
             twMerge(
-              'object-cover h-full w-full',
+              'object-cover h-full w-full aspect-[16/9]',
               !imgIsLoading ? 'flex' : 'hidden'
             )
           }
@@ -66,21 +67,14 @@ export const CardManageNewspaper: React.FC<NewspaperAllDetails> = ({ cover, crea
         />
       </div>
       <div className="p-4 w-full flex flex-col gap-3">
-        <Title className="font-medium line-clamp-2">{title}</Title>
-        <SubTitle className="font-regular flex font-medium text-sm gap-1">
-          <UserCircleIcon className="w-4" />
-          {nameWritter}
-        </SubTitle>
-        <div className="flex items-center gap-2 [&>button]:transition-colors
-        [&>button]:duration-500 [&>button]:ease-in-out">
-          <LinkRedirect
-            to='NEWS'
-            pathOptional={id}
-            className='hover:hover:opacity-80'
-          >
-            <ArrowTopRightSquareIcon className="w-5 h-5" />
-          </LinkRedirect>
-        </div>
+        <h5 className="font-medium line-clamp-2">{title}</h5>
+        <LinkRedirect
+          to='NEWS'
+          pathOptional={id}
+          className='hover:opacity-80'
+        >
+          <ArrowTopRightSquareIcon className="w-5 h-5" />
+        </LinkRedirect>
       </div>
       {
         openModal === 'default' && <ModalManageNews
