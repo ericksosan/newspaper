@@ -44,10 +44,10 @@ export const FormField: React.FC<FormFieldProps> = ({ label, name, type, placeho
           autoComplete='off'
           {...register(name, validation)}
         />
-        {
-          isInvalid && <InputAlert>{message}</InputAlert>
-        }
       </div>
+      {
+        (isInvalid && message.length > 0) && <InputAlert message={message} />
+      }
     </div>
   )
 }
