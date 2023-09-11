@@ -20,7 +20,7 @@ const CreateNews = (): JSX.Element => {
   } = useCreateNews()
 
   return (
-    <div className="px-5 sm:px-10 py-8 lg:py-10 h-auto relative font-montserrat">
+    <div className="px-5 sm:px-10 py-8 lg:py-10 min-h-screen relative font-montserrat">
       <div className='lg:max-w-4xl lg:mx-auto flex flex-col gap-3'>
         <div className="flex justify-between items-center border-b-2 pb-4 border-gray-300
         dark:border-gray-600">
