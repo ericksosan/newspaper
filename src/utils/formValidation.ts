@@ -47,11 +47,14 @@ const validatePasswordRegex = (value: string): string => {
 
 const confirmPassword = (watch: UseFormWatch<FormInputsSignup>): RegisterOptions => {
   const validation: RegisterOptions = {
-    required: { value: true, message: 'Password required.' },
-    minLength: { value: 8, message: 'Minimum password 8 characters.' },
+    ...password,
     validate: (value) => {
       if (watch('rePassword') !== value) {
         return 'Your passwords do no match.'
+      }
+
+      if (validatePasswordRegex(value).length > 0) {
+        return `Password must contain at least one:/${validatePasswordRegex(value)}.`
       }
     }
   }
@@ -80,10 +83,14 @@ const confirmChangePassword = (watch: UseFormWatch<FormInputsChangePassword>): R
   return validation
 }
 
+const username: RegisterOptions = {
+  required: { value: true, message: 'Username required.' },
+  minLength: { value: 5, message: 'Username must be over 5 characters.' }
+}
+
 const confirmChangeUsername = (oldUsername: string): RegisterOptions => {
   const validation: RegisterOptions = {
-    required: { value: true, message: 'New username required.' },
-    minLength: { value: 5, message: 'Username must be over 5 characters.' },
+    ...username,
     validate: (value) => {
       if (oldUsername === value) {
         return 'Not the old username.'
@@ -97,6 +104,7 @@ const confirmChangeUsername = (oldUsername: string): RegisterOptions => {
 export const formValidation = {
   email,
   standard,
+  username,
   password,
   confirmPassword,
   confirmChangePassword,
