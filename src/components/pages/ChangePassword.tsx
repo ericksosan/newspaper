@@ -31,7 +31,7 @@ const ChangePassword = (): JSX.Element => {
             type='password'
             name="newPassword"
             placeholder="Enter your new password"
-            validation={formValidation.password}
+            validation={formValidation.confirmChangePassword(watch)}
           />
 
           <FormField
