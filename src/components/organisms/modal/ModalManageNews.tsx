@@ -2,8 +2,8 @@ import { useContext, useState } from 'react'
 import { Modal } from 'flowbite-react'
 import { FormMarkdownEditor, ModalConfirmChanges } from '..'
 import { ManageNewspaperContext } from '../../../contexts'
-import { ButtonLoading, FormAlert } from '../../molecules'
 import { Button } from '../../atoms'
+import { SaveIcon, TrashIcon } from '../../atoms/icon'
 
 interface ModalProps {
   openModal: string | undefined
@@ -12,20 +12,22 @@ interface ModalProps {
 }
 
 export const ModalManageNews: React.FC<ModalProps> = ({ openModal, handleSetOpenModal, idNewspaper }) => {
+  const [openModalConfirm, setOpenModalConfirm] = useState<string | undefined>()
   const {
-    alert,
     register,
-    isLoading,
     imageFileStatus,
     handleFileCoverChange,
     handleUpdatePostNewspaper,
     handleDeletePostNewspaper
   } = useContext(ManageNewspaperContext)
 
-  const [openModalConfirm, setOpenModalConfirm] = useState<string | undefined>()
-
   const handleSetOpenModalConfirm = (action: string | undefined): void => {
     setOpenModalConfirm(action)
+  }
+
+  const handleUpdateNewspaper = (): void => {
+    handleUpdatePostNewspaper(idNewspaper)
+    handleSetOpenModal(undefined)
   }
 
   const handleDeleteNewspaper = (): void => {
@@ -39,7 +41,7 @@ export const ModalManageNews: React.FC<ModalProps> = ({ openModal, handleSetOpen
       size={'6xl'}
       show={openModal === 'default'}
       onClose={() => { handleSetOpenModal(undefined) }}>
-      <Modal.Header className='flex flex-row'>
+      <Modal.Header>
         Updating News
       </Modal.Header>
       <Modal.Body className='modify-scroll'>
@@ -50,32 +52,26 @@ export const ModalManageNews: React.FC<ModalProps> = ({ openModal, handleSetOpen
         />
       </Modal.Body>
       <Modal.Footer>
-        <div className="w-full flex gap-2 items-center justify-between flex-col md:flex-row">
-          <div className="flex gap-2 w-full md:w-96">
-            <ButtonLoading
-              color='blue'
-              type="button"
-              isLoading={isLoading}
-              onClick={() => { handleUpdatePostNewspaper(idNewspaper) }}
-            >
-              Save Changes
-            </ButtonLoading>
-            <Button
-              colors='red'
-              type="button"
-              onClick={() => { handleSetOpenModalConfirm('pop-up') }}
-            >
-              Delete
-            </Button>
-          </div>
-          {
-            (alert.message.length > 0 && alert.message !== undefined) &&
-            <FormAlert alert={alert} className=' p-2 m-0' />
-          }
+        <div className="w-full flex gap-2 items-center justify-between">
+          <Button
+            colors='red'
+            type="button"
+            className='flex gap-1 items-center font-medium pr-2 p-2 md:px-2 md:pr-3 md:text-base text-xs'
+            onClick={() => { handleSetOpenModalConfirm('pop-up') }}>
+            <TrashIcon />
+            Delete news
+          </Button>
+          <Button
+            colors='blue'
+            type="button"
+            className='w-auto flex gap-1 items-center font-medium pr-2 p-2 md:px-2 md:pr-3 md:text-base text-xs'
+            onClick={handleUpdateNewspaper}>
+            <SaveIcon />
+            Save Changes
+          </Button>
         </div>
       </Modal.Footer>
       <ModalConfirmChanges
-        isLoading={isLoading}
         openModal={openModalConfirm}
         handleSetOpenModal={handleSetOpenModalConfirm}
         handleConfirmChanges={handleDeleteNewspaper}

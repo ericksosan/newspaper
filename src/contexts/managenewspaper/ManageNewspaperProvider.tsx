@@ -1,14 +1,15 @@
 import { useState } from 'react'
+import { toast } from 'react-hot-toast'
 import { ManageNewspaperContext, type ManageNewspaperContextValues } from '..'
-import { deleteNewspaper, getNewspaperByOne, updateNewspaper } from '../../firebase/database/newspaper'
-import type { Alert } from '../../types'
+import { type NewspaperAllDetails, deleteNewspaper, updateNewspaper } from '../../firebase/database/newspaper'
 import { useMarkdownEditorForm } from '../../hooks'
+import type { FormMarkdownEditor } from '../../types'
+import { toastOptions } from '../../utils'
 
 export const ManageNewspaperProvider = ({ children }: { children: React.ReactNode }): JSX.Element => {
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [alert, setAlert] = useState<Alert>({ message: '', code: 'none' })
+  const [newspaper, setNewspaper] = useState<NewspaperAllDetails[]>([] as NewspaperAllDetails[])
+
   const {
-    message,
     register,
     setValue,
     handleSubmit,
@@ -17,60 +18,80 @@ export const ManageNewspaperProvider = ({ children }: { children: React.ReactNod
     validateFormMarkdownEditor
   } = useMarkdownEditorForm()
 
-  const [updateChange, setUpdateChange] = useState<boolean>(false)
+  const handleSetNewspaper = (listNewspaper: NewspaperAllDetails[]): void => {
+    setNewspaper(listNewspaper)
+  }
 
   const handleFillField = (id: string): void => {
-    getNewspaperByOne(id)
-      .then(res => {
-        if (res !== null) {
-          const { cover, title, content } = res
-          setValue('cover', cover)
-          setValue('title', title)
-          setValue('content', content)
+    const res = newspaper.find((news) => news.id === id)
+
+    if (res) {
+      const { cover, title, content } = res
+      setValue('cover', cover)
+      setValue('title', title)
+      setValue('content', content)
+    }
+  }
+
+  const onUpdateNewspaper = (id: string, data: FormMarkdownEditor): void => {
+    setNewspaper(
+      newspaper.map((news) => {
+        if (news.id === id) {
+          return {
+            ...news,
+            ...data
+          }
         }
+
+        return news
       })
-      .catch(_err => { })
-    setAlert({ message: '', code: 'none' })
+    )
+  }
+
+  const onDeleteNewspaper = (id: string): void => {
+    setNewspaper(
+      newspaper.filter((news) => news.id !== id)
+    )
   }
 
   const handleUpdatePostNewspaper = (id: string): void => {
     if (!validateFormMarkdownEditor()) return
 
     void handleSubmit((data) => {
-      setIsLoading(true)
-      updateNewspaper(id, data)
-        .then(_res => {
-          setAlert({ code: 'success', message: 'The newspaper was successfully updated' })
-          setUpdateChange(!updateChange)
-        })
-        .catch((_err) => {
-          setAlert({ code: 'error', message: 'An error occurred while updating the news' })
-        })
-        .finally(() => { setIsLoading(false) })
+      void toast.promise(updateNewspaper(id, data),
+        {
+          loading: 'Saving changes...',
+          success: (_data) => {
+            onUpdateNewspaper(id, data)
+            return 'The newspaper was successfully updated.'
+          },
+          error: (_err) => 'An error occurred while updating the news.'
+        },
+        toastOptions
+      )
     })()
   }
 
   const handleDeletePostNewspaper = (id: string): void => {
-    setIsLoading(true)
-    deleteNewspaper(id)
-      .then(_res => {
-        setAlert({ code: 'success', message: 'The newspaper was successfully deleted' })
-        setUpdateChange(!updateChange)
-      })
-      .catch((_err) => {
-        setAlert({ code: 'error', message: 'An error occurred while deleting the news' })
-      })
-      .finally(() => { setIsLoading(false) })
+    void toast.promise(deleteNewspaper(id),
+      {
+        loading: 'Deleting news...',
+        success: (_data) => {
+          onDeleteNewspaper(id)
+          return 'The newspaper was successfully deleted.'
+        },
+        error: (_err) => 'An error occurred while deleting the news.'
+      },
+      toastOptions
+    )
   }
 
   const values: ManageNewspaperContextValues = {
-    alert,
-    message,
     register,
-    isLoading,
-    updateChange,
+    newspaper,
     imageFileStatus,
     handleFillField,
+    handleSetNewspaper,
     handleFileCoverChange,
     handleDeletePostNewspaper,
     handleUpdatePostNewspaper

@@ -32,7 +32,7 @@ export const ModalConfirmChanges: React.FC<ModalConfirmChangesProps> = ({ title,
                 ? <Button
                   colors='red'
                   className='w-32'
-                  onClick={() => { handleSetOpenModal(undefined) }}>
+                  onClick={handleConfirmChanges}>
                   Yes, I&apos;m sure
                 </Button>
                 : <ButtonLoading
