@@ -65,7 +65,7 @@ export const ShareOnDropdown: React.FC<ShareOnDropdownProps> = ({ id, title, sum
             </WhatsappShareButton>
           </li>
 
-          <li> 
+          <li>
             <LinkedinShareButton
               className=' flex gap-x-2 items-center w-full h-full'
               title={title}
