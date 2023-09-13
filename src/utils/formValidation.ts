@@ -39,8 +39,22 @@ const confirmChangePassword = (watch: UseFormWatch<FormInputsChangePassword>): R
   return validation
 }
 
+const confirmChangeUsername = (oldUsername: string): RegisterOptions => {
+  const validation: RegisterOptions = {
+    required: { value: true, message: 'New username required.' },
+    minLength: { value: 5, message: 'Username must be over 5 characters.' },
+    validate: (value) => {
+      if (oldUsername === value) {
+        return 'Not the old username.'
+      }
+    }
+  }
+
+  return validation
+}
+
 const standard: RegisterOptions = {
   required: { value: true, message: 'Required.' }
 }
 
-export const formValidation = { email, password, confirmPassword, confirmChangePassword, standard }
+export const formValidation = { email, password, confirmPassword, confirmChangePassword, standard, confirmChangeUsername }

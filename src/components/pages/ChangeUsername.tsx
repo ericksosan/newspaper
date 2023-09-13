@@ -5,16 +5,22 @@ import { Button } from '../atoms'
 import { ContainerAccountSettings, FormAlert, FormField } from '../molecules'
 import { ModalConfirmChanges } from '../organisms'
 import { useChangeUsername } from '../../hooks'
+import { useAuth } from '../../firebase/hooks/useAuth'
 
 const ChangeUsername = (): JSX.Element => {
-  const { alert, handleUpdateUsername, handleSetOpenModal, isLoading, onSubmitChangeUsername, openModal } = useChangeUsername()
+  const { user: { username } } = useAuth()
   const methods = useForm<FormInputChangeUsername>()
-  const { handleSubmit } = methods
+  const { handleSubmit, reset } = methods
+  const {
+    alert, handleUpdateUsername,
+    handleSetOpenModal, isLoading,
+    onSubmitChangeUsername, openModal
+  } = useChangeUsername(reset)
 
   return (
     <ContainerAccountSettings sectionTitle='Change Username'>
       <FormProvider {...methods}>
-        <form onSubmit={() => { handleSubmit(onSubmitChangeUsername) }}>
+        <form onSubmit={handleSubmit(onSubmitChangeUsername)}>
 
           {
             alert.code === 'success' && <FormAlert alert={alert} />
@@ -24,7 +30,7 @@ const ChangeUsername = (): JSX.Element => {
             label="New Username"
             name="newUsername"
             placeholder="Enter your new username"
-            validation={formValidation.standard}
+            validation={formValidation.confirmChangeUsername(username ?? '')}
           />
 
           <Button
