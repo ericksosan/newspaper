@@ -33,7 +33,7 @@ const Signup = (): JSX.Element => {
 
             {message.length > 0 && <FormAlert alert={{ message, code: 'error' }} />}
 
-            <div className="flex justify-between items-center gap-3 ">
+            <div className="flex justify-between gap-3 ">
               <FormField
                 label="First name"
                 type='text' name="firstname"
@@ -55,7 +55,7 @@ const Signup = (): JSX.Element => {
               type='text'
               name="username"
               placeholder="goodluck"
-              validation={formValidation.standard}
+              validation={formValidation.username}
             />
 
             <FormField
@@ -70,7 +70,7 @@ const Signup = (): JSX.Element => {
               type='password'
               name="rePassword"
               placeholder="Password"
-              validation={formValidation.password}
+              validation={formValidation.confirmPassword(watch)}
             />
 
             <FormField
