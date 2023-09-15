@@ -1,8 +1,9 @@
 import { type UseFormRegister } from 'react-hook-form'
 import { twMerge } from 'tailwind-merge'
-import { Spinner } from '../../atoms'
+import { Label, Spinner } from '../../atoms'
 import { useMarkdownEditorForm } from '../../../hooks'
 import type { FormMarkdownEditor as FormMardownEditorValues, ImageFileStatus } from '../../../types'
+import { MarkdownIcon } from '../../atoms/icon'
 
 interface MarkdownEditorProps {
   imageFileStatus: ImageFileStatus
@@ -42,7 +43,7 @@ export const FormMarkdownEditor: React.FC<MarkdownEditorProps> = ({ register, ha
         <label
           htmlFor="coverfile"
           className='block border bg-gray-50 text-slate-900 dark:text-gray-300
-            border-gray-300 py-3 px-6 rounded-md font-inter font-medium dark:bg-gray-800
+            border-gray-300 py-2 px-6 rounded-md font-inter font-medium dark:bg-gray-800
             dark:border-gray-600 cursor-pointer active:scale-105 transition-all
               duration-300 ease-in-out'
         >
@@ -64,6 +65,17 @@ export const FormMarkdownEditor: React.FC<MarkdownEditorProps> = ({ register, ha
         </span>
       </div>
 
+      <Label
+        className={
+          twMerge(
+            'mb-0',
+            changeModeCover ? 'hidden' : 'block'
+          )
+        }
+        name='cover'
+        required>
+        Cover
+      </Label>
       <input
         autoFocus
         type="url"
@@ -71,24 +83,47 @@ export const FormMarkdownEditor: React.FC<MarkdownEditorProps> = ({ register, ha
         placeholder='Enter the URL of the cover page.'
         className={
           twMerge(
-            'markdown-editor-field text-sm md:text-2xl',
+            'markdown-editor-field',
             changeModeCover ? 'hidden' : 'block'
           )
         }
         {...register('cover')}
       />
 
+      <Label
+        className='mb-0'
+        name='title'
+        required>
+        Title
+      </Label>
       <input
         type="text"
         autoComplete='off'
         placeholder='Enter here the title of the news item...'
-        className='markdown-editor-field text-sm md:text-2xl'
+        className='markdown-editor-field'
         {...register('title')}
       />
 
+      <div className="w-full flex items-center justify-between">
+        <Label
+          className='mb-0'
+          name='content'
+          required>
+          Write the content of your news here.
+        </Label>
+        <a
+          className='flex items-center justify-center w-10 h-10 rounded-full dark:hover:bg-white/10
+          [&>svg]:fill-azure-radiance-700 dark:[&>svg]:fill-white hover:bg-azure-radiance-700/10
+          transition-colors duration-300 ease-linear'
+          rel='noreferrer'
+          href="https://www.markdownguide.org/cheat-sheet/"
+          target='_blank'>
+          <MarkdownIcon className='w-5 h-5' />
+        </a>
+      </div>
       <textarea
-        rows={25}
-        placeholder='Write the content of your news here.'
+        rows={15}
+        placeholder='Write the content of your news here and inspire the world with your words!'
         className=" markdown-editor-field modify-scroll resize-none"
         {...register('content')}>
       </textarea>
