@@ -22,6 +22,7 @@ export interface NewspaperAllDetails {
   nameWritter: string
   avatarWritter: string
   readingTimeText: string
+  timestamp: number
 }
 
 // --------------- Pagination --------------- //
@@ -42,7 +43,7 @@ export interface DataNewspaper {
  * type `NewspaperAllDetails`, and `totalNewspaper` is a number.
  */
 export const getAllNewspaper = async (currentPage: number = 1): Promise<DataNewspaper> => {
-  const orderQueryBy = 'createdAt'
+  const orderQueryBy = 'timestamp'
   const limitQuery = 20
 
   const currentPosition = (limitQuery * currentPage)
@@ -93,11 +94,10 @@ export const getNewspaperByOne = async (id: string): Promise<NewspaperAllDetails
  * NewspaperAllDetails.
  */
 export const getNewspaperByWritter = async (id: string): Promise<NewspaperAllDetails[]> => {
-  const collectionRef = collection(db, 'newspaper')
-  const queryRef = query(collectionRef, where('idWritter', '==', id))
+  const queryRef = query(collection(db, 'newspaper'), where('idWritter', '==', id))
   return (await getDocs(queryRef)).docs.map((doc) => {
     return doc.data() as NewspaperAllDetails
-  })
+  }).sort((a, b) => b.timestamp - a.timestamp)
 }
 
 // --------------- Create newspaper --------------- //
@@ -126,7 +126,8 @@ export const createNewspaper = async (newspaperDetails: NewspaperDetails): Promi
     ...newspaper,
     readingTimeText,
     createdAt: date,
-    modifiedAt: ''
+    modifiedAt: '',
+    timestamp: Date.now()
   }
 
   const docRef = await addDoc(collectionRef, data)
