@@ -7,5 +7,6 @@ export const AppRoutes = {
   ADMIN_USERS: '/admin/users',
   WRITE_NEWS: '/admin/news/add',
   CHANGE_USERNAME: '/profile/change-username',
-  CHANGE_PASSWORD: '/profile/change-password'
+  CHANGE_PASSWORD: '/profile/change-password',
+  CHANGE_FULLNAME: '/profile/change-fullname'
 } as const

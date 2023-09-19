@@ -54,7 +54,7 @@ export const getAllNewspaper = async (currentPage: number = 1): Promise<DataNews
   const queryRef = query(collection(db, 'newspaper'), orderBy(orderQueryBy, 'desc'), limit(currentPosition))
   const docRef = (await getDocs(queryRef))
 
-  const totalNewspaper = Math.round(preDocRef.size / limitQuery)
+  const totalNewspaper = Math.ceil(preDocRef.size / limitQuery)
   const allNewspaper = docRef.docs.slice(lastPosition, currentPosition).map((doc) => {
     return doc.data() as NewspaperAllDetails
   })
@@ -163,6 +163,27 @@ export const updateNewspaper = async (id: string, newspaperDetails: FormMarkdown
 
   const docRef = doc(db, 'newspaper', id)
   await updateDoc(docRef, dataUpdate)
+}
+
+// --------------- Update newspaper by writter --------------- //
+
+/**
+ * The function `updateNewspaperWritter` updates the name of a newspaper writer in
+ * the Firestore database based on their ID.
+ * @param {string} idWritter - The `idWritter` parameter is a string that
+ * represents the ID of the writer whose newspaper records need to be updated.
+ * @param {string} nameWritter - The `nameWritter` parameter is a string that
+ * represents the new name of the newspaper writer.
+ */
+export const updateNewspaperWritter = async (idWritter: string, nameWritter: string): Promise<void> => {
+  const queryRef = query(collection(db, 'newspaper'), where('idWritter', '==', idWritter))
+
+  const docsByWritter = (await getDocs(queryRef))
+
+  docsByWritter.docs.map(async (document) => {
+    const docRef = doc(db, 'newspaper', document.id)
+    await updateDoc(docRef, { nameWritter })
+  })
 }
 
 // --------------- Delete newspaper --------------- //
