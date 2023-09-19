@@ -77,6 +77,14 @@ const confirmChangePassword = (watch: UseFormWatch<FormInputsChangePassword>): R
       if (validatePasswordRegex(value).length > 0) {
         return `Password must contain at least one:/${validatePasswordRegex(value)}.`
       }
+
+      if (watch('oldPassword') === value) {
+        return 'New password, not like old one.'
+      }
+
+      if (validatePasswordRegex(value).length > 0) {
+        return `Password must contain at least one:/${validatePasswordRegex(value)}.`
+      }
     }
   }
 
