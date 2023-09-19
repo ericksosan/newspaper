@@ -1,6 +1,7 @@
 import { doc, setDoc, getDoc, updateDoc, getDocs, collection, query, where } from 'firebase/firestore'
 import type { DocumentData } from 'firebase/firestore'
 import { db } from '../firebase.config'
+import { updateNewspaperWritter } from './newspaper'
 
 export interface UserDetails {
   id: string
@@ -100,4 +101,20 @@ export const updateUsername = async (id: string, username: string): Promise<void
 export const updateRole = async (id: string, isAdmin: boolean): Promise<void> => {
   const docRef = doc(db, 'users', id)
   await updateDoc(docRef, { isAdmin })
+}
+
+/**
+ * The function `updateFullName` updates the full name of a user in a database
+ * document.
+ * @param {string} id - The `id` parameter is a string that represents the unique
+ * identifier of the user whose full name needs to be updated.
+ * @param data - The `data` parameter is an object that contains two properties:
+ * `firstname` and `lastname`. These properties represent the first name and last
+ * name of a user.
+ */
+export const updateFullName = async (id: string, data: { firstname: string, lastname: string }): Promise<void> => {
+  const fullname = `${data.firstname} ${data.lastname}`
+  const docRef = doc(db, 'users', id)
+  await updateDoc(docRef, { ...data, fullname })
+  await updateNewspaperWritter(id, fullname)
 }

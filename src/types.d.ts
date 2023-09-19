@@ -26,6 +26,11 @@ export interface FormInputChangeUsername {
   newUsername: string
 }
 
+export interface FormInputChangeFullName {
+  firstname: string
+  lastname: string
+}
+
 type CodeAlert = 'error' | 'success' | 'none'
 export interface Alert {
   code: CodeAlert

@@ -14,6 +14,7 @@ const CreateNews = lazy(async () => await import('./components/pages/CreateNews'
 const ManageUsers = lazy(async () => await import('./components/pages/ManageUsers'))
 const Login = lazy(async () => await import('./components/pages/Login'))
 const Signup = lazy(async () => await import('./components/pages/Signup'))
+const ChangeFullName = lazy(async () => await import('./components/pages/ChangeFullName'))
 
 export const App: React.FC = () => {
   return (
@@ -41,6 +42,11 @@ export const App: React.FC = () => {
           <Route path="/profile/change-password" element={
             <Suspense fallback={<Loading />}>
               <ChangePassword />
+            </Suspense>} />
+
+          <Route path="/profile/change-fullname" element={
+            <Suspense fallback={<Loading />}>
+              <ChangeFullName />
             </Suspense>} />
 
           {/* Admin */}

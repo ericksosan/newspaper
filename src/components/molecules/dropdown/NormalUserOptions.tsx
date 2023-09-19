@@ -1,6 +1,6 @@
 import { UserDropdownDivideBySection } from '.'
 import { DropdownItem } from '../../atoms'
-import { KeyIcon, UserPencilIcon } from '../../atoms/icon'
+import { KeyIcon, UserPencilIcon, WriteIcon } from '../../atoms/icon'
 
 export const NormalUserOptions = (): JSX.Element => {
   return (
@@ -18,6 +18,11 @@ export const NormalUserOptions = (): JSX.Element => {
       <DropdownItem to='CHANGE_PASSWORD'>
         <KeyIcon />
         Change Password
+      </DropdownItem>
+
+      <DropdownItem to='CHANGE_FULLNAME'>
+        <WriteIcon />
+        Change Full Name
       </DropdownItem>
     </>
   )

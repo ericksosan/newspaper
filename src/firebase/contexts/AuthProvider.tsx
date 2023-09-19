@@ -6,6 +6,7 @@ import { type UserDetails, getUserDetails } from '../database/users'
 import { logout } from '../authentication/logout'
 import { AppRoutes } from '../../routes'
 import { type NavigateOptions, useNavigate } from 'react-router-dom'
+import type { FormInputChangeFullName } from '../../types'
 
 interface AuthProviderProps {
   children: React.ReactNode
@@ -61,6 +62,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     navigate(AppRoutes[path], options)
   }
 
+  const handleChangeFullName = (data: FormInputChangeFullName): void => {
+    setUser(
+      {
+        ...user,
+        ...data,
+        fullname: `${data.firstname} ${data.lastname}`
+      }
+    )
+  }
+
   const values: AuthContextValues = {
     isLoading,
     isLogout,
@@ -70,7 +81,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     userDetailsLoaded,
     handleGetUserData,
     handleChangeUsername,
-    navigateTo
+    navigateTo,
+    handleChangeFullName
   }
 
   return (
