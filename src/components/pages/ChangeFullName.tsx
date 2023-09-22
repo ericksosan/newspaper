@@ -8,8 +8,13 @@ import { Button } from '../atoms'
 
 const ChangeFullName = (): JSX.Element => {
   const methods = useForm<FormInputChangeFullName>()
-  const { handleSubmit, reset } = methods
-  const { openModal, handleSetOpenModal, onSubmitChangeFullName, handleUpdateFullName } = useChangeFullName(reset)
+  const { handleSubmit } = methods
+  const {
+    openModal,
+    handleSetOpenModal,
+    onSubmitChangeFullName,
+    handleUpdateFullName
+  } = useChangeFullName()
 
   return (
     <ContainerAccountSettings sectionTitle='Change Full Name'>

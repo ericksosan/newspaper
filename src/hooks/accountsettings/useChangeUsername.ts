@@ -1,25 +1,25 @@
 import { useState } from 'react'
-import type { Alert, FormInputChangeUsername } from '../../types'
-import { useForm, type SubmitHandler, type UseFormReset } from 'react-hook-form'
+import type { FormInputChangeUsername } from '../../types'
+import { useForm, type SubmitHandler } from 'react-hook-form'
 import { useAuth } from '../../firebase/hooks/useAuth'
 import { updateUsername } from '../../firebase/database/users'
+import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
+import { toastOptions } from '../../utils'
 
 interface UseChangeUsername {
-  isLoading: boolean
   openModal: string | undefined
-  alert: Alert
   onSubmitChangeUsername: SubmitHandler<FormInputChangeUsername>
   handleUpdateUsername: () => Promise<void>
   handleSetOpenModal: (action: string | undefined) => void
 }
 
-export const useChangeUsername = (reset: UseFormReset<FormInputChangeUsername>): UseChangeUsername => {
+export const useChangeUsername = (): UseChangeUsername => {
   const [openModal, setOpenModal] = useState<string | undefined>()
   const [username, setUsername] = useState<string>('')
-  const [alert, setAlert] = useState<Alert>({} as Alert)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
   const { formState: { isValid } } = useForm<FormInputChangeUsername>()
   const { user, handleChangeUsername } = useAuth()
+  const navigate = useNavigate()
 
   const onSubmitChangeUsername: SubmitHandler<FormInputChangeUsername> = (data) => {
     if (isValid) {
@@ -29,17 +29,20 @@ export const useChangeUsername = (reset: UseFormReset<FormInputChangeUsername>):
   }
 
   const handleUpdateUsername = async (): Promise<void> => {
-    try {
-      setIsLoading(true)
-      await updateUsername(user.id, username)
-      handleChangeUsername(username)
-      handleSetOpenModal(undefined)
-      reset()
-      setIsLoading(false)
-      setAlert({ code: 'success', message: 'Your username was changed' })
-    } catch (err) {
-      setAlert({ code: 'error', message: 'Your username wasn\'t changed' })
-    }
+    void toast.promise(
+      updateUsername(user.id, username),
+      {
+        loading: 'Changing username...',
+        success: (_data) => {
+          handleChangeUsername(username)
+          handleSetOpenModal(undefined)
+          navigate('/', { replace: true })
+          return 'Your username has been successfully changed.'
+        },
+        error: (_err) => 'An error occurred while changing your username.'
+      },
+      toastOptions
+    )
   }
 
   const handleSetOpenModal = (action: string | undefined): void => {
@@ -47,8 +50,6 @@ export const useChangeUsername = (reset: UseFormReset<FormInputChangeUsername>):
   }
 
   return {
-    alert,
-    isLoading,
     openModal,
     onSubmitChangeUsername,
     handleUpdateUsername,
