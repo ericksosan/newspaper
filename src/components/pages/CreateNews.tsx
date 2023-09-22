@@ -1,8 +1,6 @@
-import { memo } from 'react'
-import { twJoin } from 'tailwind-merge'
 import { FormMarkdownEditor, NewspaperPreview } from '../../components/organisms'
 import { Button, Title } from '../../components/atoms'
-import { ButtonLoading, FormAlert } from '../../components/molecules'
+import { FormAlert } from '../../components/molecules'
 import { useCreateNews } from '../../hooks'
 
 const CreateNews = (): JSX.Element => {
@@ -10,7 +8,6 @@ const CreateNews = (): JSX.Element => {
     section,
     message,
     register,
-    isLoading,
     isSectionChanged,
     formMarkdownEditor,
     handlePostNewspaper,
@@ -24,12 +21,7 @@ const CreateNews = (): JSX.Element => {
       <div className='lg:max-w-4xl lg:mx-auto flex flex-col gap-3'>
         <div className="flex justify-between items-center border-b-2 pb-4 border-gray-300
         dark:border-gray-600">
-          <Title className={
-            twJoin(
-              isSectionChanged ? 'animate-fade' : 'animate-fade',
-              'text-lg md:text-4xl animate-duration-300 animate-ease-in-out'
-            )
-          }>
+          <Title className='text-lg md:text-4xl animate-duration-300 animate-ease-in-out'>
             {section}
           </Title>
           <div className="flex gap-3 [&>button]:py-1 [&>button]:px-2 [&>button]:md:py-2
@@ -51,12 +43,11 @@ const CreateNews = (): JSX.Element => {
                 </Button>
             }
 
-            <ButtonLoading
-              isLoading={isLoading}
-              color='blue'
+            <Button
+              colors='blue'
               onClick={handlePostNewspaper}>
               Post Newspaper
-            </ButtonLoading>
+            </Button>
           </div>
         </div>
         {
@@ -77,4 +68,4 @@ const CreateNews = (): JSX.Element => {
   )
 }
 
-export default memo(CreateNews)
+export default CreateNews

@@ -26,7 +26,12 @@ export const useMarkdownEditorForm = (): UseMarkdownEditorForm => {
   const { register, handleSubmit, control, setValue, reset } = useForm<FormMarkdownEditor>()
   const { cover, title, content } = useWatch<FormMarkdownEditor>({ control })
 
-  const isURL = /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i
+  const URLRegex = {
+    general: /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i,
+    secure: /^(https:\/\/|ftp:\/\/)/i,
+    imageExtension: /\.(jpeg|jpg|webp|png)(\?.*)?$/i,
+    specificDomain: /newspaper-c0ba0\.appspot\.com/i
+  }
 
   const validateFormMarkdownEditor = (): boolean => {
     if ((cover === '' || cover === undefined)) {
@@ -34,9 +39,21 @@ export const useMarkdownEditorForm = (): UseMarkdownEditorForm => {
       return false
     }
 
-    if (cover !== '' && !isURL.test(cover ?? '')) {
-      setMessage('The URL of the cover page is invalid!')
-      return false
+    if (cover !== '' && !URLRegex.specificDomain.test(cover ?? '')) {
+      if (cover !== '' && !URLRegex.secure.test(cover ?? '')) {
+        setMessage('The URL is not secure!')
+        return false
+      }
+
+      if (cover !== '' && !URLRegex.general.test(cover ?? '')) {
+        setMessage('The URL is not valid.')
+        return false
+      }
+
+      if (cover !== '' && !URLRegex.imageExtension.test(cover)) {
+        setMessage('The URL does not contain an allowed image extension (jpeg | jpg | webp | png)')
+        return false
+      }
     }
 
     if (typeof title === 'undefined' || typeof content === 'undefined') {

@@ -5,11 +5,12 @@ import { useAuth } from '../../firebase/hooks/useAuth'
 import { type NewspaperDetails, createNewspaper } from '../../firebase/database/newspaper'
 import { useNavigate } from 'react-router-dom'
 import { useMarkdownEditorForm } from '..'
+import { toast } from 'react-hot-toast'
+import { toastOptions } from '../../utils'
 
 interface UseCreateNews {
   section: string
   message: string
-  isLoading: boolean
   isSectionChanged: boolean
   imageFileStatus: ImageFileStatus
   handleSwitchPreviewEdit: () => void
@@ -22,9 +23,8 @@ interface UseCreateNews {
 export const useCreateNews = (): UseCreateNews => {
   const { user } = useAuth()
   const [section, setSection] = useState<string>('Create News')
-  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [isSectionChanged, setIsSectionChanged] = useState<boolean>(false)
-  const { register, message, handleSubmit, validateFormMarkdownEditor, reset, handleFileCoverChange, imageFileStatus } = useMarkdownEditorForm()
+  const { register, message, handleSubmit, validateFormMarkdownEditor, handleFileCoverChange, imageFileStatus } = useMarkdownEditorForm()
   const [formMarkdownEditor, setFormMarkdownEditor] = useState<FormMarkdownEditor>({} as FormMarkdownEditor)
 
   const navigate = useNavigate()
@@ -49,27 +49,32 @@ export const useCreateNews = (): UseCreateNews => {
   const handlePostNewspaper = async (): Promise<void> => {
     if (!validateFormMarkdownEditor()) return
 
-    const data: NewspaperDetails = {
-      newspaper: formMarkdownEditor,
-      idWritter: user.id,
-      avatarWritter: user.photoURL ?? '',
-      nameWritter: user.fullname ?? 'Anonymus'
-    }
-
-    try {
-      setIsLoading(true)
-      const id = await createNewspaper(data)
-      reset()
-      navigate(`/new/${id}`, { replace: true })
-      setIsLoading(false)
-    } catch (error) { }
+    void handleSubmit(async (data) => {
+      const newNewspaper: NewspaperDetails = {
+        newspaper: data,
+        idWritter: user.id,
+        avatarWritter: user.photoURL ?? '',
+        nameWritter: user.fullname ?? 'Anonymus'
+      }
+      void toast.promise(
+        createNewspaper(newNewspaper),
+        {
+          loading: 'Creating newspaper...',
+          success: (id) => {
+            navigate(`/new/${id}`, { replace: true })
+            return 'The newspaper was successfully created'
+          },
+          error: (_err) => 'An error occurred while creating the news item.'
+        },
+        toastOptions
+      )
+    })()
   }
 
   return {
     section,
     message,
     register,
-    isLoading,
     isSectionChanged,
     formMarkdownEditor,
     handlePostNewspaper,
