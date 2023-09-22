@@ -24,10 +24,10 @@ export const CardNewspaper: React.FC<CardNewspaperProps> = (props) => {
       pathOptional={id}
       className="flex flex-col items-center bg-white border overflow-hidden border-gray-300 dark:hover:bg-slate-900
       transition-colors duration-300 ease-out rounded-lg dark:border-gray-700 dark:bg-slate-800
-      w-full sm:w-full sm:py-6 shadow-md dark:shadow-md [&>div>h5]:hover:text-azure-radiance-700 [&>div>h5]:dark:hover:text-gray-300
+      w-full sm:w-full sm:py-4 shadow-md dark:shadow-md [&>div>h5]:hover:text-azure-radiance-700 [&>div>h5]:dark:hover:text-gray-300
       [&>div>h5]:transition-colors [&>div>h5]:duration-300 [&>div>h5]:ease-out font-inter">
-      <div className="flex flex-col justify-between p-6 gap-4 sm:py-0 w-full">
-        <>
+      <div className="flex flex-col justify-between p-4 gap-4 sm:py-0 w-full">
+        <div className='h-52 w-full hidden sm:flex rounded-md overflow-hidden'>
           <SkeletonImage
             className={
               twMerge(
@@ -38,14 +38,14 @@ export const CardNewspaper: React.FC<CardNewspaperProps> = (props) => {
           <img
             className={
               twMerge(
-                'object-cover hidden h-52 w-full rounded-md',
+                'object-cover object-center min-w-full h-full hidden rounded-md aspect-video',
                 !imgIsLoading ? 'sm:flex' : 'sm:hidden'
               )
             }
             src={cover}
             onLoad={() => { setImgIsLoading(false) }}
           />
-        </>
+        </div>
 
         <div className="inline-flex items-center">
           <Avatar img={avatarWritter} alt={nameWritter} />
