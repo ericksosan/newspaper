@@ -1,7 +1,7 @@
 import { useForm, FormProvider } from 'react-hook-form'
 import { formValidation } from '../../utils'
 import { type FormInputs } from '../../types'
-import { Divider, SubTitle } from '../atoms'
+import { Divider, LinkRedirect, SubTitle } from '../atoms'
 import { Navbar } from '../organisms'
 import { FormAlert, FormCover, FormField, FormHeader, FormRedirect, ButtonLoading } from '../molecules'
 import { useAuthForm } from '../../hooks/authform'
@@ -23,7 +23,8 @@ const Login = (): JSX.Element => {
           alt="People reading news"
         />
         <FormProvider {...methods}>
-          <form className='w-full mb-10 sm:w-3/4 lg:w-full lg:mb-0 xl:w-3/4'
+          <form className='w-full mb-10 sm:w-3/4 lg:w-full lg:mb-0 xl:w-3/4 flex
+          flex-col'
             onSubmit={handleSubmit(onSubmitLogin)}>
 
             <FormHeader
@@ -48,6 +49,12 @@ const Login = (): JSX.Element => {
               placeholder="Password"
               validation={formValidation.password}
             />
+            <LinkRedirect
+              className='self-end block mb-10 font-medium hover:opacity-80
+              transition-colors duration-300 ease-in-out'
+              to='RESET_PASSWORD'>
+              Forgot password?
+            </LinkRedirect>
 
             <ButtonLoading
               color='blue'

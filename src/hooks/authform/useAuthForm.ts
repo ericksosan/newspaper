@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { type SubmitHandler } from 'react-hook-form'
-import { authSignIn, authSignInWithGoogle, authSignUp } from '../../firebase/authentication'
+import { authSignIn, authSignInWithGoogle, authSignUp, userResetPasswordWithEmail } from '../../firebase/authentication'
 import { useAuth } from '../../firebase/hooks/useAuth'
-import type { FormInputs, FormInputsSignup } from '../../types'
+import type { FormInputResetPassword, FormInputs, FormInputsSignup } from '../../types'
+import toast from 'react-hot-toast'
+import { toastOptions } from '../../utils'
 
 interface UseAuthForm {
   message: string
@@ -11,14 +13,18 @@ interface UseAuthForm {
     emailProv: boolean
     googleProv: boolean
   }
+  showModalMessage: boolean
+  handleReplyOfModalMessage: () => void
   onSubmitLogin: SubmitHandler<FormInputs>
   onSubmitSignUp: SubmitHandler<FormInputsSignup>
+  onSubmitResetPassword: SubmitHandler<FormInputResetPassword>
   handleSignInWithGoogle: () => Promise<void>
 }
 
 export const useAuthForm = (): UseAuthForm => {
   const [isLoading, setIsLoading] = useState({ emailProv: false, googleProv: false })
   const [message, setMessage] = useState('')
+  const [showModalMessage, setShowModalMessage] = useState(false)
   const { handleGetUserData } = useAuth()
   const navigate = useNavigate()
 
@@ -48,6 +54,21 @@ export const useAuthForm = (): UseAuthForm => {
     }
   }
 
+  const onSubmitResetPassword: SubmitHandler<FormInputResetPassword> = async ({ email }): Promise<void> => {
+    void toast.promise(
+      userResetPasswordWithEmail(email),
+      {
+        loading: 'Loading...',
+        success: () => {
+          setShowModalMessage(true)
+          return 'Email sent successfully!'
+        },
+        error: (_err) => 'There is no existing user record corresponding to the provided identifier.'
+      },
+      toastOptions
+    )
+  }
+
   const handleSignInWithGoogle = async (): Promise<void> => {
     try {
       setIsLoading({ ...isLoading, googleProv: true })
@@ -60,11 +81,19 @@ export const useAuthForm = (): UseAuthForm => {
     }
   }
 
+  const handleReplyOfModalMessage = (): void => {
+    setShowModalMessage(!showModalMessage)
+    navigate('/', { replace: true })
+  }
+
   return {
     message,
     isLoading,
     onSubmitLogin,
     onSubmitSignUp,
+    showModalMessage,
+    onSubmitResetPassword,
+    handleReplyOfModalMessage,
     handleSignInWithGoogle
   }
 }
