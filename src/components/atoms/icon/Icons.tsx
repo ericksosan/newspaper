@@ -95,7 +95,7 @@ export const CheckBadgeIcon = ({ className }: React.ComponentProps<'svg'>): JSX.
       viewBox="0 0 24 24"
       fill="currentColor"
       className={
-        twMerge('w-6 h-6', className)
+        twMerge('w-4 h-4', className)
       }>
       <path fillRule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307zm7.007 6.387a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z" clipRule="evenodd" />
     </svg>
@@ -323,6 +323,43 @@ export const WriteIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Eleme
       )}
       viewBox="0 0 640 512">
       <path d="M192 128c0-17.7 14.3-32 32-32s32 14.3 32 32v7.8c0 27.7-2.4 55.3-7.1 82.5l-84.4 25.3c-40.6 12.2-68.4 49.6-68.4 92v71.9c0 40 32.5 72.5 72.5 72.5c26 0 50-13.9 62.9-36.5l13.9-24.3c26.8-47 46.5-97.7 58.4-150.5l94.4-28.3-12.5 37.5c-3.3 9.8-1.6 20.5 4.4 28.8s15.7 13.3 26 13.3H544c17.7 0 32-14.3 32-32s-14.3-32-32-32H460.4l18-53.9c3.8-11.3 .9-23.8-7.4-32.4s-20.7-11.8-32.2-8.4L316.4 198.1c2.4-20.7 3.6-41.4 3.6-62.3V128c0-53-43-96-96-96s-96 43-96 96v32c0 17.7 14.3 32 32 32s32-14.3 32-32V128zm-9.2 177l49-14.7c-10.4 33.8-24.5 66.4-42.1 97.2l-13.9 24.3c-1.5 2.6-4.3 4.3-7.4 4.3c-4.7 0-8.5-3.8-8.5-8.5V335.6c0-14.1 9.3-26.6 22.8-30.7zM24 368c-13.3 0-24 10.7-24 24s10.7 24 24 24H64.3c-.2-2.8-.3-5.6-.3-8.5V368H24zm592 48c13.3 0 24-10.7 24-24s-10.7-24-24-24H305.9c-6.7 16.3-14.2 32.3-22.3 48H616z" />
+    </svg>
+  )
+}
+
+export const PencilBoltIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg"
+      className={twMerge('w-4 h-4', className)}
+      viewBox="0 0 24 24"
+      strokeWidth={2}
+      stroke="currentColor"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4"></path>
+      <path d="M13.5 6.5l4 4"></path>
+      <path d="M19 16l-2 3h4l-2 3"></path>
+    </svg>
+  )
+}
+
+export const BoockIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" className={twMerge('w-4 h-4', className)}
+      viewBox="0 0 24 24"
+      strokeWidth={2}
+      stroke="currentColor"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0"></path>
+      <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0"></path>
+      <path d="M3 6l0 13"></path>
+      <path d="M12 6l0 13"></path>
+      <path d="M21 6l0 13"></path>
     </svg>
   )
 }

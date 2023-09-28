@@ -1,4 +1,4 @@
-import { GoogleAuthProvider, type UserCredential, signInWithPopup } from 'firebase/auth'
+import { GoogleAuthProvider, type UserCredential, signInWithPopup, type UserInfo } from 'firebase/auth'
 import { generateUsername } from 'unique-username-generator'
 import { auth } from '../firebase.config'
 import { createUser, type UserDetails } from '../database/users'
@@ -6,7 +6,15 @@ import { createUser, type UserDetails } from '../database/users'
 export const authSignInWithGoogle = async (): Promise<UserCredential> => {
   const googleProvider = new GoogleAuthProvider()
   const userCredential = await signInWithPopup(auth, googleProvider)
-  const { uid, photoURL, displayName, email } = userCredential.user
+  const { uid, displayName, email } = userCredential.user
+
+  let providerInfo: UserInfo = {} as UserInfo
+
+  userCredential.user.providerData.forEach((profile) => {
+    providerInfo = profile
+  })
+
+  const { providerId, photoURL } = providerInfo
 
   const username = generateUsername()
 
@@ -15,10 +23,11 @@ export const authSignInWithGoogle = async (): Promise<UserCredential> => {
     id: uid,
     firstname: '',
     lastname: '',
-    photoURL,
-    isAdmin: false,
     username,
-    fullname: displayName
+    fullname: displayName,
+    providerId,
+    photoURL,
+    role: 'reader'
   }
 
   await createUser(user)

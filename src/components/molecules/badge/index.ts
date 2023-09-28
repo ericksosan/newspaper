@@ -1,1 +1,1 @@
-export * from './BadgeAdmin';
+export * from './BadgeRoles'

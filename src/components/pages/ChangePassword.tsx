@@ -3,11 +3,16 @@ import { formValidation } from '../../utils'
 import type { FormInputsChangePassword } from '../../types'
 import { useChangePassword } from '../../hooks'
 import { ButtonLoading, ContainerAccountSettings, FormAlert, FormField } from '../molecules'
+import { useAuth } from '../../firebase/hooks/useAuth'
+import { Redirect } from '../atoms'
 
 const ChangePassword = (): JSX.Element => {
+  const { user: { providerId } } = useAuth()
   const { alert, isLoading, onSubmitChangePassword } = useChangePassword()
   const methods = useForm<FormInputsChangePassword>()
   const { handleSubmit, watch } = methods
+
+  if (providerId !== 'password') return <Redirect to='HOME' />
 
   return (
     <ContainerAccountSettings sectionTitle='Change Password'>

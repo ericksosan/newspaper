@@ -1,4 +1,4 @@
-import { type UserCredential, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+import { type UserCredential, createUserWithEmailAndPassword, signInWithEmailAndPassword, type UserInfo } from 'firebase/auth'
 import { AvatarGenerator } from 'random-avatar-generator'
 import { auth } from '../firebase.config'
 import type { FormInputs, FormInputsSignup } from '../../types'
@@ -8,17 +8,27 @@ export const authSignUp = async (data: FormInputsSignup): Promise<UserCredential
   const { email, password, firstname, lastname, username } = data
   const userCredential = await createUserWithEmailAndPassword(auth, email, password)
   const { uid } = userCredential.user
+
   const generator = new AvatarGenerator()
+
+  let providerInfo: UserInfo = {} as UserInfo
+
+  userCredential.user.providerData.forEach((profile) => {
+    providerInfo = profile
+  })
+
+  const { providerId } = providerInfo
 
   const user: UserDetails = {
     email,
     id: uid,
     firstname,
     lastname,
+    providerId,
     photoURL: generator.generateRandomAvatar(),
-    isAdmin: false,
     username: username.toLocaleLowerCase(),
-    fullname: `${firstname} ${lastname}`
+    fullname: `${firstname} ${lastname}`,
+    role: 'reader'
   }
 
   try {
