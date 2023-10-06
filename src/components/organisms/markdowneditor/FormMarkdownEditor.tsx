@@ -52,7 +52,7 @@ export const FormMarkdownEditor: React.FC<MarkdownEditorProps> = ({ register, ha
             type="file"
             id='coverfile'
             className='hidden'
-            accept='.jpg, .jpeg, .png'
+            accept='.jpg, .jpeg, .png, .webp'
             onChange={handleFileCoverChange}
           />
         </label>
