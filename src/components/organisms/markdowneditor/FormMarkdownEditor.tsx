@@ -104,7 +104,7 @@ export const FormMarkdownEditor: React.FC<MarkdownEditorProps> = ({ register, ha
         {...register('title')}
       />
 
-      <div className="w-full flex items-center justify-between">
+      <div className="w-full items-center flex justify-between">
         <Label
           className='mb-0'
           name='content'
@@ -112,13 +112,15 @@ export const FormMarkdownEditor: React.FC<MarkdownEditorProps> = ({ register, ha
           Write the content of your news here.
         </Label>
         <a
-          className='flex items-center justify-center w-10 h-10 rounded-full dark:hover:bg-white/10
+          className='flex items-center justify-center w-10 h-10 rounded-full md:w-auto md:rounded-md dark:hover:bg-white/10
           [&>svg]:fill-azure-radiance-700 dark:[&>svg]:fill-white hover:bg-azure-radiance-700/10
-          transition-colors duration-300 ease-linear'
+          transition-colors duration-300 ease-linear text-slate-900 gap-1 md:px-4 text-sm dark:text-white
+          self-end'
           rel='noreferrer'
           href="https://www.markdownguide.org/cheat-sheet/"
           target='_blank'>
           <MarkdownIcon className='w-5 h-5' />
+          <span className='hidden md:block'>Markdown Guide.</span>
         </a>
       </div>
       <textarea
