@@ -21,13 +21,8 @@ export const SkeletonCardManageNewspaper = (): JSX.Element => {
       </div>
 
       <div className="p-4 w-full flex flex-col gap-3">
-        <SkeletonElement className="h-2.5 w-60" />
-        <SkeletonElement className="h-2.5 w-52" />
-
-        <div className="flex items-center gap-1">
-          <SkeletonElement className="w-5 h-5" />
-          <SkeletonElement className="w-10 h-2.5" />
-        </div>
+        <SkeletonElement className="h-2.5 w-72" />
+        <SkeletonElement className="h-2.5 w-44" />
 
         <div className="flex items-center gap-2">
           <SkeletonElement className="w-5 h-5" />
