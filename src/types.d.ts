@@ -47,3 +47,7 @@ export interface ImageFileStatus {
 export interface FormInputResetPassword {
   email: string
 }
+
+export interface UserOptionsProps {
+  children?: React.ReactNode
+}

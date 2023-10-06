@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './firebase/contexts/AuthProvider'
-import { ProtectedRoutes, AdminRoutes, AuthRoutes } from './routes'
+import { ProtectedRoutes, AdminRoutes, AuthRoutes, EditorRoutes } from './routes'
 import { Loading } from './components/molecules'
 import { ManageNewspaperProvider } from './contexts'
 
@@ -50,21 +50,24 @@ export const App: React.FC = () => {
               <ChangeFullName />
             </Suspense>} />
 
-          {/* Admin */}
-          <Route path="/admin" element={<AdminRoutes />}>
-            <Route path="news" element={
+          {/* Editor */}
+          <Route path="/editor" element={<EditorRoutes />}>
+            <Route path="manage/news" element={
               <Suspense fallback={<Loading />}>
                 <ManageNewspaperProvider>
                   <ManageNewspaper />
                 </ManageNewspaperProvider>
               </Suspense>} />
 
-            <Route path="news/add" element={
+            <Route path="write/news" element={
               <Suspense fallback={<Loading />}>
                 <CreateNews />
               </Suspense>} />
+          </Route>
 
-            <Route path="users" element={
+          {/* Admin */}
+          <Route path="/admin" element={<AdminRoutes />}>
+            <Route path="manage/users" element={
               <Suspense fallback={<Loading />}>
                 <ManageUsers />
               </Suspense>} />

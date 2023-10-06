@@ -1,3 +1,4 @@
-export * from './AdminRoutes';
-export * from './AuthRoutes';
-export * from './ProtectedRoutes';
+export * from './AuthRoutes'
+export * from './AdminRoutes'
+export * from './EditorRoutes'
+export * from './ProtectedRoutes'

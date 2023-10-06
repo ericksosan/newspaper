@@ -3,6 +3,7 @@ import type { DocumentData } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import { updateNewspaperWritter } from './newspaper'
 
+export type UserRoles = 'reader' | 'editor' | 'admin'
 export interface UserDetails {
   id: string
   firstname: string | null
@@ -10,21 +11,21 @@ export interface UserDetails {
   username: string | null
   photoURL: string | null
   email: string | null
-  isAdmin: boolean
   fullname: string | null
+  role: UserRoles
+  providerId: string
 }
 
 // --------------- Get all users --------------- //
 
 /**
  * The function `getAllUsers` retrieves all user details from a Firestore
- * collection except for the user with the specified ID.
- * @param {string} id - The `id` parameter is a string representing the ID of a
- * user.
- * @returns a Promise that resolves to an array of UserDetails objects.
+ * collection, excluding those with the role of "admin".
+ * @returns The function `getAllUsers` returns a Promise that resolves to an array
+ * of `UserDetails` objects.
  */
-export const getAllUsers = async (id: string): Promise<UserDetails[]> => {
-  const queryRef = query(collection(db, 'users'), where('id', '!=', id))
+export const getAllUsers = async (): Promise<UserDetails[]> => {
+  const queryRef = query(collection(db, 'users'), where('role', '!=', 'admin'))
   const querySnapshot = await getDocs(queryRef)
 
   const users: UserDetails[] = querySnapshot.docs.map((doc) => {
@@ -98,9 +99,9 @@ export const updateUsername = async (id: string, username: string): Promise<void
  * `isAdmin` is `true`, it means the user should be assigned the admin role. If
  * `isAdmin` is `false`, it means the user should not be assigned the admin
  */
-export const updateRole = async (id: string, isAdmin: boolean): Promise<void> => {
+export const updateRole = async (id: string, newRole: string): Promise<void> => {
   const docRef = doc(db, 'users', id)
-  await updateDoc(docRef, { isAdmin })
+  await updateDoc(docRef, { role: newRole })
 }
 
 /**

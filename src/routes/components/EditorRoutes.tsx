@@ -2,15 +2,15 @@ import { Navigate, Outlet } from 'react-router'
 import { useAuth } from '../../firebase/hooks/useAuth'
 import { Loading } from '../../components/molecules'
 
-export const AdminRoutes = (): JSX.Element => {
+export const EditorRoutes = (): JSX.Element => {
   const { user: { role }, isLoading } = useAuth()
 
-  const isAdmin = (role === 'admin')
+  const isEditor = (role === 'editor' || role === 'admin')
 
   if (isLoading) return <Loading />
 
   return (
-    isAdmin
+    isEditor
       ? <Outlet />
       : <Navigate to='/' />
   )

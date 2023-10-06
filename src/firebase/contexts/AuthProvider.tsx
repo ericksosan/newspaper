@@ -15,12 +15,11 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isLogout, setIsLogout] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [userDetailsLoaded, setUserDetailsLoaded] = useState<boolean>(true)
   const [user, setUser] = useState<UserDetails>({} as UserDetails)
   const navigate = useNavigate()
 
   useEffect(() => {
-    const deconnect = onAuthStateChanged(auth, (currentUser) => {
+    const disconnect = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser !== null) {
         setIsLogout(true)
         void handleGetUserData(currentUser.uid)
@@ -30,7 +29,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setIsLoading(false)
       }
     })
-    return deconnect
+    return disconnect
   }, [])
 
   const handleGetUserData = async (id: string): Promise<void> => {
@@ -38,7 +37,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       const res = await getUserDetails(id)
       if (res !== undefined) {
         setUser(res as UserDetails)
-        setUserDetailsLoaded(false)
         setIsLoading(false)
       }
     } catch (error) { }
@@ -78,7 +76,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     user,
     logout,
     handleLogoutReset,
-    userDetailsLoaded,
     handleGetUserData,
     handleChangeUsername,
     navigateTo,

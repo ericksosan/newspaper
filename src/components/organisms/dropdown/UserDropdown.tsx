@@ -4,16 +4,13 @@ import { Avatar, Logout, UserDetailsDropdown, UserOptions } from '../../molecule
 import { Divider } from '../../atoms'
 
 export const UserDropdown = (): JSX.Element => {
-  const { user } = useAuth()
+  const { user: { photoURL, fullname } } = useAuth()
 
   return (
     <Dropdown
       inline
       label={
-        <Avatar
-          img={user.photoURL ?? ''}
-          alt={user.fullname ?? ''}
-        />
+        <Avatar img={photoURL ?? ''} alt={fullname ?? ''} />
       }
       arrowIcon={false}
       className='bg-white w-72 lg:w-80 flex flex-col gap-2 dark:bg-slate-800
@@ -22,7 +19,7 @@ export const UserDropdown = (): JSX.Element => {
     >
       <UserDetailsDropdown />
       <UserOptions />
-      <Divider className='dark:border-gray-700/30 w-full'/>
+      <Divider className='dark:border-gray-700/30 w-full' />
       <Logout />
     </Dropdown>
   )

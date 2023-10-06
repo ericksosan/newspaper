@@ -10,7 +10,6 @@ export interface AuthContextValues {
   user: UserDetails
   logout: () => Promise<void>
   handleLogoutReset: () => void
-  userDetailsLoaded: boolean
   handleGetUserData: (id: string) => Promise<void>
   handleChangeUsername: (username: string) => void
   handleChangeFullName: (data: FormInputChangeFullName) => void
