@@ -1,10 +1,11 @@
 import { useState } from 'react'
-import { type UseFormReset, type SubmitHandler, useForm } from 'react-hook-form'
+import { type SubmitHandler, useForm } from 'react-hook-form'
 import type { FormInputChangeFullName } from '../../types'
 import toast from 'react-hot-toast'
 import { useAuth } from '../../firebase/hooks/useAuth'
 import { toastOptions } from '../../utils'
 import { updateFullName } from '../../firebase/database/users'
+import { useNavigate } from 'react-router-dom'
 
 interface UseChangeFullName {
   openModal: string | undefined
@@ -13,11 +14,12 @@ interface UseChangeFullName {
   onSubmitChangeFullName: SubmitHandler<FormInputChangeFullName>
 }
 
-export const useChangeFullName = (reset: UseFormReset<FormInputChangeFullName>): UseChangeFullName => {
+export const useChangeFullName = (): UseChangeFullName => {
   const [openModal, setOpenModal] = useState<string | undefined>()
   const [fullName, setFullName] = useState<FormInputChangeFullName>()
   const { formState: { isValid } } = useForm<FormInputChangeFullName>()
   const { user: { id }, handleChangeFullName } = useAuth()
+  const navigate = useNavigate()
 
   const onSubmitChangeFullName: SubmitHandler<FormInputChangeFullName> = (data) => {
     if (isValid) {
@@ -32,14 +34,14 @@ export const useChangeFullName = (reset: UseFormReset<FormInputChangeFullName>):
     void toast.promise(
       updateFullName(id, fullName),
       {
-        loading: 'Saving changes...',
+        loading: 'Changing full name...',
         success: (_data) => {
           handleChangeFullName(fullName)
           handleSetOpenModal(undefined)
-          reset()
-          return 'Full name was successfully updated.'
+          navigate('/', { replace: true })
+          return 'Your full name has been successfully changed.'
         },
-        error: (_err) => 'An error occurred while updating the full name.'
+        error: (_err) => 'An error occurred while changing your full name.'
       },
       toastOptions
     )
