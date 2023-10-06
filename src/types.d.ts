@@ -43,3 +43,7 @@ export interface ImageFileStatus {
   messageFile: string
   isLoadingUpload: boolean
 }
+
+export interface FormInputResetPassword {
+  email: string
+}
