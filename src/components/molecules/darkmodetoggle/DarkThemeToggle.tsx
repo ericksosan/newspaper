@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Button } from '../../atoms'
 import { MoonIcon, SunIcon } from '../../atoms/icon'
+import { twMerge } from 'tailwind-merge'
 
 export const DarkThemeToggle: React.FC = () => {
   const [themeToggle, setThemeToggle] = useState<boolean>(false || JSON.parse(localStorage.getItem('appearance') as string) as boolean)
@@ -22,9 +23,14 @@ export const DarkThemeToggle: React.FC = () => {
   return (
     <Button
       onClick={() => { setThemeToggle(!themeToggle) }}
-      className='text-slate-700 transition-opacity duration-500 hover:opacity-70
-      dark:text-gray-200 [&>svg]:animate-jump [&>svg]:animate-duration-500
-      [&>svg]:animate-ease-out [&>svg]:animate-once p-0'
+      className={
+        twMerge(
+          `text-slate-700 transition-all duration-300 ease-in-out w-10 h-10
+          flex justify-center items-center rounded-full
+          dark:text-gray-200 p-0 hover:opacity-90 hover:bg-black/5 dark:hover:bg-white/10`,
+          themeToggle ? '-rotate-[360deg]' : 'rotate-[360deg]'
+        )
+      }
     >
       {
         themeToggle

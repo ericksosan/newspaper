@@ -30,9 +30,7 @@ module.exports = {
 	},
 	darkMode: 'class',
 	plugins: [
-		require('flowbite/plugin'),
 		require('@tailwindcss/typography'),
-		require('tailwindcss-animated'),
 		require('tailwind-scrollbar')({ nocompatible: true })
 	],
 };
