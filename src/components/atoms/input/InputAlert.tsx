@@ -1,4 +1,10 @@
-export const InputAlert = ({ message }: { message: string }): JSX.Element => {
+import { twMerge } from 'tailwind-merge'
+
+interface InputAlertProps {
+  message: string
+  className?: string
+}
+export const InputAlert: React.FC<InputAlertProps> = ({ message, className }) => {
   let messageSplited: string[] = []
 
   if (message.includes('/')) {
@@ -6,8 +12,12 @@ export const InputAlert = ({ message }: { message: string }): JSX.Element => {
   }
 
   return (
-    <div className="mt-2 text-sm text-red-600 font-semibold animate-fade-down
-    animate-duration-300 animate-ease-in-out flex gap-1 items-center">
+    <div className={
+      twMerge(
+        'mt-2 text-sm text-red-600 font-semibold flex gap-1 items-center',
+        className
+      )
+    }>
       {
         messageSplited.length !== 0
           ? <div className="flex flex-col md:flex-row gap-1">

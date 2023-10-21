@@ -13,7 +13,7 @@ export const MoonIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Elemen
     <svg xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24" fill="currentColor"
       className={
-        twMerge(className, 'w-6 h-6')
+        twMerge('w-6 h-6', className)
       }>
       <path fillRule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-4.368 2.667-8.112 6.46-9.694a.75.75 0 01.818.162z" clipRule="evenodd" />
     </svg>
@@ -26,7 +26,7 @@ export const SunIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element
       viewBox="0 0 24 24"
       fill="currentColor"
       className={
-        twMerge(className, 'w-6 h-6')
+        twMerge('w-6 h-6', className)
       }>
       <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
     </svg>
@@ -39,7 +39,7 @@ export const NewspaperIcon = ({ className }: React.ComponentProps<'svg'>): JSX.E
       viewBox="0 0 24 24"
       fill="currentColor"
       className={
-        twMerge(className, 'w-6 h-6')
+        twMerge('w-6 h-6', className)
       }>
       <path fillRule="evenodd" d="M4.125 3C3.089 3 2.25 3.84 2.25 4.875V18a3 3 0 003 3h15a3 3 0 01-3-3V4.875C17.25 3.839 16.41 3 15.375 3H4.125zM12 9.75a.75.75 0 000 1.5h1.5a.75.75 0 000-1.5H12zm-.75-2.25a.75.75 0 01.75-.75h1.5a.75.75 0 010 1.5H12a.75.75 0 01-.75-.75zM6 12.75a.75.75 0 000 1.5h7.5a.75.75 0 000-1.5H6zm-.75 3.75a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5H6a.75.75 0 01-.75-.75zM6 6.75a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h3a.75.75 0 00.75-.75v-3A.75.75 0 009 6.75H6z" clipRule="evenodd" />
       <path d="M18.75 6.75h1.875c.621 0 1.125.504 1.125 1.125V18a1.5 1.5 0 01-3 0V6.75z" />
@@ -53,7 +53,7 @@ export const PecilSquareIcon = ({ className }: React.ComponentProps<'svg'>): JSX
       viewBox="0 0 24 24"
       fill="currentColor"
       className={
-        twMerge(className, 'w-6 h-6')
+        twMerge('w-6 h-6', className)
       }>
       <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
       <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
@@ -67,7 +67,7 @@ export const GroupUsersIcon = ({ className }: React.ComponentProps<'svg'>): JSX.
       viewBox="0 0 24 24"
       fill="currentColor"
       className={
-        twMerge(className, 'w-6 h-6')
+        twMerge('w-6 h-6', className)
       }>
       <path fillRule="evenodd" d="M8.25 6.75a3.75 3.75 0 117.5 0 3.75 3.75 0 01-7.5 0zM15.75 9.75a3 3 0 116 0 3 3 0 01-6 0zM2.25 9.75a3 3 0 116 0 3 3 0 01-6 0zM6.31 15.117A6.745 6.745 0 0112 12a6.745 6.745 0 016.709 7.498.75.75 0 01-.372.568A12.696 12.696 0 0112 21.75c-2.305 0-4.47-.612-6.337-1.684a.75.75 0 01-.372-.568 6.787 6.787 0 011.019-4.38z" clipRule="evenodd" />
       <path d="M5.082 14.254a8.287 8.287 0 00-1.308 5.135 9.687 9.687 0 01-1.764-.44l-.115-.04a.563.563 0 01-.373-.487l-.01-.121a3.75 3.75 0 013.57-4.047zM20.226 19.389a8.287 8.287 0 00-1.308-5.135 3.75 3.75 0 013.57 4.047l-.01.121a.563.563 0 01-.373.486l-.115.04c-.567.2-1.156.349-1.764.441z" />
@@ -108,7 +108,7 @@ export const UserPencilIcon = ({ className }: React.ComponentProps<'svg'>): JSX.
       xmlns="http://www.w3.org/2000/svg"
       fill="currentColor"
       className={
-        twMerge(className, 'w-6 h-6')
+        twMerge('w-6 h-6', className)
       }
       viewBox="0 0 640 512">
       <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H322.8c-3.1-8.8-3.7-18.4-1.4-27.8l15-60.1c2.8-11.3 8.6-21.5 16.8-29.7l40.3-40.3c-32.1-31-75.7-50.1-123.9-50.1H178.3zm435.5-68.3c-15.6-15.6-40.9-15.6-56.6 0l-29.4 29.4 71 71 29.4-29.4c15.6-15.6 15.6-40.9 0-56.6l-14.4-14.4zM375.9 417c-4.1 4.1-7 9.2-8.4 14.9l-15 60.1c-1.4 5.5 .2 11.2 4.2 15.2s9.7 5.6 15.2 4.2l60.1-15c5.6-1.4 10.8-4.3 14.9-8.4L576.1 358.7l-71-71L375.9 417z" />
@@ -122,7 +122,7 @@ export const KeyIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element
       viewBox="0 0 24 24"
       fill="currentColor"
       className={
-        twMerge(className, 'w-6 h-6')
+        twMerge('w-6 h-6', className)
       }>
       <path fillRule="evenodd" d="M15.75 1.5a6.75 6.75 0 00-6.651 7.906c.067.39-.032.717-.221.906l-6.5 6.499a3 3 0 00-.878 2.121v2.818c0 .414.336.75.75.75H6a.75.75 0 00.75-.75v-1.5h1.5A.75.75 0 009 19.5V18h1.5a.75.75 0 00.53-.22l2.658-2.658c.19-.189.517-.288.906-.22A6.75 6.75 0 1015.75 1.5zm0 3a.75.75 0 000 1.5A2.25 2.25 0 0118 8.25a.75.75 0 001.5 0 3.75 3.75 0 00-3.75-3.75z" clipRule="evenodd" />
     </svg>
@@ -360,6 +360,152 @@ export const BoockIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Eleme
       <path d="M3 6l0 13"></path>
       <path d="M12 6l0 13"></path>
       <path d="M21 6l0 13"></path>
+    </svg>
+  )
+}
+
+export const SendCommentIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+  return (
+    <svg xmlns='http://www.w3.org/2000/svg'
+      className={twMerge('h-3 w-3 md:h-4 md:w-4 mt-0.5', className)}
+      viewBox='0 0 24 24'
+      strokeWidth='2'
+      stroke='currentColor'
+      fill='none'
+      strokeLinecap='round'
+      strokeLinejoin='round'>
+      <path stroke='none' d='M0 0h24v24H0z' fill='none'></path>
+      <path d='M10 14l11 -11'></path>
+      <path d='M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5'></path>
+    </svg>
+  )
+}
+
+export const CommentIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg"
+      className={twMerge('w-4 h-4', className)}
+      viewBox="0 0 24 24"
+      strokeWidth="2"
+      stroke="currentColor"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M8 9h8"></path>
+      <path d="M8 13h6"></path>
+      <path d="M18 4a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12z"></path>
+    </svg>
+  )
+}
+
+export const CommentSlashIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg"
+      className={twMerge('w-4 h-4', className)}
+      viewBox="0 0 24 24"
+      strokeWidth="2"
+      stroke="currentColor"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M8 9h1m4 0h3"></path>
+      <path d="M8 13h5"></path>
+      <path d="M8 4h10a3 3 0 0 1 3 3v8c0 .577 -.163 1.116 -.445 1.573m-2.555 1.427h-5l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8c0 -1.085 .576 -2.036 1.439 -2.562"></path>
+      <path d="M3 3l18 18"></path>
+    </svg>
+  )
+}
+
+export const CommentMinusIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg"
+      className={twMerge('w-4 h-4', className)}
+      viewBox="0 0 24 24"
+      strokeWidth="2"
+      stroke="currentColor"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M8 9h8"></path>
+      <path d="M8 13h6"></path>
+      <path d="M11.976 18.614l-3.976 2.386v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8"></path>
+      <path d="M16 19h6"></path>
+    </svg>
+  )
+}
+
+export const CommentPlusIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg"
+      className={twMerge('w-4 h-4', className)}
+      viewBox="0 0 24 24"
+      strokeWidth="2"
+      stroke="currentColor"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M8 9h8"></path>
+      <path d="M8 13h6"></path>
+      <path d="M12.01 18.594l-4.01 2.406v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v5.5"></path>
+      <path d="M16 19h6"></path>
+      <path d="M19 16v6"></path>
+    </svg>
+  )
+}
+
+export const PencilIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg"
+      className={twMerge('w-4 h-4', className)}
+      viewBox="0 0 24 24"
+      strokeWidth="2"
+      stroke="currentColor"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4"></path>
+      <path d="M13.5 6.5l4 4"></path>
+    </svg>
+  )
+}
+
+export const PencilOffIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg"
+      className={twMerge('w-4 h-4', className)}
+      viewBox="0 0 24 24"
+      strokeWidth="2"
+      stroke="currentColor"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M10 10l-6 6v4h4l6 -6m1.99 -1.99l2.504 -2.504a2.828 2.828 0 1 0 -4 -4l-2.5 2.5"></path>
+      <path d="M13.5 6.5l4 4"></path>
+      <path d="M3 3l18 18"></path>
+    </svg>
+  )
+}
+
+export const ArrowDownIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg"
+      className={twMerge('w-4 h-4', className)}
+      viewBox="0 0 24 24"
+      strokeWidth="2"
+      stroke="currentColor"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M12 5l0 14"></path>
+      <path d="M16 15l-4 4"></path>
+      <path d="M8 15l4 4"></path>
     </svg>
   )
 }
