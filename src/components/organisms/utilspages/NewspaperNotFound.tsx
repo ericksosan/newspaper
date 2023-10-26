@@ -10,7 +10,10 @@ export const NewspaperNotFound = (): JSX.Element => {
   useEffect(() => {
     setIsLoading(true)
     getSuggestions()
-      .then(setSuggestions)
+      .then((data) => {
+        setSuggestions(data)
+        setIsLoading(false)
+      })
       .catch(() => { })
       .finally(() => { setIsLoading(false) })
   }, [])
@@ -39,7 +42,10 @@ export const NewspaperNotFound = (): JSX.Element => {
           You may be interested in this news
         </h2>
         <Divider className='w-full mt-4 mb-8' />
-        <News isLoading={isLoading} newspaper={suggestions} />
+        <News
+          isLoading={isLoading}
+          newspaper={suggestions}
+          placerholderQuantity={10} />
       </section>
     </Container>
   )

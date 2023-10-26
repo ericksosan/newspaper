@@ -4,17 +4,18 @@ import { type Comment } from '../../firebase/database/comments'
 import { type NewspaperAllDetails } from '../../firebase/database/newspaper'
 import { deleteReply } from '../../firebase/database/replies'
 import { commentElapsedTime } from '../../utils'
+import { useModal } from '..'
 
 interface UseCardComments {
   isReplying: boolean
   isEditing: boolean
-  hasChildren: boolean
   totalRepliesToDelete: number
-  openModal: string | undefined
   isReplyOpen: boolean
   newspaper: Pick<NewspaperAllDetails, 'id' | 'idWritter'>
   commentElapsedTimeCreating: string
   commentElapsedTimeModification: string
+  isModalOpen: boolean
+  handlerToggleModal: (status: boolean) => void
   onCreateReply: (replyBody: string) => void
   onRemoveComment: () => void
   onEditComment: (body: string) => void
@@ -22,16 +23,14 @@ interface UseCardComments {
   handlerIsReplying: (value: boolean) => void
   handlerIsEditing: (value: boolean) => void
   handlerIsReplyOpen: (value: boolean) => void
-  handleSetOpenModal: (action: string | undefined) => void
 }
 
 export const useCardComments = ({ comment }: { comment: Comment }): UseCardComments => {
   const [isReplying, setIsReplying] = useState<boolean>(false)
   const [isEditing, setIsEditing] = useState<boolean>(false)
-  const [hasChildren, setHasChildren] = useState<boolean>(false)
   const [totalRepliesToDelete, setTotalRepliesToDelete] = useState<number>(0)
-  const [openModal, setOpenModal] = useState<string | undefined>()
   const [isReplyOpen, setIsReplyOpen] = useState(false)
+  const { isModalOpen, handlerToggleModal } = useModal()
 
   const { id, parentId, createdAt, modifiedAt } = comment
 
@@ -45,24 +44,27 @@ export const useCardComments = ({ comment }: { comment: Comment }): UseCardComme
     handlerRemoveComment
   } = useContext(CommentContext)
 
-  const handleSetOpenModal = (action: string | undefined): void => {
-    setOpenModal(action)
-  }
-
   const onCreateReply = (replyBody: string): void => {
     handlerCreateReply(id, replyBody)
     setIsReplying((prev) => !prev)
     setIsReplyOpen(true)
   }
 
-  const deleteChildren = (listChildren: string[]): void => {
-    setHasChildren(true)
-    setTotalRepliesToDelete(listChildren.length)
-    handleSetOpenModal('pop-up')
+  const deleteAllComments = (id: string): void => {
+    const { listChildren } = findChildren(id)
+
+    handlerToggleModal(false)
 
     listChildren.forEach((childrenId) => {
       void deleteReply(childrenId)
     })
+
+    if (parentId) {
+      handlerRemoveReply(id)
+      return
+    }
+
+    handlerRemoveComment(id)
   }
 
   const onRemoveComment = (): void => {
@@ -70,7 +72,9 @@ export const useCardComments = ({ comment }: { comment: Comment }): UseCardComme
 
     if (parentId) {
       if (hasChildren) {
-        deleteChildren(listChildren)
+        handlerToggleModal(true)
+        setTotalRepliesToDelete(listChildren.length)
+
         return
       }
 
@@ -79,7 +83,9 @@ export const useCardComments = ({ comment }: { comment: Comment }): UseCardComme
     }
 
     if (hasChildren) {
-      deleteChildren(listChildren)
+      handlerToggleModal(true)
+      setTotalRepliesToDelete(listChildren.length)
+
       return
     }
 
@@ -99,11 +105,11 @@ export const useCardComments = ({ comment }: { comment: Comment }): UseCardComme
 
   const handleConfirmChanges = (): void => {
     if (parentId) {
-      handlerRemoveReply(id)
+      deleteAllComments(id)
       return
     }
 
-    handlerRemoveComment(id)
+    deleteAllComments(id)
   }
 
   const handlerIsReplying = (value: boolean): void => {
@@ -124,20 +130,19 @@ export const useCardComments = ({ comment }: { comment: Comment }): UseCardComme
   return {
     isReplying,
     isEditing,
-    hasChildren,
     totalRepliesToDelete,
-    openModal,
     isReplyOpen,
     newspaper,
     commentElapsedTimeCreating,
     commentElapsedTimeModification,
+    isModalOpen,
+    handlerToggleModal,
     onCreateReply,
     onRemoveComment,
     onEditComment,
     handleConfirmChanges,
     handlerIsReplying,
     handlerIsEditing,
-    handlerIsReplyOpen,
-    handleSetOpenModal
+    handlerIsReplyOpen
   }
 }

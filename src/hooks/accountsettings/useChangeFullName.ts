@@ -6,38 +6,48 @@ import { useAuth } from '../../firebase/hooks/useAuth'
 import { toastOptions } from '../../utils'
 import { updateFullName } from '../../firebase/database/users'
 import { useNavigate } from 'react-router-dom'
+import { useModal } from '..'
 
 interface UseChangeFullName {
-  openModal: string | undefined
+  isModalOpen: boolean
+  handlerToggleModal: (status: boolean) => void
   handleUpdateFullName: () => void
-  handleSetOpenModal: (action: string | undefined) => void
   onSubmitChangeFullName: SubmitHandler<FormInputChangeFullName>
 }
 
 export const useChangeFullName = (): UseChangeFullName => {
-  const [openModal, setOpenModal] = useState<string | undefined>()
   const [fullName, setFullName] = useState<FormInputChangeFullName>()
   const { formState: { isValid } } = useForm<FormInputChangeFullName>()
-  const { user: { id }, handleChangeFullName } = useAuth()
+  const { user, handleChangeFullName } = useAuth()
   const navigate = useNavigate()
+  const { isModalOpen, handlerToggleModal } = useModal()
 
   const onSubmitChangeFullName: SubmitHandler<FormInputChangeFullName> = (data) => {
     if (isValid) {
       setFullName(data)
-      handleSetOpenModal('pop-up')
+      handlerToggleModal(true)
     }
   }
 
   const handleUpdateFullName = (): void => {
-    if (fullName === undefined) return
+    if (fullName === undefined && fullName !== null) return
+
+    const { firstname, lastname } = fullName
+
+    if (`${firstname} ${lastname}` === user?.fullname) {
+      toast.success('Your full name has been successfully changed.', toastOptions)
+      handlerToggleModal(false)
+      navigate('/', { replace: true })
+      return
+    }
 
     void toast.promise(
-      updateFullName(id, fullName),
+      updateFullName(user.id, fullName),
       {
         loading: 'Changing full name...',
         success: (_data) => {
           handleChangeFullName(fullName)
-          handleSetOpenModal(undefined)
+          handlerToggleModal(false)
           navigate('/', { replace: true })
           return 'Your full name has been successfully changed.'
         },
@@ -47,13 +57,9 @@ export const useChangeFullName = (): UseChangeFullName => {
     )
   }
 
-  const handleSetOpenModal = (action: string | undefined): void => {
-    setOpenModal(action)
-  }
-
   return {
-    openModal,
-    handleSetOpenModal,
+    isModalOpen,
+    handlerToggleModal,
     handleUpdateFullName,
     onSubmitChangeFullName
   }

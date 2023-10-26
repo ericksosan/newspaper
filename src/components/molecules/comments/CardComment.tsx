@@ -19,30 +19,30 @@ export const CardComment: React.FC<CommentProps> = memo(({ comment, replies, use
   const {
     newspaper,
     isEditing,
-    openModal,
     isReplying,
-    hasChildren,
     isReplyOpen,
+    isModalOpen,
     totalRepliesToDelete,
     commentElapsedTimeCreating,
     commentElapsedTimeModification,
+    handlerToggleModal,
     onCreateReply,
     onRemoveComment,
     onEditComment,
     handleConfirmChanges,
     handlerIsReplying,
     handlerIsEditing,
-    handlerIsReplyOpen,
-    handleSetOpenModal
+    handlerIsReplyOpen
   } = useCardComments({ comment })
 
   return (
-    <div className="pt-4 flex flex-col font-inter px-1.5 border-l-[1px] animate-fade animate-duration-300 animate-ease-linear md:px-4
-    md:border-l-2 border-slate-300 dark:border-slate-700 relative overflow-hidden">
+    <div className="pt-4 flex flex-col font-inter px-1.5 border-l-[1px]
+    animate-fade animate-duration-300 animate-ease-linear md:px-4
+    md:border-l-2 border-slate-300 dark:border-slate-700 overflow-hidden">
 
       <div className='flex gap-2 items-center relative'>
         <div className="border-slate-300 dark:border-slate-700 absolute w-full
-        border-t-[1px] md:border-t-2 -translate-x-full" />
+        border-t-[1px] md:border-t-2 -translate-x-full z-0" />
         <Avatar
           img={userDetails.photoURL ?? ''}
           alt={`Profile picture of  ${userDetails.fullname ?? ''}`}
@@ -62,7 +62,7 @@ export const CardComment: React.FC<CommentProps> = memo(({ comment, replies, use
           <time className="text-gray-600 dark:text-gray-400 font-normal text-[10px] font-inter">
             {
               modifiedAt
-                ? `${commentElapsedTimeCreating} · Edited ${commentElapsedTimeModification}`
+                ? `${commentElapsedTimeCreating} • Edited ${commentElapsedTimeModification}`
                 : commentElapsedTimeCreating
             }
           </time>
@@ -112,15 +112,13 @@ export const CardComment: React.FC<CommentProps> = memo(({ comment, replies, use
       }
 
       {
-        hasChildren &&
+        isModalOpen &&
         <ModalConfirmChanges
-          handleSetOpenModal={handleSetOpenModal}
-          openModal={openModal}
+          handlerCloseModal={handlerToggleModal}
           title={`Are you sure you want to delete this comment, you have a total of (${totalRepliesToDelete}) replies.`}
           handleConfirmChanges={handleConfirmChanges}
         />
       }
-
     </div >
   )
 })

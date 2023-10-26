@@ -23,7 +23,7 @@ export const Comment = (): JSX.Element => {
 
   return (
     <section>
-      <div className='flex flex-col divide-y-[1px] md:divide-y-2 dark:divide-slate-700'>
+      <div className='flex flex-col divide-y-[1px] md:divide-y-2 dark:divide-slate-700 relative'>
         {isCommentLoading && <SkeletonCardComment />}
 
         {
@@ -41,7 +41,8 @@ export const Comment = (): JSX.Element => {
         }
 
         {
-          nextCommentsLoading && Array(5).fill('').map((_item, i) => (<SkeletonCardComment key={i} />))
+          nextCommentsLoading &&
+          Array(5).fill('').map((_item, i) => (<SkeletonCardComment key={i} />))
         }
 
       </div>

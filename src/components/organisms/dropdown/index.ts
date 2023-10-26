@@ -1,2 +1,1 @@
-export * from './ShareOnDropdown';
-export * from './UserDropdown';
+export * from './UserDropdown'

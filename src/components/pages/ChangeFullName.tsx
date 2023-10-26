@@ -10,8 +10,8 @@ const ChangeFullName = (): JSX.Element => {
   const methods = useForm<FormInputChangeFullName>()
   const { handleSubmit } = methods
   const {
-    openModal,
-    handleSetOpenModal,
+    isModalOpen,
+    handlerToggleModal,
     onSubmitChangeFullName,
     handleUpdateFullName
   } = useChangeFullName()
@@ -42,11 +42,14 @@ const ChangeFullName = (): JSX.Element => {
             Save Changes
           </Button>
         </form>
-        <ModalConfirmChanges
-          handleConfirmChanges={handleUpdateFullName}
-          handleSetOpenModal={handleSetOpenModal}
-          openModal={openModal}
-          title='Are you sure you want to change your full name?' />
+
+        {
+          isModalOpen &&
+          <ModalConfirmChanges
+            handlerCloseModal={handlerToggleModal}
+            handleConfirmChanges={handleUpdateFullName}
+            title='Are you sure you want to change your full name?' />
+        }
       </FormProvider>
     </ContainerAccountSettings>
   )

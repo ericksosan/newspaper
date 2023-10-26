@@ -203,7 +203,7 @@ export const ExclamationMarkIcon = ({ className }: React.ComponentProps<'svg'>):
   return (
     <svg
       className={twMerge(
-        'mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200',
+        'w-12 h-12',
         className
       )}
       aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -506,6 +506,91 @@ export const ArrowDownIcon = ({ className }: React.ComponentProps<'svg'>): JSX.E
       <path d="M12 5l0 14"></path>
       <path d="M16 15l-4 4"></path>
       <path d="M8 15l4 4"></path>
+    </svg>
+  )
+}
+
+export const PreviousIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg"
+      className={twMerge('w-6 h-6', className)}
+      viewBox="0 0 24 24"
+      strokeWidth="2"
+      stroke="currentColor"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M15 6l-6 6l6 6"></path>
+    </svg>
+  )
+}
+
+export const NextIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg"
+      className={twMerge('w-4 h-4', className)}
+      viewBox="0 0 24 24"
+      strokeWidth="2"
+      stroke="currentColor"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M9 6l6 6l-6 6"></path>
+    </svg>
+  )
+}
+
+export const XCloseIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg"
+      className={twMerge('w-4 h-4', className)}
+      viewBox="0 0 24 24"
+      strokeWidth={2}
+      stroke="currentColor"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M18 6l-12 12"></path>
+      <path d="M6 6l12 12"></path>
+    </svg>
+  )
+}
+
+export const LinkIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      className={twMerge('w-4 h-4', className)}
+      strokeWidth={2}
+      stroke="currentColor"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M9 15l6 -6"></path>
+      <path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464"></path>
+      <path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463"></path>
+    </svg>
+  )
+}
+
+export const ShareIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Element => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      className={twMerge('w-4 h-4', className)}
+      viewBox="0 0 24 24"
+      strokeWidth={2}
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+      <path d="M8 9h-1a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-8a2 2 0 0 0 -2 -2h-1"></path>
+      <path d="M12 14v-11"></path>
+      <path d="M9 6l3 -3l3 3"></path>
     </svg>
   )
 }
