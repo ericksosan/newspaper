@@ -50,3 +50,16 @@ export interface UserOptionsProps {
 export interface Pages {
   page: number
 }
+
+export interface FormInputResetPassword {
+  email: string
+}
+
+export interface UserOptionsProps {
+  children?: React.ReactNode
+}
+
+export interface Pages {
+  page: number
+}
+

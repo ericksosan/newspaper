@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './firebase/contexts/AuthProvider'
 import { ProtectedRoutes, AdminRoutes, AuthRoutes, EditorRoutes } from './routes'
+import { ProtectedRoutes, AdminRoutes, AuthRoutes, EditorRoutes } from './routes'
 import { Loading } from './components/molecules'
 import { ManageNewspaperProvider } from './contexts'
 
@@ -66,13 +67,18 @@ export const App: React.FC = () => {
               </Suspense>} />
 
             <Route path="write/news" element={
-              <Suspense fallback={<Loading />}>
-                <CreateNews />
-              </Suspense>} />
+              <Route path="write/news" element={
+                <Suspense fallback={<Loading />}>
+                  <CreateNews />
+                </Suspense>} />
           </Route>
+        </Route>
 
-          {/* Admin */}
-          <Route path="/admin" element={<AdminRoutes />}>
+        {/* Admin */}
+        <Route path="/admin" element={<AdminRoutes />}>
+          <Route path="manage/users" element={
+            {/* Admin */ }
+            < Route path="/admin" element={<AdminRoutes />}>
             <Route path="manage/users" element={
               <Suspense fallback={<Loading />}>
                 <ManageUsers />
@@ -89,6 +95,11 @@ export const App: React.FC = () => {
           <Route path="signup" element={
             <Suspense fallback={<Loading />}>
               <Signup />
+            </Suspense>} />
+
+          <Route path="reset-password" element={
+            <Suspense fallback={<Loading />}>
+              <ResetPassword />
             </Suspense>} />
 
           <Route path="reset-password" element={
