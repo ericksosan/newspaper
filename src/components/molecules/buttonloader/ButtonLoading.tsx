@@ -25,7 +25,15 @@ export const ButtonLoading: React.FC<ButtonLoadingProps> = ({ children, isLoadin
         )
       }
     >
-      {isLoading ? <Spinner className={color === 'white' ? 'border-t-azure-radiance-700' : 'border-t-white'} /> : children}
+      {
+        isLoading
+          ? <Spinner className={
+            color === 'white'
+              ? 'text-slate-900 dark:text-slate-900'
+              : 'text-white dark:text-white'
+          } />
+          : children
+      }
     </Button>
   )
 }

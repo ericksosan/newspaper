@@ -1,45 +1,55 @@
-import { useState, useEffect } from 'react'
-import { Pagination } from 'flowbite-react'
+import { useState, useEffect, useMemo } from 'react'
 import { getGreeting } from '../../utils'
 import { useAuth } from '../../firebase/hooks/useAuth'
-import { Loading, News } from '../molecules'
+import { News, Pagination } from '../molecules'
 import { Container, Title } from '../atoms'
-import { type DataNewspaper, getAllNewspaper } from '../../firebase/database/newspaper'
+import { getAllNewspaper, type NewspaperAllDetails } from '../../firebase/database/newspaper'
 
 const Home = (): JSX.Element => {
-  const [dataNewspaper, setDataNewspaper] = useState({ allNewspaper: [], totalNewspaper: 1 } as DataNewspaper)
-  const [isLoading, setIsLoading] = useState<boolean>(true)
+  const [newspaper, setNewspaper] = useState<NewspaperAllDetails[]>([])
+  const [isLoading, setIsLoading] = useState<boolean>(false)
   const [currentPage, setCurrentPage] = useState(1)
   const { user: { fullname } } = useAuth()
-  const { allNewspaper, totalNewspaper } = dataNewspaper
 
   useEffect(() => {
+    window.scrollTo({ behavior: 'smooth', top: 0 })
+
+    setIsLoading(true)
+
     getAllNewspaper(currentPage)
-      .then(res => { setDataNewspaper(res) })
+      .then((data) => {
+        setNewspaper(data)
+        setIsLoading(false)
+      })
       .catch(_err => { })
       .finally(() => { setIsLoading(false) })
   }, [currentPage])
 
-  const onPageChange = (page: number): void => {
-    setCurrentPage(page)
+  const handlerCurrentPage = (current: number): void => {
+    setCurrentPage(current)
   }
 
-  if (isLoading) return <Loading />
+  const greeting = useMemo(() => (
+    <Title className='text-xl md:text-4xl pb-4 line-clamp-2 md:line-clamp-none'>
+      {getGreeting(fullname ?? '')}
+    </Title>
+  ), [fullname])
 
   return (
     <Container>
-      <Title className='text-xl md:text-4xl pb-4 line-clamp-2 md:line-clamp-none'>
-        {getGreeting(fullname ?? '')}
-      </Title>
-      <News isLoading={isLoading} newspaper={allNewspaper} />
+
+      {greeting}
+
+      <News
+        isLoading={isLoading}
+        newspaper={newspaper}
+        placerholderQuantity={10} />
+
       <Pagination
-        showIcons
         currentPage={currentPage}
-        layout="navigation"
-        onPageChange={onPageChange}
-        totalPages={totalNewspaper === 0 ? 1 : totalNewspaper}
-        className='grid place-items-center my-4 font-inter'
+        handlerCurrentPage={handlerCurrentPage}
       />
+
     </Container>
   )
 }

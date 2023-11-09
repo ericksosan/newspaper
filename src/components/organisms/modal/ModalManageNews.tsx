@@ -1,9 +1,10 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { Modal } from 'flowbite-react'
 import { FormMarkdownEditor, ModalConfirmChanges } from '..'
 import { ManageNewspaperContext } from '../../../contexts'
 import { Button } from '../../atoms'
 import { SaveIcon, TrashIcon } from '../../atoms/icon'
+import { useModal } from '../../../hooks'
 
 interface ModalProps {
   openModal: string | undefined
@@ -12,7 +13,8 @@ interface ModalProps {
 }
 
 export const ModalManageNews: React.FC<ModalProps> = ({ openModal, handleSetOpenModal, idNewspaper }) => {
-  const [openModalConfirm, setOpenModalConfirm] = useState<string | undefined>()
+  const { isModalOpen, handlerToggleModal } = useModal()
+
   const {
     register,
     imageFileStatus,
@@ -20,10 +22,6 @@ export const ModalManageNews: React.FC<ModalProps> = ({ openModal, handleSetOpen
     handleUpdatePostNewspaper,
     handleDeletePostNewspaper
   } = useContext(ManageNewspaperContext)
-
-  const handleSetOpenModalConfirm = (action: string | undefined): void => {
-    setOpenModalConfirm(action)
-  }
 
   const handleUpdateNewspaper = (): void => {
     handleUpdatePostNewspaper(idNewspaper)
@@ -56,26 +54,28 @@ export const ModalManageNews: React.FC<ModalProps> = ({ openModal, handleSetOpen
           <Button
             colors='red'
             type="button"
-            className='flex gap-1 items-center font-medium pr-2 p-2 md:px-2 md:pr-3 md:text-base text-xs'
-            onClick={() => { handleSetOpenModalConfirm('pop-up') }}>
+            className='px-3 py-1.5 md:px-5 md:py-2.5 w-auto flex items-center gap-1'
+            onClick={() => { handlerToggleModal(true) }}>
             <TrashIcon />
             Delete news
           </Button>
           <Button
             colors='blue'
             type="button"
-            className='w-auto flex gap-1 items-center font-medium pr-2 p-2 md:px-2 md:pr-3 md:text-base text-xs'
+            className='px-3 py-1.5 md:px-5 md:py-2.5 w-auto flex items-center gap-1'
             onClick={handleUpdateNewspaper}>
             <SaveIcon />
             Save Changes
           </Button>
         </div>
       </Modal.Footer>
-      <ModalConfirmChanges
-        openModal={openModalConfirm}
-        handleSetOpenModal={handleSetOpenModalConfirm}
-        handleConfirmChanges={handleDeleteNewspaper}
-        title='Are you sure you want to delete this newspaper?' />
+      {
+        isModalOpen &&
+        <ModalConfirmChanges
+          handlerCloseModal={handlerToggleModal}
+          handleConfirmChanges={handleDeleteNewspaper}
+          title='Are you sure you want to delete this newspaper?' />
+      }
     </Modal>
   )
 }

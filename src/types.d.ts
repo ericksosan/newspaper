@@ -51,3 +51,8 @@ export interface FormInputResetPassword {
 export interface UserOptionsProps {
   children?: React.ReactNode
 }
+
+export interface Pages {
+  page: number
+}
+

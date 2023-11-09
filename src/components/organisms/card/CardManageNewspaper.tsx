@@ -24,7 +24,7 @@ export const CardManageNewspaper: React.FC<NewspaperAllDetails> = ({ cover, crea
     <figure className="shadow-sm font-inter h-auto w-full flex flex-col rounded-md
       overflow-hidden border border-slate-300 dark:bg-slate-800 dark:border-slate-700
     dark:text-gray-200">
-      <div className="border-none overflow-hidden h-52  rounded-b-xl relative">
+      <div className="border-none overflow-hidden rounded-b-xl relative aspect-video">
         <div className="flex items-start flex-col justify-between absolute h-full
           w-full bg-gradient-to-b from-slate-900 z-10">
           <div className="flex items-start justify-between w-full p-4">
@@ -59,7 +59,7 @@ export const CardManageNewspaper: React.FC<NewspaperAllDetails> = ({ cover, crea
           onLoad={() => { setImgIsLoading(false) }}
           className={
             twMerge(
-              'object-cover h-full w-full aspect-[16/9]',
+              'object-cover h-full w-full aspect-auto',
               !imgIsLoading ? 'flex' : 'hidden'
             )
           }
@@ -67,7 +67,7 @@ export const CardManageNewspaper: React.FC<NewspaperAllDetails> = ({ cover, crea
         />
       </div>
       <div className="p-4 w-full flex flex-col gap-3">
-        <h5 className="font-medium line-clamp-2">{title}</h5>
+        <h2 className="font-medium line-clamp-2">{title}</h2>
         <LinkRedirect
           to='NEWS'
           pathOptional={id}

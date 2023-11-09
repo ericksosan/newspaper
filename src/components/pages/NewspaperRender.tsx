@@ -12,7 +12,7 @@ const NewspaperRender = (): JSX.Element => {
 
   return (
     <section className='w-full min-h-screen py-10 flex flex-col px-5'>
-      <article className='mx-auto max-w-4xl min-h-screen animate-fade animate-duration-300 animate-ease-linear'>
+      <article className='mx-auto max-w-4xl w-full min-h-screen animate-fade animate-duration-300 animate-ease-linear'>
         <CardNewspaperDetails {...newspaper} />
         <RenderMarkdown {...dataRenderMarkdown} />
         <CommentProvider newspaper={newspaper}>

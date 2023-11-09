@@ -6,25 +6,26 @@ import { updateUsername } from '../../firebase/database/users'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { toastOptions } from '../../utils'
+import { useModal } from '..'
 
 interface UseChangeUsername {
-  openModal: string | undefined
+  isModalOpen: boolean
   onSubmitChangeUsername: SubmitHandler<FormInputChangeUsername>
   handleUpdateUsername: () => Promise<void>
-  handleSetOpenModal: (action: string | undefined) => void
+  handlerToggleModal: (value: boolean) => void
 }
 
 export const useChangeUsername = (): UseChangeUsername => {
-  const [openModal, setOpenModal] = useState<string | undefined>()
   const [username, setUsername] = useState<string>('')
   const { formState: { isValid } } = useForm<FormInputChangeUsername>()
   const { user, handleChangeUsername } = useAuth()
   const navigate = useNavigate()
+  const { isModalOpen, handlerToggleModal } = useModal()
 
   const onSubmitChangeUsername: SubmitHandler<FormInputChangeUsername> = (data) => {
     if (isValid) {
       setUsername(data.newUsername)
-      handleSetOpenModal('pop-up')
+      handlerToggleModal(true)
     }
   }
 
@@ -35,7 +36,7 @@ export const useChangeUsername = (): UseChangeUsername => {
         loading: 'Changing username...',
         success: (_data) => {
           handleChangeUsername(username)
-          handleSetOpenModal(undefined)
+          handlerToggleModal(false)
           navigate('/', { replace: true })
           return 'Your username has been successfully changed.'
         },
@@ -45,14 +46,10 @@ export const useChangeUsername = (): UseChangeUsername => {
     )
   }
 
-  const handleSetOpenModal = (action: string | undefined): void => {
-    setOpenModal(action)
-  }
-
   return {
-    openModal,
+    isModalOpen,
+    handlerToggleModal,
     onSubmitChangeUsername,
-    handleUpdateUsername,
-    handleSetOpenModal
+    handleUpdateUsername
   }
 }

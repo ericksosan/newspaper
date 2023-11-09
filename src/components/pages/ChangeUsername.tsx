@@ -12,8 +12,8 @@ const ChangeUsername = (): JSX.Element => {
   const methods = useForm<FormInputChangeUsername>()
   const { handleSubmit } = methods
   const {
-    openModal,
-    handleSetOpenModal,
+    isModalOpen,
+    handlerToggleModal,
     handleUpdateUsername,
     onSubmitChangeUsername
   } = useChangeUsername()
@@ -38,11 +38,13 @@ const ChangeUsername = (): JSX.Element => {
             Change Username
           </Button>
         </form>
-        <ModalConfirmChanges
-          handleConfirmChanges={() => { void handleUpdateUsername() }}
-          handleSetOpenModal={handleSetOpenModal}
-          openModal={openModal}
-          title='Are you sure you want to change your username?' />
+        {
+          isModalOpen &&
+          <ModalConfirmChanges
+            handlerCloseModal={handlerToggleModal}
+            handleConfirmChanges={() => { void handleUpdateUsername() }}
+            title='Are you sure you want to change your username?' />
+        }
       </FormProvider>
     </ContainerAccountSettings>
   )

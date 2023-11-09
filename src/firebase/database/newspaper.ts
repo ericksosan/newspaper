@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc, orderBy, where, limit, query } from 'firebase/firestore'
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc, where, limit, query } from 'firebase/firestore'
 import { calculateReadingTime, createTextSummary } from '../utils'
 import type { FormMarkdownEditor } from '../../types'
 import { db } from '../firebase.config'
@@ -25,12 +25,9 @@ export interface NewspaperAllDetails {
   timestamp: number
 }
 
-// --------------- Pagination --------------- //
+const limitQuery = 20
 
-export interface DataNewspaper {
-  totalNewspaper: number
-  allNewspaper: NewspaperAllDetails[]
-}
+// --------------- Pagination --------------- //
 
 /**
  * The function `getAllNewspaper` retrieves a paginated list of newspaper documents
@@ -42,24 +39,25 @@ export interface DataNewspaper {
  * `allNewspaper` and `totalNewspaper`. `allNewspaper` is an array of objects of
  * type `NewspaperAllDetails`, and `totalNewspaper` is a number.
  */
-export const getAllNewspaper = async (currentPage: number = 1): Promise<DataNewspaper> => {
-  const orderQueryBy = 'timestamp'
-  const limitQuery = 20
-
+export const getAllNewspaper = async (currentPage: number = 1): Promise<NewspaperAllDetails[]> => {
   const currentPosition = (limitQuery * currentPage)
   const lastPosition = ((limitQuery) * ((currentPage - 1)))
 
-  const preQuery = query(collection(db, 'newspaper'))
-  const preDocRef = await getDocs(preQuery)
-  const queryRef = query(collection(db, 'newspaper'), orderBy(orderQueryBy, 'desc'), limit(currentPosition))
+  const queryRef = query(collection(db, 'newspaper'), limit(currentPosition))
   const docRef = (await getDocs(queryRef))
 
-  const totalNewspaper = Math.ceil(preDocRef.size / limitQuery)
-  const allNewspaper = docRef.docs.slice(lastPosition, currentPosition).map((doc) => {
+  return docRef.docs.slice(lastPosition, currentPosition).map((doc) => {
     return doc.data() as NewspaperAllDetails
-  })
+  }).sort((a, b) => (b.timestamp - a.timestamp))
+}
 
-  return { allNewspaper, totalNewspaper }
+export const getTotalPages = async (): Promise<number> => {
+  const queryRef = query(collection(db, 'newspaper'))
+  const size = (await getDocs(queryRef)).size
+
+  const total = Math.ceil(size / limitQuery)
+
+  return total
 }
 
 // --------------- Get newspaper by one --------------- //
@@ -102,7 +100,7 @@ export const getNewspaperByWritter = async (id: string): Promise<NewspaperAllDet
 
 // --------------- Get newspaper suggestions --------------- //
 
-export const getSuggestions = async (): Promise<NewspaperAllDetails[]> => {
+export const getSuggestions = async (quantitySuggestions: number = 8): Promise<NewspaperAllDetails[]> => {
   const suggestions: NewspaperAllDetails[] = []
   const prevSuggestions: number[] = []
 
@@ -122,7 +120,7 @@ export const getSuggestions = async (): Promise<NewspaperAllDetails[]> => {
     }
 
     generatedSuggestions = generateSuggestions()
-  } while (suggestions.length !== 8)
+  } while (suggestions.length !== quantitySuggestions)
 
   return suggestions
 }
