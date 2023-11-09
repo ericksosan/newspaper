@@ -18,9 +18,11 @@ export const Button: React.FC<ButtonProps> = ({ children, className, type, disab
       disabled={disabled}
       className={
         twMerge(
-          `rounded-md transition-colors duration-300 ease-in-out
+          `rounded-full transition-colors duration-300 ease-in-out
           disabled:pointer-events-none font-normal font-inter`,
 
+          colors === 'white' && `bg-white text-slate-900 hover:bg-gray-100
+          border border-slate-300 disabled:opacity-50 px-5 py-2`,
           colors === 'white' && `bg-white text-slate-900 hover:bg-gray-100
           border border-slate-300 disabled:opacity-50 px-5 py-2`,
 

@@ -1,7 +1,7 @@
 import { doc, setDoc, getDoc, updateDoc, getDocs, collection, query, where } from 'firebase/firestore'
 import type { DocumentData } from 'firebase/firestore'
 import { db } from '../firebase.config'
-import { updateNewspaperWritter } from './newspaper'
+import { updateNewspaperWritter, updateProfilePictureWritter } from './newspaper'
 
 export type UserRoles = 'reader' | 'editor' | 'admin'
 export interface UserDetails {
@@ -118,4 +118,12 @@ export const updateFullName = async (id: string, data: { firstname: string, last
   const docRef = doc(db, 'users', id)
   await updateDoc(docRef, { ...data, fullname })
   await updateNewspaperWritter(id, fullname)
+}
+
+export const updateProfilePicture = async (id: string, photoURL: string | null): Promise<void> => {
+  const docRef = doc(db, 'users', id)
+
+  await updateDoc(docRef, { photoURL })
+
+  await updateProfilePictureWritter(id, photoURL)
 }

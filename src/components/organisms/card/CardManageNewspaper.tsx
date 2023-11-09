@@ -1,29 +1,18 @@
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { type NewspaperAllDetails } from '../../../firebase/database/newspaper'
 import { LinkRedirect, SkeletonImage } from '../../atoms'
 import { ModalManageNews } from '..'
-import { twMerge } from 'tailwind-merge'
 import { ArrowTopRightSquareIcon, ToothIcon, UserCircleIcon } from '../../atoms/icon'
-import { ManageNewspaperContext } from '../../../contexts'
+import { useModal } from '../../../hooks'
 
 export const CardManageNewspaper: React.FC<NewspaperAllDetails> = ({ cover, createdAt, id, nameWritter, title }) => {
-  const [openModal, setOpenModal] = useState<string | undefined>()
   const [imgIsLoading, setImgIsLoading] = useState<boolean>(true)
-  const { handleFillField } = useContext(ManageNewspaperContext)
-
-  const handleSetOpenModal = (action: string | undefined): void => {
-    setOpenModal(action)
-  }
-
-  const handleManageNewspaper = (): void => {
-    setOpenModal('default')
-    handleFillField(id)
-  }
+  const { isModalOpen, handlerToggleModal } = useModal()
 
   return (
     <figure className="shadow-sm font-inter h-auto w-full flex flex-col rounded-md
       overflow-hidden border border-slate-300 dark:bg-slate-800 dark:border-slate-700
-    dark:text-gray-200">
+      dark:text-gray-200 animate-fade duration-300 ease-in">
       <div className="border-none overflow-hidden rounded-b-xl relative aspect-video">
         <div className="flex items-start flex-col justify-between absolute h-full
           w-full bg-gradient-to-b from-slate-900 z-10">
@@ -36,7 +25,7 @@ export const CardManageNewspaper: React.FC<NewspaperAllDetails> = ({ cover, crea
             <button
               type="button"
               className='hover:hover:opacity-80 top-0 text-white'
-              onClick={handleManageNewspaper}>
+              onClick={() => { handlerToggleModal(true) }}>
               <ToothIcon className="w-5 h-5 fill-white" />
             </button>
           </div>
@@ -48,21 +37,11 @@ export const CardManageNewspaper: React.FC<NewspaperAllDetails> = ({ cover, crea
             </span>
           </div>
         </div>
-        <SkeletonImage className={
-          twMerge(
-            'w-full h-full',
-            imgIsLoading ? 'flex' : 'hidden'
-          )
-        } />
+        <SkeletonImage className={`w-full h-full ${imgIsLoading ? 'flex' : 'hidden'}`} />
         <img
           src={cover}
           onLoad={() => { setImgIsLoading(false) }}
-          className={
-            twMerge(
-              'object-cover h-full w-full aspect-auto',
-              !imgIsLoading ? 'flex' : 'hidden'
-            )
-          }
+          className={`object-cover h-full w-full aspect-auto ${!imgIsLoading ? 'flex' : 'hidden'}`}
           alt={title}
         />
       </div>
@@ -71,16 +50,16 @@ export const CardManageNewspaper: React.FC<NewspaperAllDetails> = ({ cover, crea
         <LinkRedirect
           to='NEWS'
           pathOptional={id}
-          className='hover:opacity-80'
-        >
+          className='hover:opacity-80' >
           <ArrowTopRightSquareIcon className="w-5 h-5" />
         </LinkRedirect>
       </div>
       {
-        openModal === 'default' && <ModalManageNews
-          openModal={openModal}
-          handleSetOpenModal={handleSetOpenModal}
-          idNewspaper={id}
+        isModalOpen &&
+        <ModalManageNews
+          newspaperId={id}
+          onOpen={isModalOpen}
+          handleSetOpenModal={handlerToggleModal}
         />
       }
     </figure>

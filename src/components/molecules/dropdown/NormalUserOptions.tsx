@@ -2,7 +2,7 @@ import { UserDropdownDivideBySection } from '.'
 import { useAuth } from '../../../firebase/hooks/useAuth'
 import type { UserOptionsProps } from '../../../types'
 import { DropdownItem } from '../../atoms'
-import { KeyIcon, UserPencilIcon, WriteIcon } from '../../atoms/icon'
+import { KeyIcon, UserPencilIcon, WriteIcon, CameraIcon } from '../../atoms/icon'
 
 export const NormalUserOptions: React.FC<UserOptionsProps> = ({ children }): JSX.Element => {
   const { user: { providerId } } = useAuth()
@@ -28,6 +28,11 @@ export const NormalUserOptions: React.FC<UserOptionsProps> = ({ children }): JSX
           Change Password
         </DropdownItem>
       }
+
+      <DropdownItem to='CHANGE_PROFILE_PICTURE'>
+        <CameraIcon />
+        Change Profile Picture
+      </DropdownItem>
 
       <DropdownItem to='CHANGE_FULLNAME'>
         <WriteIcon />

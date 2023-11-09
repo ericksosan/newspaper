@@ -12,7 +12,7 @@ const ResetPassword = (): JSX.Element => {
   const { handleSubmit } = methods
 
   return (
-    <section className="flex flex-col font-montserrat">
+    <section className="flex flex-col font-montserrat animate-fade duration-300 ease-in">
       <Navbar className='fixed top-0 bg-white dark:bg-slate-900' />
 
       <main className="flex items-center justify-center min-h-screen w-full p-10

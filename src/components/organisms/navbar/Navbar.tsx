@@ -1,8 +1,8 @@
-import { twMerge } from 'tailwind-merge'
 import { useAuth } from '../../../firebase/hooks/useAuth'
 import { Nav, LinkRedirect } from '../../atoms'
 import { DarkThemeToggle } from '../../molecules'
-import { UserDropdown } from '..'
+import { DropdownMenu } from '..'
+import { DropdownMenuProvider } from '../../../contexts'
 
 export const Navbar = ({ className }: { className?: string }): JSX.Element => {
   const { isLogout } = useAuth()
@@ -12,16 +12,18 @@ export const Navbar = ({ className }: { className?: string }): JSX.Element => {
       <LinkRedirect
         to='HOME'
         hoverColor={false}
-        className={twMerge(
-          'text-xl text-azure-radiance-700',
-          !isLogout && 'pointer-events-none'
-        )}
-      >
+        className={`text-xl text-azure-radiance-700 ${!isLogout ? 'pointer-events-none' : ''}`} >
         Newspaper
       </LinkRedirect>
       <div className="flex items-center justify-between gap-5">
         <DarkThemeToggle />
-        {isLogout && <UserDropdown />}
+
+        {
+          isLogout &&
+          <DropdownMenuProvider>
+            <DropdownMenu />
+          </DropdownMenuProvider>
+        }
       </div>
     </Nav>
   )

@@ -1,68 +1,55 @@
 import { useState } from 'react'
-import { useForm, useWatch } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import type { UseFormHandleSubmit, UseFormRegister, UseFormReset, UseFormSetValue } from 'react-hook-form'
-import type { FormMarkdownEditor, ImageFileStatus } from '../../types'
-import { uploadImageCover } from '../../firebase/storage/uploadImageCover'
-
+import type { FormMarkdownEditor } from '../../types'
+import toast from 'react-hot-toast'
+import { toastOptions } from '../../utils/toastOptions'
 interface UseMarkdownEditorForm {
   message: string
-  changeModeCover: boolean
-  selectFile: File | undefined
-  imageFileStatus: ImageFileStatus
+  fileThumbnail: File | null
   reset: UseFormReset<FormMarkdownEditor>
-  handleChangeModeCoverFileURL: () => void
-  validateFormMarkdownEditor: () => boolean
+  validateFormMarkdownEditor: (data: FormMarkdownEditor) => boolean
   register: UseFormRegister<FormMarkdownEditor>
   setValue: UseFormSetValue<FormMarkdownEditor>
   handleSubmit: UseFormHandleSubmit<FormMarkdownEditor>
   handleFileCoverChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  handleDragOver: (e: React.DragEvent<HTMLDivElement>) => void
+  handleDropThumbnail: (e: React.DragEvent<HTMLDivElement>) => void
+  handleDragLeave: (e: React.DragEvent<HTMLDivElement>) => void
+  isThumbnailOver: boolean
 }
 
 export const useMarkdownEditorForm = (): UseMarkdownEditorForm => {
   const [message, setMessage] = useState<string>('')
-  const [imageFileStatus, setImageFileStatus] = useState<ImageFileStatus>({ messageFile: '', isLoadingUpload: false })
-  const [selectFile, setSelectFile] = useState<File | undefined>()
-  const [changeModeCover, setChangeModeCover] = useState<boolean>(false)
-  const { register, handleSubmit, control, setValue, reset } = useForm<FormMarkdownEditor>()
-  const { cover, title, content } = useWatch<FormMarkdownEditor>({ control })
+  const { register, handleSubmit, setValue, reset } = useForm<FormMarkdownEditor>()
+  const [fileThumbnail, setFileThumbnail] = useState<File | null>(null)
+  const [isThumbnailOver, setIsThumbnailOver] = useState<boolean>(false)
 
-  const URLRegex = {
-    general: /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/i,
-    secure: /^(https:\/\/|ftp:\/\/)/i,
-    imageExtension: /\.(jpeg|jpg|webp|png)(\?.*)?$/i,
-    specificDomain: /newspaper-c0ba0\.appspot\.com/i
-  }
-
-  const validateFormMarkdownEditor = (): boolean => {
-    if ((cover === '' || cover === undefined)) {
-      setMessage('You must choose URL or Image file mode!')
+  const validateFormMarkdownEditor = ({ cover, title, content }: FormMarkdownEditor): boolean => {
+    if (!fileThumbnail && !cover) {
+      setMessage('You must choose the thumbnail!')
       return false
     }
 
-    if (cover !== '' && !URLRegex.specificDomain.test(cover ?? '')) {
-      if (cover !== '' && !URLRegex.secure.test(cover ?? '')) {
-        setMessage('The URL is not secure!')
+    if (fileThumbnail) {
+      if (!(/\/(jpeg|jpg|png)$/i.test(fileThumbnail.type))) {
+        setMessage('Thumbnail format not allowed. Only .jpeg, .jpg or .png are allowed')
         return false
       }
 
-      if (cover !== '' && !URLRegex.general.test(cover ?? '')) {
-        setMessage('The URL is not valid.')
-        return false
-      }
-
-      if (cover !== '' && !URLRegex.imageExtension.test(cover)) {
-        setMessage('The URL does not contain an allowed image extension (jpeg | jpg | webp | png)')
+      if (fileThumbnail.size >= (2000 * 1000)) {
+        setMessage('The file is too large. Thumbnail must be less than 2MB')
         return false
       }
     }
 
-    if (typeof title === 'undefined' || typeof content === 'undefined') {
-      setMessage('Title and content are required fields!')
+    if (title === '') {
+      setMessage('The title cannot be empty!')
       return false
     }
 
-    if (title === '' || content === '') {
-      setMessage('The title and content cannot be empty!')
+    if (content === '') {
+      setMessage('The content cannot be empty!')
       return false
     }
 
@@ -70,45 +57,40 @@ export const useMarkdownEditorForm = (): UseMarkdownEditorForm => {
     return true
   }
 
-  const handleChangeModeCoverFileURL = (): void => {
-    setChangeModeCover(!changeModeCover)
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>): void => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsThumbnailOver(true)
   }
 
-  let prevName: string | undefined = ''
+  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>): void => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsThumbnailOver(false)
+  }
+
+  const handleDropThumbnail = (e: React.DragEvent<HTMLDivElement>): void => {
+    e.preventDefault()
+    e.stopPropagation()
+
+    const file = e.dataTransfer.files?.[0]
+
+    if (!file) return
+
+    setFileThumbnail(file)
+    setIsThumbnailOver(false)
+
+    toast.success(`The photo named ${file.name} was selected.`, toastOptions)
+  }
+
   const handleFileCoverChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const file = e.target.files?.[0]
-    prevName = selectFile?.name
 
-    if (file) {
-      setSelectFile(file)
+    if (!file) return
 
-      if (file?.name === prevName) return
+    setFileThumbnail(file)
 
-      setImageFileStatus(
-        {
-          messageFile: 'uploading...',
-          isLoadingUpload: true
-        }
-      )
-      uploadImageCover(file)
-        .then((url) => {
-          setValue('cover', url)
-          setImageFileStatus(
-            {
-              messageFile: 'uploaded! ✅',
-              isLoadingUpload: false
-            }
-          )
-        })
-        .catch(_err => {
-          setImageFileStatus(
-            {
-              messageFile: 'error ❌',
-              isLoadingUpload: false
-            }
-          )
-        })
-    }
+    toast.success(`The photo named ${file.name} was selected.`, toastOptions)
   }
 
   return {
@@ -116,12 +98,13 @@ export const useMarkdownEditorForm = (): UseMarkdownEditorForm => {
     message,
     register,
     setValue,
-    selectFile,
     handleSubmit,
-    imageFileStatus,
-    changeModeCover,
+    fileThumbnail,
+    handleDragOver,
     handleFileCoverChange,
     validateFormMarkdownEditor,
-    handleChangeModeCoverFileURL
+    handleDropThumbnail,
+    handleDragLeave,
+    isThumbnailOver
   }
 }

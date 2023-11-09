@@ -1,56 +1,67 @@
-import { useContext } from 'react'
-import { Modal } from 'flowbite-react'
+import ReactDOM from 'react-dom'
 import { FormMarkdownEditor, ModalConfirmChanges } from '..'
-import { ManageNewspaperContext } from '../../../contexts'
 import { Button } from '../../atoms'
-import { SaveIcon, TrashIcon } from '../../atoms/icon'
-import { useModal } from '../../../hooks'
+import { SaveIcon, TrashIcon, XCloseIcon } from '../../atoms/icon'
+import { useModalManageNews } from '../../../hooks'
 
 interface ModalProps {
-  openModal: string | undefined
-  handleSetOpenModal: (action: string | undefined) => void
-  idNewspaper: string
+  onOpen: boolean
+  newspaperId: string
+  handleSetOpenModal: (status: boolean) => void
 }
 
-export const ModalManageNews: React.FC<ModalProps> = ({ openModal, handleSetOpenModal, idNewspaper }) => {
-  const { isModalOpen, handlerToggleModal } = useModal()
-
+export const ModalManageNews: React.FC<ModalProps> = ({ handleSetOpenModal, newspaperId, onOpen }) => {
   const {
-    register,
-    imageFileStatus,
+    handleDeletePostNewspaper,
+    handleDragLeave,
+    handleDragOver,
+    handleDropThumbnail,
     handleFileCoverChange,
+    handlerToggleModal,
     handleUpdatePostNewspaper,
-    handleDeletePostNewspaper
-  } = useContext(ManageNewspaperContext)
+    isThumbnailOver,
+    message,
+    oldThumbnail,
+    fileThumbnail,
+    register,
+    isModalOpen
+  } = useModalManageNews(onOpen, newspaperId, handleSetOpenModal)
 
-  const handleUpdateNewspaper = (): void => {
-    handleUpdatePostNewspaper(idNewspaper)
-    handleSetOpenModal(undefined)
-  }
+  return ReactDOM.createPortal(
+    <div role="dialog" className="fixed top-0 left-0 right-0 z-50 flex justify-center bg-black/40
+    items-center p-4 md:p-8 overflow-x-hidden overflow-hidden md:inset-0 min-h-screen max-h-full">
 
-  const handleDeleteNewspaper = (): void => {
-    handleDeletePostNewspaper(idNewspaper)
-    handleSetOpenModal(undefined)
-  }
+      <div
+        className="w-full max-w-5xl p-5 animate-fade animate-duration-150 animate-ease-linear
+        relative mx-auto my-auto rounded-xl shadow-lg bg-white dark:bg-slate-900
+        border dark:border-slate-700 flex flex-col gap-y-3">
 
-  return (
-    <Modal
-      dismissible
-      size={'6xl'}
-      show={openModal === 'default'}
-      onClose={() => { handleSetOpenModal(undefined) }}>
-      <Modal.Header>
-        Updating News
-      </Modal.Header>
-      <Modal.Body className='modify-scroll'>
-        <FormMarkdownEditor
-          register={register}
-          imageFileStatus={imageFileStatus}
-          handleFileCoverChange={handleFileCoverChange}
-        />
-      </Modal.Body>
-      <Modal.Footer>
-        <div className="w-full flex gap-2 items-center justify-between">
+        <div className="w-full flex flex-auto justify-between">
+          <h1 className='font-semibold text-lg text-slate-900 dark:text-white'>Updating News</h1>
+          <button
+            onClick={() => { handleSetOpenModal(false) }}
+            className="w-8 h-8 md:w-10 md:h-10 rounded-full text-slate-900
+          hover:bg-black/5 dark:hover:bg-white/10 dark:text-white grid
+            place-content-center">
+            <XCloseIcon className="md:w-5 md:h-5" />
+          </button>
+        </div>
+
+        <div className='text-center p-3 md:p-5 flex-auto justify-center gap-2 h-full
+        max-h-[500px] overflow-y-scroll modify-scroll'>
+          <FormMarkdownEditor
+            cover={oldThumbnail ?? ''}
+            fileThumbnail={fileThumbnail}
+            handleDragLeave={handleDragLeave}
+            isThumbnailOver={isThumbnailOver}
+            handleDropThumbnail={handleDropThumbnail}
+            handleDragOver={handleDragOver}
+            register={register}
+            errorMessage={message}
+            handleFileCoverChange={handleFileCoverChange} />
+        </div>
+
+        <div className="w-full flex gap-2 items-center justify-between py-1">
           <Button
             colors='red'
             type="button"
@@ -63,19 +74,21 @@ export const ModalManageNews: React.FC<ModalProps> = ({ openModal, handleSetOpen
             colors='blue'
             type="button"
             className='px-3 py-1.5 md:px-5 md:py-2.5 w-auto flex items-center gap-1'
-            onClick={handleUpdateNewspaper}>
+            onClick={handleUpdatePostNewspaper}>
             <SaveIcon />
             Save Changes
           </Button>
         </div>
-      </Modal.Footer>
+
+      </div>
+
       {
         isModalOpen &&
         <ModalConfirmChanges
           handlerCloseModal={handlerToggleModal}
-          handleConfirmChanges={handleDeleteNewspaper}
+          handleConfirmChanges={handleDeletePostNewspaper}
           title='Are you sure you want to delete this newspaper?' />
       }
-    </Modal>
+    </div>, document.body
   )
 }

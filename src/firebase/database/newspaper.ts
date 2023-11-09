@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc, where, limit, query } from 'firebase/firestore'
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc, where, limit, query, orderBy } from 'firebase/firestore'
 import { calculateReadingTime, createTextSummary } from '../utils'
 import type { FormMarkdownEditor } from '../../types'
 import { db } from '../firebase.config'
@@ -43,12 +43,12 @@ export const getAllNewspaper = async (currentPage: number = 1): Promise<Newspape
   const currentPosition = (limitQuery * currentPage)
   const lastPosition = ((limitQuery) * ((currentPage - 1)))
 
-  const queryRef = query(collection(db, 'newspaper'), limit(currentPosition))
+  const queryRef = query(collection(db, 'newspaper'), orderBy('timestamp', 'desc'), limit(currentPosition))
   const docRef = (await getDocs(queryRef))
 
   return docRef.docs.slice(lastPosition, currentPosition).map((doc) => {
     return doc.data() as NewspaperAllDetails
-  }).sort((a, b) => (b.timestamp - a.timestamp))
+  })
 }
 
 export const getTotalPages = async (): Promise<number> => {
@@ -208,6 +208,19 @@ export const updateNewspaperWritter = async (idWritter: string, nameWritter: str
   docsByWritter.docs.map(async (document) => {
     const docRef = doc(db, 'newspaper', document.id)
     await updateDoc(docRef, { nameWritter })
+  })
+}
+
+// --------------- Update profile picture newspaper --------------- //
+
+export const updateProfilePictureWritter = async (idWritter: string, avatarWritter: string | null): Promise<void> => {
+  const queryRef = query(collection(db, 'newspaper'), where('idWritter', '==', idWritter))
+
+  const docsByWritter = (await getDocs(queryRef))
+
+  docsByWritter.docs.map(async (document) => {
+    const docRef = doc(db, 'newspaper', document.id)
+    await updateDoc(docRef, { avatarWritter })
   })
 }
 

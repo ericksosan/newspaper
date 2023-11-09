@@ -14,7 +14,7 @@ const Login = (): JSX.Element => {
   const { isLoading, message, onSubmitLogin, handleSignInWithGoogle } = useAuthForm()
 
   return (
-    <section className="flex flex-col font-montserrat">
+    <section className="flex flex-col font-montserrat animate-fade duration-300 ease-in">
       <Navbar />
       <main className='flex flex-col justify-center items-center z-20 px-10
       lg:flex-row lg:m-auto lg:w-11/12 lg:gap-2 lg:py-10'>

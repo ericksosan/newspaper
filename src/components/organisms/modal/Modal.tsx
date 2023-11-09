@@ -15,7 +15,7 @@ export const Modal: React.FC<ModalProps> = ({ children, className, modalTitle, m
   const modalRef = useClickAway<HTMLDivElement>(handlerCloseModal)
 
   return ReactDOM.createPortal(
-    <div tabIndex={-1} className="fixed top-0 left-0 right-0 z-50 flex justify-center bg-black/80
+    <div tabIndex={-1} className="fixed top-0 left-0 right-0 z-[1000] flex justify-center bg-black/80
     items-center p-8 overflow-x-hidden overflow-y-auto md:inset-0 min-h-screen max-h-full">
 
       <div

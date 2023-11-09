@@ -3,29 +3,35 @@ import { SkeletonAvatar } from '../../atoms'
 import { twMerge } from 'tailwind-merge'
 
 interface AvatarProps {
-  img: string
+  img: string | null
   alt?: string
   className?: string
+  classNamePicture?: string
+  onClick?: () => void
 }
 
-export const Avatar: React.FC<AvatarProps> = ({ img, alt, className }) => {
+export const Avatar: React.FC<AvatarProps> = ({ img, alt, className, classNamePicture, onClick }) => {
   const [avatarIsLoading, setAvatarIsLoading] = useState<boolean>(true)
   return (
-    <picture className={
-      twMerge(
-        'w-10 h-10 overflow-hidden rounded-full grid place-content-center',
-        className
-      )
-    }>
+    <picture
+      onClick={onClick}
+      className={
+        twMerge(
+          'w-10 h-10 overflow-hidden rounded-full flex items-center',
+          className,
+          classNamePicture
+        )
+      }>
       <SkeletonAvatar className={
         twMerge(
           !avatarIsLoading
             ? 'hidden'
-            : 'block'
+            : 'block',
+          className
         )
       } />
       <img
-        src={img}
+        src={img ?? '/images/avatar-default.gif'}
         alt={`Profile ${alt ?? ''}`}
         onLoad={() => { setAvatarIsLoading(false) }}
         className={

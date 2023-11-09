@@ -9,5 +9,6 @@ export const AppRoutes = {
   RESET_PASSWORD: '/auth/reset-password',
   CHANGE_USERNAME: '/profile/change-username',
   CHANGE_PASSWORD: '/profile/change-password',
-  CHANGE_FULLNAME: '/profile/change-fullname'
+  CHANGE_FULLNAME: '/profile/change-fullname',
+  CHANGE_PROFILE_PICTURE: '/profile/change-profile-picture'
 } as const

@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import { onAuthStateChanged } from 'firebase/auth'
-import { AuthContext, type AuthContextValues } from './AuthContext'
+import { AuthContext, type NewUserDetails, type AuthContextValues } from './AuthContext'
 import { auth } from '../firebase.config'
 import { type UserDetails, getUserDetails } from '../database/users'
 import { logout } from '../authentication/logout'
 import { AppRoutes } from '../../routes'
 import { type NavigateOptions, useNavigate } from 'react-router-dom'
-import type { FormInputChangeFullName } from '../../types'
+import { useLocalStorage } from '@uidotdev/usehooks'
+import { useLocation } from 'react-router-dom'
 
 interface AuthProviderProps {
   children: React.ReactNode
@@ -16,39 +17,40 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isLogout, setIsLogout] = useState<boolean>(false)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [user, setUser] = useState<UserDetails>({} as UserDetails)
+  const [isModalProfileOpen, setIsModalProfileOpen] = useState(false)
   const navigate = useNavigate()
+
+  const { pathname } = useLocation()
+
+  const [, setShareLink] = useLocalStorage('sharelink')
+
+  useEffect(() => {
+    if (/^\/new\/[A-Za-z0-9]+$/.test(pathname)) setShareLink(pathname)
+  }, [location])
 
   useEffect(() => {
     const disconnect = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser !== null) {
         setIsLogout(true)
         void handleGetUserData(currentUser.uid)
-      } else {
-        setUser({} as UserDetails)
-        setIsLogout(false)
-        setIsLoading(false)
+        return
       }
+
+      setUser({} as UserDetails)
+      setIsLogout(false)
+      setIsLoading(false)
     })
+
     return disconnect
   }, [])
 
   const handleGetUserData = async (id: string): Promise<void> => {
-    try {
-      const res = await getUserDetails(id)
-      if (res !== undefined) {
-        setUser(res as UserDetails)
-        setIsLoading(false)
-      }
-    } catch (error) { }
-  }
+    const userDetails = await getUserDetails(id)
 
-  const handleChangeUsername = (username: string): void => {
-    setUser(
-      {
-        ...user,
-        username: username.toLowerCase()
-      }
-    )
+    if (!userDetails) return
+
+    setUser(userDetails as UserDetails)
+    setIsLoading(false)
   }
 
   const handleLogoutReset = (): void => {
@@ -60,26 +62,25 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     navigate(AppRoutes[path], options)
   }
 
-  const handleChangeFullName = (data: FormInputChangeFullName): void => {
-    setUser(
-      {
-        ...user,
-        ...data,
-        fullname: `${data.firstname} ${data.lastname}`
-      }
-    )
+  const handleUpdateLocalUserDatails = (newUserDetails: NewUserDetails): void => {
+    setUser((prev) => ({ ...prev, ...newUserDetails }))
+  }
+
+  const handleIsModalProfileOpen = (status: boolean): void => {
+    setIsModalProfileOpen(status)
   }
 
   const values: AuthContextValues = {
     isLoading,
     isLogout,
     user,
+    isModalProfileOpen,
     logout,
+    handleIsModalProfileOpen,
     handleLogoutReset,
     handleGetUserData,
-    handleChangeUsername,
-    navigateTo,
-    handleChangeFullName
+    handleUpdateLocalUserDatails,
+    navigateTo
   }
 
   return (

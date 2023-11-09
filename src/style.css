@@ -11,7 +11,7 @@ body {
 .markdown-editor-field {
 	@apply focus:shadow-none focus:ring-0 w-full bg-transparent py-2 px-3 font-inter
 	text-slate-900 dark:text-gray-200 text-sm md:text-lg bg-gray-100 outline-none
-	border-gray-300 focus:ring-transparent focus:border-gray-300 dark:bg-gray-800
+	border-gray-300 focus:ring-transparent focus:border-gray-300 dark:bg-slate-800
 	dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-transparent rounded-md;
 }
 
@@ -35,4 +35,18 @@ dark:text-white dark:bg-slate-800 border dark:border-slate-700 flex items-center
 	@apply grid place-content-center gap-x-2 text-center w-8 h-8 md:w-10 md:h-10 rounded-full
 !bg-black/5 hover:!bg-black/10 dark:!bg-slate-800 dark:hover:!bg-slate-700
 	transition-colors duration-150 ease-in;
+}
+
+.btn-file {
+	@apply inline-block border bg-gray-50 text-slate-900 dark:text-gray-300
+	border-gray-300 py-2 px-6 rounded-full font-inter font-medium dark:bg-gray-800
+	dark:border-gray-600 cursor-pointer hover:scale-105 transition-transform duration-300
+	ease-in-out;
+}
+
+.dropdown-item {
+	@apply p-3 font-normal font-inter hover:text-azure-radiance-700 transition-colors
+	ease-in-out duration-150 cursor-pointer dark:text-gray-200 border-none rounded-md
+	flex gap-2 items-center [&>svg]:w-5 hover:bg-black/5 dark:hover:bg-slate-700
+	w-full;
 }

@@ -1,7 +1,5 @@
-import { useState } from 'react'
-import { LinkRedirect, SkeletonImage, SubTitle } from '../../atoms'
-import { Avatar } from '../../molecules'
-import { twMerge } from 'tailwind-merge'
+import { LinkRedirect, SubTitle } from '../../atoms'
+import { Avatar, CardThumbnail } from '../../molecules'
 
 interface CardNewspaperProps {
   id: string
@@ -16,7 +14,6 @@ interface CardNewspaperProps {
 
 export const CardNewspaper: React.FC<CardNewspaperProps> = (props) => {
   const { id, cover, title, summary, createdAt, nameWritter, avatarWritter, readingTimeText } = props
-  const [imgIsLoading, setImgIsLoading] = useState<boolean>(true)
 
   return (
     <LinkRedirect
@@ -26,27 +23,9 @@ export const CardNewspaper: React.FC<CardNewspaperProps> = (props) => {
     dark:hover:bg-slate-900 transition-colors duration-300 ease-out rounded-xl
     dark:border-slate-700 dark:bg-slate-800 w-full sm:w-full sm:py-4
     [&>div>h5]:hover:text-azure-radiance-700 [&>div>h5]:dark:hover:text-gray-300
-      [&>div>h5]:transition-colors [&>div>h5]:duration-300 [&>div>h5]:ease-out font-inter">
+    [&>div>h5]:transition-colors [&>div>h5]:duration-300 [&>div>h5]:ease-out font-inter">
       <div className="flex flex-col justify-between p-4 gap-3 sm:py-0 w-full">
-        <div className='hidden sm:flex rounded-xl overflow-hidden aspect-video items-center justify-center'>
-          <SkeletonImage
-            className={
-              twMerge(
-                imgIsLoading ? 'sm:flex rounded-xl aspect-video' : 'sm:hidden'
-              )
-            }
-          />
-          <img
-            className={
-              twMerge(
-                'object-cover w-full h-full hidden aspect-auto',
-                !imgIsLoading ? 'sm:flex' : 'sm:hidden'
-              )
-            }
-            src={cover}
-            onLoad={() => { setImgIsLoading(false) }}
-          />
-        </div>
+        <CardThumbnail imageURL={cover} />
 
         <div className="inline-flex items-center gap-x-2">
           <Avatar img={avatarWritter} alt={nameWritter} />
@@ -57,12 +36,13 @@ export const CardNewspaper: React.FC<CardNewspaperProps> = (props) => {
             <time className="text-gray-400 font-normal text-xs font-montserrat">{createdAt}</time>
           </div>
         </div>
+
         <h5 className="text-md font-semibold text-gray-900 dark:text-white
           md:text-lg line-clamp-2" >
           {title}
         </h5>
         <p className="font-medium text-gray-800 text-sm dark:text-gray-300
-        md:text-md line-clamp-3">
+          md:text-md line-clamp-3">
           {summary}
         </p>
         <SubTitle className="text-sm font-normal text-slate-700 dark:text-gray-400">

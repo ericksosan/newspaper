@@ -8,7 +8,7 @@ const ManageUsers = (): JSX.Element => {
         Users Management
       </Title>
       <div className="relative overflow-x-auto rounded-lg border dark:border-slate-700 shadow modify-scroll">
-        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 font-inter">
+        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 font-inter animate-fade duration-300 ease-in">
           <UserTableHeader />
           <UserTableBody />
         </table>
