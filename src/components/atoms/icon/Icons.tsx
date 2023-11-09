@@ -594,4 +594,3 @@ export const ShareIcon = ({ className }: React.ComponentProps<'svg'>): JSX.Eleme
     </svg>
   )
 }
-

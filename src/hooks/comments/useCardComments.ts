@@ -64,7 +64,6 @@ export const useCardComments = ({ comment }: { comment: Comment }): UseCardComme
       return
     }
 
-    handlerRemoveComment(id)
   }
 
   const onRemoveComment = (): void => {
