@@ -4,7 +4,7 @@ import { useAuth } from '../../firebase/hooks/useAuth'
 import { Loading, News, Pagination } from '../molecules'
 import { Container, Title } from '../atoms'
 import { getAllNewspaper, type NewspaperAllDetails } from '../../firebase/database/newspaper'
-import { ModalChangeProfilePicture } from '../organisms'
+import { ModalChangeProfilePicture, NoNewspaperYet } from '../organisms'
 
 const Home = (): JSX.Element => {
   const [newspaper, setNewspaper] = useState<NewspaperAllDetails[]>([])
@@ -40,6 +40,8 @@ const Home = (): JSX.Element => {
   }
 
   if (isLoading) return <Loading />
+
+  if (!isLoading && newspaper.length === 0) return <NoNewspaperYet />
 
   return (
     <Container>
