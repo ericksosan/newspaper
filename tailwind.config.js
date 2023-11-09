@@ -30,7 +30,6 @@ module.exports = {
 	darkMode: 'class',
 	plugins: [
 		require('@tailwindcss/typography'),
-		require('tailwindcss-animated'),
 		require('tailwind-scrollbar')({ nocompatible: true })
 	],
 };
