@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, query, updateDoc, orderBy, where, limit } from 'firebase/firestore'
+import { addDoc, collection, deleteDoc, doc, getDoc, getDocs, updateDoc, orderBy, where, limit, query } from 'firebase/firestore'
 import { calculateReadingTime, createTextSummary } from '../utils'
 import type { FormMarkdownEditor } from '../../types'
 import { db } from '../firebase.config'
@@ -98,6 +98,33 @@ export const getNewspaperByWritter = async (id: string): Promise<NewspaperAllDet
   return (await getDocs(queryRef)).docs.map((doc) => {
     return doc.data() as NewspaperAllDetails
   }).sort((a, b) => b.timestamp - a.timestamp)
+}
+
+// --------------- Get newspaper suggestions --------------- //
+
+export const getSuggestions = async (): Promise<NewspaperAllDetails[]> => {
+  const suggestions: NewspaperAllDetails[] = []
+  const prevSuggestions: number[] = []
+
+  const queryRef = query(collection(db, 'newspaper'))
+
+  const resul = (await getDocs(queryRef)).docs
+
+  const generateSuggestions = (): number => Math.round(Math.random() * resul.length)
+
+  let generatedSuggestions = generateSuggestions()
+
+  do {
+    if (!prevSuggestions.includes(generatedSuggestions)) {
+      suggestions.push(resul[generatedSuggestions].data() as NewspaperAllDetails)
+
+      prevSuggestions.push(generatedSuggestions)
+    }
+
+    generatedSuggestions = generateSuggestions()
+  } while (suggestions.length !== 8)
+
+  return suggestions
 }
 
 // --------------- Create newspaper --------------- //

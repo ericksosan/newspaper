@@ -1,7 +1,7 @@
 import { createContext } from 'react'
-import { type UserDetails } from '../database/users'
 import { type AppRoutes } from '../../routes'
 import { type NavigateOptions } from 'react-router-dom'
+import { type UserDetails } from '../database/users'
 import type { FormInputChangeFullName } from '../../types'
 
 export interface AuthContextValues {

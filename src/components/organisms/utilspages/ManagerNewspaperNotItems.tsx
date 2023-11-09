@@ -7,12 +7,12 @@ export const ManagerNewspaperNotItems = (): JSX.Element => {
         <img
           src="/images/hiking.svg"
           alt=""
-          className="w-1/2 dark:fill-white" />
-        <div className="flex justify-center items-center flex-col gap-5 lg:gap-10">
+          className="w-1/2 dark:fill-white animate-fade-right animate-delay-150 animate-ease-in-out" />
+        <div className="flex justify-center items-center flex-col gap-5 lg:gap-10 animate-fade-left animate-delay-300 animate-ease-in-out">
           <Title className="block text-xl md:text-4xl lg:text-6xl text-center">It seems you still have no news to manage.</Title>
           <LinkRedirect
             to='WRITE_NEWS'
-            className='font-inter text-sm md:text-xl text-white rounded-md py-2 px-5 bg-azure-radiance-700'
+            className='font-inter text-sm md:text-xl text-white rounded-md py-2 px-5 bg-azure-radiance-700 hover:bg-azure-radiance-800'
           >
             Go to create newspaper
           </LinkRedirect>
