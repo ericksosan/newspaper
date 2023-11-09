@@ -16,6 +16,7 @@ const Login = lazy(async () => await import('./components/pages/Login'))
 const Signup = lazy(async () => await import('./components/pages/Signup'))
 const ChangeFullName = lazy(async () => await import('./components/pages/ChangeFullName'))
 const ResetPassword = lazy(async () => await import('./components/pages/ResetPassword'))
+const ChangeProfilePicture = lazy(async () => await import('./components/pages/ChangeProfilePicture'))
 
 export const App: React.FC = () => {
   return (
@@ -48,6 +49,11 @@ export const App: React.FC = () => {
           <Route path="/profile/change-fullname" element={
             <Suspense fallback={<Loading />}>
               <ChangeFullName />
+            </Suspense>} />
+
+          <Route path="/profile/change-profile-picture" element={
+            <Suspense fallback={<Loading />}>
+              <ChangeProfilePicture />
             </Suspense>} />
 
           {/* Editor */}

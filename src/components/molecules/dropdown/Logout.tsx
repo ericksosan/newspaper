@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useAuth } from '../../../firebase/hooks/useAuth'
-import { DropdownItem, Spinner } from '../../atoms'
+import { Spinner } from '../../atoms'
 import { ArrowRightRectangleIcon } from '../../atoms/icon'
 
 export const Logout = (): JSX.Element => {
@@ -17,8 +17,16 @@ export const Logout = (): JSX.Element => {
   }
 
   return (
-    <DropdownItem onClick={() => { void handleLogout() }}>
-      { isLoading && <Spinner/> } <ArrowRightRectangleIcon /> Logout
-    </DropdownItem>
+    <button
+      onClick={() => { void handleLogout() }}
+      className='dropdown-item disabled:pointer-events-none'
+      disabled={isLoading}
+    >
+      {
+        isLoading
+          ? <>Leaving... <Spinner /></>
+          : <><ArrowRightRectangleIcon /> Logout</>
+      }
+    </button>
   )
 }

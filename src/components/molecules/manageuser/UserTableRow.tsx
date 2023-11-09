@@ -21,7 +21,7 @@ export const UserTableRow: React.FC<UserDetails> = ({ id, fullname, username, ro
     < tr className='bg-white dark:bg-slate-800 dark:border-gray-700 [&>td]:px-6 [&>td]:py-4'>
       <td>
         <Avatar
-          img={photoURL ?? ''}
+          img={photoURL}
           alt={fullname ?? ''}
         />
       </td>

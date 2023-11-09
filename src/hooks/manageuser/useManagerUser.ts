@@ -12,7 +12,7 @@ export const useManagerUser = (): UseManagerUser => {
 
   useEffect(() => {
     getAllUsers()
-      .then(users => { setListUsers(users) })
+      .then(setListUsers)
       .catch(_err => { })
       .finally(() => { setIsLoading(false) })
   }, [])

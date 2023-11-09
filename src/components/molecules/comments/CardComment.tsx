@@ -44,7 +44,7 @@ export const CardComment: React.FC<CommentProps> = memo(({ comment, replies, use
         <div className="border-slate-300 dark:border-slate-700 absolute w-full
         border-t-[1px] md:border-t-2 -translate-x-full z-0" />
         <Avatar
-          img={userDetails.photoURL ?? ''}
+          img={userDetails.photoURL}
           alt={`Profile picture of  ${userDetails.fullname ?? ''}`}
           className="w-8 h-8 md:w-10 md:h-10 border-[1px] md:border-2 border-slate-300
           dark:border-slate-700" />

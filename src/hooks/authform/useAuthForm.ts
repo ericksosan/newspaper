@@ -25,7 +25,7 @@ export const useAuthForm = (): UseAuthForm => {
   const [isLoading, setIsLoading] = useState({ emailProv: false, googleProv: false })
   const [message, setMessage] = useState('')
   const [showModalMessage, setShowModalMessage] = useState(false)
-  const { handleGetUserData } = useAuth()
+  const { handleGetUserData, handleIsModalProfileOpen } = useAuth()
   const navigate = useNavigate()
 
   const onSubmitLogin: SubmitHandler<FormInputs> = async (data): Promise<void> => {
@@ -34,7 +34,8 @@ export const useAuthForm = (): UseAuthForm => {
       const userCredentials = await authSignIn(data)
       await handleGetUserData(userCredentials.user.uid)
       setIsLoading({ ...isLoading, emailProv: false })
-      navigate('/', { replace: true })
+      navigate(JSON.parse(localStorage.getItem('sharelink') ?? '/'), { replace: true })
+      localStorage.removeItem('sharelink')
     } catch (err) {
       setMessage('Wrong password or email')
       setIsLoading({ ...isLoading, emailProv: false })
@@ -46,7 +47,9 @@ export const useAuthForm = (): UseAuthForm => {
       setIsLoading({ ...isLoading, emailProv: true })
       const userCredentials = await authSignUp(data)
       await handleGetUserData(userCredentials.user.uid)
-      navigate('/')
+      handleIsModalProfileOpen(true)
+      navigate(JSON.parse(localStorage.getItem('sharelink') ?? '/'), { replace: true })
+      localStorage.removeItem('sharelink')
       setIsLoading({ ...isLoading, emailProv: false })
     } catch (err) {
       setIsLoading({ ...isLoading, emailProv: false })

@@ -23,7 +23,7 @@ export const BadgeRoles = (): JSX.Element => {
 
       {chooserBadgeIcon[role]}
 
-      {role[0].toUpperCase()}{role.slice(1, role.length)}
+      {role?.[0].toUpperCase()}{role?.slice(1, role.length)}
     </span>
 
   )

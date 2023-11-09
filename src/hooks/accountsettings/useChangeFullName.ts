@@ -18,23 +18,28 @@ interface UseChangeFullName {
 export const useChangeFullName = (): UseChangeFullName => {
   const [fullName, setFullName] = useState<FormInputChangeFullName>()
   const { formState: { isValid } } = useForm<FormInputChangeFullName>()
-  const { user, handleChangeFullName } = useAuth()
+  const { user, handleUpdateLocalUserDatails } = useAuth()
   const navigate = useNavigate()
   const { isModalOpen, handlerToggleModal } = useModal()
 
   const onSubmitChangeFullName: SubmitHandler<FormInputChangeFullName> = (data) => {
-    if (isValid) {
-      setFullName(data)
-      handlerToggleModal(true)
-    }
+    if (!isValid) return
+
+    setFullName(data)
+    handlerToggleModal(true)
   }
 
   const handleUpdateFullName = (): void => {
     if (fullName === undefined && fullName !== null) return
 
     const { firstname, lastname } = fullName
+    const joinedFirstLastName = `${firstname} ${lastname}`
+    const updateLocalFullName = {
+      ...fullName,
+      fullname: joinedFirstLastName
+    }
 
-    if (`${firstname} ${lastname}` === user?.fullname) {
+    if (joinedFirstLastName === user?.fullname) {
       toast.success('Your full name has been successfully changed.', toastOptions)
       handlerToggleModal(false)
       navigate('/', { replace: true })
@@ -46,7 +51,7 @@ export const useChangeFullName = (): UseChangeFullName => {
       {
         loading: 'Changing full name...',
         success: (_data) => {
-          handleChangeFullName(fullName)
+          handleUpdateLocalUserDatails(updateLocalFullName)
           handlerToggleModal(false)
           navigate('/', { replace: true })
           return 'Your full name has been successfully changed.'

@@ -39,11 +39,6 @@ export interface Alert {
 
 export type ButtonColors = 'blue' | 'red' | 'white' | 'dark'
 
-export interface ImageFileStatus {
-  messageFile: string
-  isLoadingUpload: boolean
-}
-
 export interface FormInputResetPassword {
   email: string
 }

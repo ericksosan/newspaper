@@ -1,20 +1,21 @@
-import { Dropdown } from 'flowbite-react'
 import { Link } from 'react-router-dom'
 import { AppRoutes } from '../../../routes'
+import { useContext } from 'react'
+import { DropdownMenuContext } from '../../../contexts'
 
 interface DropdownItemProps {
-  to?: keyof typeof AppRoutes
-  onClick?: () => void
+  to: keyof typeof AppRoutes
   children: React.ReactNode
 }
 
-export const DropdownItem: React.FC<DropdownItemProps> = ({ to, children, onClick }) => {
+export const DropdownItem: React.FC<DropdownItemProps> = ({ to, children }) => {
+  const { handleIsDropdownOpen } = useContext(DropdownMenuContext)
+
   return (
-    <Dropdown.Item as={Link} to={to && AppRoutes[to]} onClick={onClick}
-      className='p-3 font-semibold hover:text-azure-radiance-700 transition-colors
-      ease-in-out duration-300 cursor-pointer dark:text-gray-200 border-none rounded-md
-      flex gap-2 items-center [&>svg]:w-5'>
+    <Link to={to && AppRoutes[to]}
+      onClick={() => { handleIsDropdownOpen(false) }}
+      className='dropdown-item'>
       {children}
-    </Dropdown.Item>
+    </Link>
   )
 }

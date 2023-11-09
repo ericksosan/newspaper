@@ -45,7 +45,7 @@ export const FormComment: React.FC<FormCommentsProps> = ({ commentAction, formMo
 
       <div className='flex gap-1 md:gap-2 mb-4 items-center'>
         <Avatar
-          img={photoURL ?? ''}
+          img={photoURL}
           alt={fullname ?? ''}
           className="w-8 h-8 md:w-10 md:h-10" />
         <span className='text-xs md:text-sm font-semibold dark:text-white'>

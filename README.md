@@ -4,7 +4,7 @@ This is the repository for the Newspaper project.
 
 ## Table of Contents
 
-- [Newspaper](#newspaper-)
+- [Newspaper ](#newspaper-)
   - [Table of Contents](#table-of-contents)
   - [Description](#description)
   - [Installation](#installation)
@@ -93,7 +93,7 @@ The project relies on the following dependencies:
 - **@uidotdev/usehooks:** A collection of modern, server-safe React hooks – from the ui.dev team, compatible with React v18.0.0+.
 - **dompurify:** DOMPurify is a DOM-only, super-fast, uber-tolerant XSS sanitizer for HTML, MathML and SVG.
 - **firebase:** The official Firebase library that makes it easy to integrate Firebase services into web applications, including authentication, cloud storage, and real-time databases.
-- **flowbite-react:** A version of Flowbite specifically designed for use with React, making it easier to incorporate UI components into your React projects.
+- **image-conversion:** Is a simple and easy-to-use JS image convert tools, which provides many methods to convert between Image,Canvas,File and dataURL.
 - **highlight.js:** A library for syntax highlighting code in programming languages in your web application.
 - **marked:** A library for parsing and rendering Markdown into HTML, making it easy to create formatted Markdown content in your application.
 - **node-emoji:** A library for working with emojis in Node.js, which can be useful for adding emojis to your messages or content.
@@ -134,6 +134,7 @@ The project uses the following dev dependencies:
 - **tailwindcss:** A utility-first CSS framework for building user interfaces.
 - **typescript:** TypeScript is a superset of JavaScript that adds static typing to the language.
 - **vite:** A build tool and development server for web applications.
+- **tailwindcss-animated:** Is an add-on for Tailwind CSS that provides predefined classes for animations.
 
 ## Contributing
 

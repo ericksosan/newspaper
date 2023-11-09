@@ -18,15 +18,15 @@ interface UseChangeUsername {
 export const useChangeUsername = (): UseChangeUsername => {
   const [username, setUsername] = useState<string>('')
   const { formState: { isValid } } = useForm<FormInputChangeUsername>()
-  const { user, handleChangeUsername } = useAuth()
+  const { user, handleUpdateLocalUserDatails } = useAuth()
   const navigate = useNavigate()
   const { isModalOpen, handlerToggleModal } = useModal()
 
   const onSubmitChangeUsername: SubmitHandler<FormInputChangeUsername> = (data) => {
-    if (isValid) {
-      setUsername(data.newUsername)
-      handlerToggleModal(true)
-    }
+    if (!isValid) return
+
+    setUsername(data.newUsername)
+    handlerToggleModal(true)
   }
 
   const handleUpdateUsername = async (): Promise<void> => {
@@ -35,7 +35,7 @@ export const useChangeUsername = (): UseChangeUsername => {
       {
         loading: 'Changing username...',
         success: (_data) => {
-          handleChangeUsername(username)
+          handleUpdateLocalUserDatails({ username })
           handlerToggleModal(false)
           navigate('/', { replace: true })
           return 'Your username has been successfully changed.'
