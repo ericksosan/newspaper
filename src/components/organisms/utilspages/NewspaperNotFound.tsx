@@ -20,10 +20,10 @@ export const NewspaperNotFound = (): JSX.Element => {
 
   return (
     <Container>
-      <div className="flex gap-10 md:gap-0 mt-10 md:justify-between flex-col lg:flex-row-reverse md:mt-0 min-h-screen pb-40">
+      <div className="flex gap-10 md:gap-0 mt-10 md:justify-between items-center flex-col lg:flex-row-reverse md:mt-0 min-h-screen pb-40">
         <img src="/images/newspaper_not_found.svg"
           alt="Newspaper Not Found"
-          className="w-full md:w-1/2 animate-fade-left animate-delay-150 animate-ease-in-out" />
+          className="w-full md:w-3/4 lg:w-1/2 animate-fade-left animate-delay-150 animate-ease-in-out" />
         <div className="flex justify-center items-center md:w-full">
           <div className="flex flex-col animate-fade-right animate-delay-300 animate-ease-in-out">
             <Title className="text-2xl text-slate-900 font-inter ">
