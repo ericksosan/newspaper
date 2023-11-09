@@ -23,8 +23,6 @@ export const Button: React.FC<ButtonProps> = ({ children, className, type, disab
 
           colors === 'white' && `bg-white text-slate-900 hover:bg-gray-100
           border border-slate-300 disabled:opacity-50 px-5 py-2`,
-          colors === 'white' && `bg-white text-slate-900 hover:bg-gray-100
-          border border-slate-300 disabled:opacity-50 px-5 py-2`,
 
           colors === 'blue' && `text-white bg-azure-radiance-700 border-none
           hover:bg-azure-radiance-800 text-sm px-5 py-2.5 disabled:opacity-50`,

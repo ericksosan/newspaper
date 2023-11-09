@@ -8,7 +8,6 @@ This is the repository for the Newspaper project.
   - [Table of Contents](#table-of-contents)
   - [Description](#description)
   - [Installation](#installation)
-  - [Installation](#installation-1)
   - [Usage](#usage)
   - [Scripts](#scripts)
   - [Dependencies](#dependencies)
@@ -19,8 +18,6 @@ This is the repository for the Newspaper project.
 ## Description
 
 Newspaper is a user-friendly web application that provides easy access to the latest news and information. It offers a seamless browsing experience to help you stay informed about current events and trends with convenience. Join us in our mission to make news accessible to all.
-
-## Installation
 
 ## Installation
 
